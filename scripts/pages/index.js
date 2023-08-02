@@ -3,7 +3,7 @@
         // mais il sera à remplacer avec une requête sur le fichier JSON en utilisant "fetch".
         let photographers = [
             {
-                "name": "Ma data test",
+                "name": "Ma data test1",
                 "id": 1,
                 "city": "Paris",
                 "country": "France",
@@ -12,7 +12,7 @@
                 "portrait": "account.png"
             },
             {
-                "name": "Autre data test",
+                "name": "Autre data test2",
                 "id": 2,
                 "city": "Londres",
                 "country": "UK",
@@ -25,7 +25,7 @@
         return ({
             photographers: [...photographers, ...photographers, ...photographers]})
     }
-
+                                //data
     async function displayData(photographers) {
         const photographersSection = document.querySelector(".photographer_section");
 

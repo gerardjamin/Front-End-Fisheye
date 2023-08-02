@@ -1,5 +1,8 @@
+
+//prechargement de la fonction
 function photographerTemplate(data) {
     const { name, portrait } = data;
+    console.log(data)
 
     const picture = `assets/photographers/${portrait}`;
 
