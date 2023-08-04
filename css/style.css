@@ -48,3 +48,17 @@ h1 {
     height: 200px;
     width: 200px;
 }
+
+.photographer_section article h3 {
+    color: #901C1C;
+    font-size: 13px;
+}
+
+.photographer_section article p {
+    font-size: 10px;
+}
+
+.photographer_section article h4 {
+    font-weight: 400;
+    font-size: 9px;
+}

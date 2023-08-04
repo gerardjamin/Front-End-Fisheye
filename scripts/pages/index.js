@@ -1,13 +1,10 @@
 async function getPhotographers() {
 
-    try {
-        const response = await fetch('./data/photographers.json');
-        const data = await response.json()
-        return data
-    } catch (error) {
-        console.log('An error occurs', error)
-    }
+    return await fetch('./data/photographers.json')
+        .then(res => res.json())
+        .catch(err => console.log('an error occurs', err))
 }
+
 
 async function displayData(photographers) {
     const photographersSection = document.querySelector(".photographer_section");
@@ -21,7 +18,7 @@ async function displayData(photographers) {
 }
 
 async function init() {
-    // Récupère les datas des photographes
+    // Récupère les datas des photographes(only photographers array)
     const { photographers } = await getPhotographers();
     displayData(photographers);
 }
