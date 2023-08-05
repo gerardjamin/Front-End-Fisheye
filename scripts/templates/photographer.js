@@ -1,8 +1,6 @@
 /* eslint-disable no-unused-vars */
 function photographerTemplate(data) {
     const { name,id,city,country,tagline,price, portrait, } = data;
-    
-
     const picture = `../assets/Photographers/${portrait}`;
 
     //object to display
@@ -10,7 +8,7 @@ function photographerTemplate(data) {
         const article = document.createElement( 'article' );
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture) 
-        img.setAttribute('alt',`${name}`)
+        img.setAttribute('alt',`Je m'appelle ${name}`)
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
         const h3 = document.createElement( 'h3' );
@@ -27,5 +25,6 @@ function photographerTemplate(data) {
         article.appendChild(h4);
         return (article);
     }
+    //retourne l'objet java script
     return { name, picture, getUserCardDOM }
 }
