@@ -6,11 +6,20 @@ async function getPhotographers() {
         .catch(err => console.log('an error occurs', err))
 }
 
+function displayData(data){
+    const photographersSection = document.querySelector(".photographer_section");
+    for(let element of data){
+    photographersSection.appendChild(element);
+    }
+}
+
 //Point d'entrée
 async function init() {
     // Récupère les datas des photographes(destructuration for only photographers array)
     const { photographers } = await getPhotographers();
-    factoryObject(photographers, 'photographers')
+    //programmation asynchrone => await
+    const objets = await factoryObject(photographers,'photographers')
+    displayData(objets)   
 }
 
 init();
