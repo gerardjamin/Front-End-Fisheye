@@ -10,6 +10,7 @@ async function displayData(photographers) {
     const photographersSection = document.querySelector(".photographer_section");
     /*global photographerTemplate*/
     /*eslint no-undef: "error"*/
+   
     photographers.forEach((photographer) => {
         //call 2 functions)()
         const photographerModel = photographerTemplate(photographer);
