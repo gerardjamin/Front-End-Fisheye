@@ -1,11 +1,48 @@
+:root {
+--name:valeur;
+}
+
 #contact_modal {
     display: none;
 }
 
 .photograph-header {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
+    align-items: center;
+}
+
+.photograph-header .identity {
+    padding-left: 40px;
+    
+}
+
+.photograph-header img {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.photograph-header h1 {
+    color: #D3573C;
+    font-size: 64px;
+    margin-bottom: 0;
+}
+
+.photograph-header h3 {
+    color: #901C1C;
+    font-size: 24px;
+    margin-bottom: 0;
+}
+
+.photograph-header p {
+    font-size: 18px;
+    margin-bottom: 0;
 }
 
 .contact_button {

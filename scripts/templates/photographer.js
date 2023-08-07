@@ -9,7 +9,7 @@ function photographerTemplate(data) {
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture) 
         img.setAttribute('alt',`Je m'appelle ${name}`)
-        const h2 = document.createElement( 'h2' );
+        const h2 = document.createElement( 'h1' );
         h2.textContent = name;
         const h3 = document.createElement( 'h3' );
         h3.textContent = `${city}, ${country}`;
@@ -23,8 +23,9 @@ function photographerTemplate(data) {
         article.appendChild(h3);
         article.appendChild(p);
         article.appendChild(h4);
+        
         return (article);
     }
     //retourne l'objet java script
-    return { name, picture, getUserCardDOM }
+    return { getUserCardDOM }
 }
