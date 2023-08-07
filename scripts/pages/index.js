@@ -1,11 +1,7 @@
+import { getPhotographers} from '../api/api.js';
 //Mettre le code JavaScript lié à la page index.html (home)
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-async function getPhotographers() {
-    return await fetch('./data/photographers.json')
-        .then(res => res.json())
-        .catch(err => console.log('an error occurs', err))
-}
 
 function displayData(data) {
     const photographersSection = document.querySelector(".photographer_section")

@@ -29,7 +29,6 @@ h1 {
 }
 
 .photographer_section {
-    background-color: bisque;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
@@ -37,7 +36,6 @@ h1 {
 }
 
 .photographer_section article {
-    background-color: aqua;
     justify-self: center;
     display: flex;
     justify-content: center;
