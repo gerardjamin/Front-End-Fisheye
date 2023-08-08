@@ -6,9 +6,11 @@ async function factoryObject(photographers, type) {
   if (type === "photographers") {
     const dataPhographers = []
     photographers.forEach((photographer) => {
-      //call 2 functions)()
+      //objet
       const photographerModel = photographerTemplate(photographer)
+      //elementHTML article
       const userCardDOM = photographerModel.getUserCardDOM()
+      //contient tous les artcles
       dataPhographers.push(userCardDOM)
     });
     return dataPhographers

@@ -1,39 +1,37 @@
-import {getPhotographers} from '../api/api.js';
-import {photographerHeader} from '../templates/templatePhotographers.js'
+import { getPhotographers } from '../api/api.js';
+import { photographerHeader } from '../templates/templatePhotographers.js'
 /* eslint-disable no-unused-vars */
 //Mettre le code JavaScript lié à la page photographer.html
 // eslint-disable-next-line no-unused-vars
 
-async function displayData(resultat1, resultat2) {
+async function displayData(identity, picture) {
     const photographersHeader = document.querySelector(".photograph-header")
-
-    //affichage des objets 
-    console.log('displayData',resultat1)
-    console.log('displayData',resultat2)
-
-    photographersHeader.appendChild(resultat1);
-    photographersHeader.appendChild(resultat2);
-
-     //noeud parent
-     const photographersSection = document.querySelector(".photograph-header")
-     const child = document.querySelector(".contact_button")
-     photographersSection.insertBefore(resultat1,child)
-    
-
+    photographersHeader.appendChild(identity);
+    photographersHeader.appendChild(picture);
+    //noeud parent
+    const photographersSection = document.querySelector(".photograph-header")
+    const child = document.querySelector(".contact_button")
+    photographersSection.insertBefore(identity, child)
 }
 
 async function init() {
+    // Obtenir les paramètres de l'URL
+    const urlParams = new URLSearchParams(window.location.search);
+    // Récupérez la valeur de la variable "id" de l'URL
+    const valeurId = urlParams.get('id');
     const { photographers } = await getPhotographers();
-    console.log('photographers', photographers[0])
-    const data = photographers[0]
-    console.log('data',data)
-    const objet_0 = photographerHeader(data).getUserCardDOM()
-    const{resultat1,resultat2} = objet_0
-    console.table('objet_1',resultat1)
-    console.log('objet2',resultat2)
+    //récupération de l'index du tableau
+    const trouverIndexParPropriete = (photographers, id, valeurId) => {
+        const indexTrouve = photographers.findIndex(objet => objet[id] === parseInt(valeurId));
+        return indexTrouve;
+    };
+    const indexTrouve = trouverIndexParPropriete(photographers, 'id', valeurId);
+    const data = photographers[indexTrouve]
+    const myObjet = photographerHeader(data).getUserCardDOM()
+    const { identity, picture } = myObjet
+    //affichage du photographe
+    displayData(identity, picture)
 
-    displayData(resultat1,resultat2)
-   
 }
 
 init();

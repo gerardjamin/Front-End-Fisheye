@@ -17,6 +17,8 @@ async function init() {
     const { photographers } = await getPhotographers();
     //programmation asynchrone => await
     const objetsPhotographer = await factoryObject(photographers, 'photographers')
+    //console.table(objetsPhotographer)
+    //affichage des articles
     displayData(objetsPhotographer)
 }
 
