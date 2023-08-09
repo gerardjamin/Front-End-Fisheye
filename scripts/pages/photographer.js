@@ -1,9 +1,8 @@
 import { getPhotographers } from '../api/api.js';
-import { photographerHeader } from '../templates/templatePhotographers.js'
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-//Mettre le code JavaScript lié à la page photographer.html
 // eslint-disable-next-line no-unused-vars
-
+//Mettre le code JavaScript lié à la page photographer.html
 async function displayData(identity, picture) {
     const photographersHeader = document.querySelector(".photograph-header")
     photographersHeader.appendChild(identity);
@@ -27,13 +26,11 @@ async function init() {
     };
     const indexTrouve = trouverIndexParPropriete(photographers, 'id', valeurId);
     const data = photographers[indexTrouve]
-    const myObjet = photographerHeader(data).getUserCardDOM()
-    const { identity, picture } = myObjet
+    const {identity,picture} = await factoryObject(data,'identity')
     //affichage du photographe
     displayData(identity, picture)
-
 }
-
+//point d'entrée
 init();
 
 

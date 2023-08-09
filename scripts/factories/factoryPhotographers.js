@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-inner-declarations */
 // eslint-disable-next-line no-empty
+
 async function factoryObject(photographers, type) {
   if (type === "photographers") {
     const dataPhographers = []
@@ -15,10 +16,15 @@ async function factoryObject(photographers, type) {
     });
     return dataPhographers
   }
+
+  else if (type === 'identity'){
+    //objet
+    const myObjet = photographerHeader(photographers).getUserCardDOM()
+    return { identity, picture } = myObjet 
+  }
   
   else if (type === "videos") {
     const dataVideo =[]
-
     return dataVideo
   }
 
