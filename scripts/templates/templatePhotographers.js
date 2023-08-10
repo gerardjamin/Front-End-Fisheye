@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 function photographerHeader(data) {
-    const { name, id,city, country, tagline, portrait, } = data;
+
+    const { name, id,city, country, tagline, portrait} = data;
     const picture = `../assets/Photographers/${portrait}`;
 
     //object to display
@@ -24,7 +25,6 @@ function photographerHeader(data) {
         img.setAttribute("src", picture)
         img.setAttribute('alt', `Je m'appelle ${name}`)
 
-        console.log({ identity: identity, picture: img })
         return { identity: identity, picture: img }; // Retourne l'élément article et l'image
     }
 

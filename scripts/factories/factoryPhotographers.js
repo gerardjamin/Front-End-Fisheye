@@ -3,9 +3,10 @@
 /* eslint-disable no-inner-declarations */
 // eslint-disable-next-line no-empty
 
-async function factoryObject(photographers, type) {
+async function factoryObject(photographers, type,valeurId,media) {
   if (type === "photographers") {
     const dataPhographers = []
+
     photographers.forEach((photographer) => {
       //objet
       const photographerModel = photographerTemplate(photographer)
@@ -14,13 +15,21 @@ async function factoryObject(photographers, type) {
       //contient tous les artcles
       dataPhographers.push(userCardDOM)
     });
+
     return dataPhographers
   }
 
   else if (type === 'identity'){
-    //objet
+    //objet identity et portfolio
     const myObjet = photographerHeader(photographers).getUserCardDOM()
-    return { identity, picture } = myObjet 
+    const { identity, picture } = myObjet
+    const filteredImages = media.filter(image => image.photographerId === parseInt(valeurId));
+
+    return  {
+      identity,
+      picture,
+      filteredImages  //portfolio
+    }
   }
   
   else if (type === "videos") {
