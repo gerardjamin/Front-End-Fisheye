@@ -67,10 +67,24 @@ video {
   background: #c4c4c4;
 }
 
-.portfolio_section article p {
-color: #901C1C;
-font-size: 24px;
+.portfolio_section article div {
+    display:flex;
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: baseline;
+    max-width: 350px;
 }
+
+.portfolio_section article div p {
+    color: #901C1C;
+    font-size: 24px;
+   
+}
+
+.portfolio_section article div span span{
+    color:#901C1C;
+    font-size: 24px;
+    }
 
 .contact_button {
   font-size: 20px;
