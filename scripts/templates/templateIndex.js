@@ -6,7 +6,6 @@ function photographerTemplate(data) {
     //object to display
     function getUserCardDOM() {
         const article = document.createElement( 'article' );
-
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture)  
         img.setAttribute('alt',`Je m'appelle ${name}`)
@@ -24,15 +23,12 @@ function photographerTemplate(data) {
 
         const identificateur = document.createElement('span')
         identificateur.className="identificateur"
-        //identificateur.innerHTML=`${id}`
-
+       
         article.appendChild(link)
         article.appendChild(h1);
         article.appendChild(h3);
         article.appendChild(p);
         article.appendChild(h4);
-        //article.appendChild(identificateur)
-      
         return (article);
     }
     //retourne l'objet java script

@@ -23,12 +23,12 @@ async function factoryObject(photographers, type,valeurId,media) {
     //objet identity et portfolio
     const myObjet = photographerHeader(photographers).getUserCardDOM()
     const { identity, picture } = myObjet
-    const filteredImages = media.filter(image => image.photographerId === parseInt(valeurId));
+    const filteredPhotographers = media.filter(image => image.photographerId === parseInt(valeurId));
 
     return  {
       identity,
       picture,
-      filteredImages  //portfolio
+      filteredPhotographers  //portfolio
     }
   }
   

@@ -2,10 +2,10 @@
   --name: valeur;
 }
 
-body{
-    width: 1440;
-    height: 1024;
-}
+/* body {
+  width: 1440;
+  height: 1024;
+} */
 
 #contact_modal {
   display: none;
@@ -52,10 +52,9 @@ body{
 .portfolio_section {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 50px;
+  gap: 80px;
   margin-top: 100px;
-  padding:50px 50px;
-  
+  padding: 50px 50px;
 }
 
 .portfolio_section article img,
@@ -68,23 +67,43 @@ video {
 }
 
 .portfolio_section article div {
-    display:flex;
-    flex-direction: row; 
-    justify-content: space-between;
-    align-items: baseline;
-    max-width: 350px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  max-width: 350px;
 }
 
 .portfolio_section article div p {
-    color: #901C1C;
-    font-size: 24px;
-   
+  color: #901c1c;
+  font-size: 24px;
 }
 
-.portfolio_section article div span span{
-    color:#901C1C;
-    font-size: 24px;
-    }
+.portfolio_section article div span span {
+  color: #901c1c;
+  font-size: 24px;
+}
+
+.bottom-right-encart {
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 376px;
+  height: 89px;
+  background-color: #DB8876;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.bottom-left-encart h4 {
+  display: inline-block;
+  font-size: 24px;
+}
+
 
 .contact_button {
   font-size: 20px;
