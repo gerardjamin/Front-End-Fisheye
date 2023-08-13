@@ -1,5 +1,6 @@
 :root {
-  --name: valeur;
+  --error-color: #dc3545;
+  --success-color:#fff;
 }
 
 /* body {
@@ -168,6 +169,7 @@ form div {
   width: 100%;
   align-items: self-start;
   margin-bottom: 26px;
+  font-size: 36px;
 }
 
 form input,textarea {
@@ -175,4 +177,16 @@ form input,textarea {
   height: 68px;
   border: none;
   border-radius: 5px;
+}
+
+.formField small {
+color: var(--error-color);
+}
+
+.error input {
+  background: var(--error-color);
+}
+
+.success input {
+  background: var(--success-color);
 }
