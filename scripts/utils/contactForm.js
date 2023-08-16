@@ -161,50 +161,38 @@ const modal = document.getElementById("contact_modal")
 const essai = document.getElementById("contact_modal")
 const openButton = document.getElementById("openButton")
 const closeButton = document.querySelector("#closeButton > img")  /*boutton*/
+const inputPrenom = document.getElementById('prenom')
 
 function closeModal() {
     header.setAttribute('aria-hidden', 'false')
     main.setAttribute('aria-hidden', 'false')
     encart.setAttribute('aria-hidden', 'false')
-
     modal.setAttribute('aria-hidden', 'true')
-
     setTimeout(() => {
         openButton.focus()
-
-        if (document.activeElement === openButton) {
-            console.log('L\'élément open a le focus.');
-        } else {
-            console.log('L\'élément n\'a pas le focus.');
-        }
         modal.style.display = "none";
-    }, 100)
+    }, 5)
 }
 
 function openModal() {
+    modal.style.display = "block";
     header.setAttribute('aria-hidden', 'true')
     main.setAttribute('aria-hidden', 'true')
     encart.setAttribute('aria-hidden', 'true')
-
-
-
-    setTimeout(() => {
-
-        essai.focus()
-        modal.focus()
-        header.focus()
-        closeButton.focus()
-        if (document.activeElement === closeButton) {
-            console.log('L\'élément croix a le focus.');
-        } else {
-            console.log('L\'élément croix n\'a pas le focus.');
-        }
-        modal.style.display = "block";
-    }, 100)
     modal.setAttribute('aria-hidden', 'false')
-
-
+    setTimeout(() => {
+        inputPrenom.focus()
+    }, 5)
 }
+
+// fermeture avec la touche escape du clavier
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.style.display === 'block') {
+        e.preventDefault();
+        closeModal();
+    }
+});
+
 
 
 
