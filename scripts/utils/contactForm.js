@@ -164,13 +164,13 @@ const closeButton = document.querySelector("#closeButton > img")  /*boutton*/
 const inputPrenom = document.getElementById('prenom')
 
 function closeModal() {
+    modal.style.display = "none";
     header.setAttribute('aria-hidden', 'false')
     main.setAttribute('aria-hidden', 'false')
     encart.setAttribute('aria-hidden', 'false')
     modal.setAttribute('aria-hidden', 'true')
     setTimeout(() => {
         openButton.focus()
-        modal.style.display = "none";
     }, 5)
 }
 
