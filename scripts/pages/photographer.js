@@ -3,7 +3,7 @@ import { compteLikesPhotographer } from "../utils/likes.js"
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 // eslint-disable-next-line no-unused-vars
-//Mettre le code JavaScript lié à la page photographer.html
+//Mettre le code JavaScript lié à la page photographer.html ici
 async function displayData(identity, picture, filteredPhotographers, photographers) {
     //partie identite
     const photographersHeader = document.querySelector(".photograph-header")
@@ -12,7 +12,7 @@ async function displayData(identity, picture, filteredPhotographers, photographe
     //noeud parent
     const photographersSection = document.querySelector(".photograph-header")
     //premier enfant
-    const child = document.querySelector(".contact_button")
+    const child = document.querySelector(".openButton")
     photographersSection.insertBefore(identity, child)
 
     //partie portofolio
@@ -30,18 +30,18 @@ async function displayData(identity, picture, filteredPhotographers, photographe
 
         if (image) {
             //partie image
-            const img = document.createElement("img")
-            img.setAttribute("src", portfolioPicture)
-            img.setAttribute("alt", `le titre de la photo${title}`)
-            article.appendChild(img)
+            const imgElement = document.createElement("img")
+            imgElement.setAttribute("src", portfolioPicture)
+            imgElement.setAttribute("alt", `le titre de la photo${title}`)
+            article.appendChild(imgElement)
 
-        } else {
+        } else if(video) {
             //partie video
-            const video = document.createElement("video")
-            video.setAttribute("src", portfolioVideo)
-            video.setAttribute("type", "mp4")
-            video.setAttribute("controls", "true")
-            article.appendChild(video)
+            const videoElement = document.createElement("video")
+            videoElement.setAttribute("src", portfolioVideo)
+            videoElement.setAttribute("type", "mp4")
+            videoElement.setAttribute("controls", "true")
+            article.appendChild(videoElement)
         }
         //coeur
         const span = document.createElement("span")

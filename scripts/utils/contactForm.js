@@ -1,21 +1,29 @@
 /* eslint-disable no-unused-vars */
-//partie verification formulaire
+//partie vérification du formulaire
 const form = document.querySelector("#signUp")
 const prenomInput = document.forms.formulaire.prenom;
 const nomInput = document.forms.formulaire.nom;
 const emailInput = document.forms.formulaire.email;
 const messageTextarea = document.forms.formulaire.message;
 
-//correction en temps reel du formulaire
+//correction en temps reel des champs du formulaire
 var formulaire = document.getElementById("signUp");
 var inputs = formulaire.getElementsByTagName("input");
 for (var i = 0; i < inputs.length; i++) {
-    inputs[i].addEventListener("blur", function(event) {
+    inputs[i].addEventListener("input", function () {
         checkSurname()
         checkName()
         checkEmail()
+        checkMessage()
     });
 }
+
+//correction en temps reel de la zone areatext
+var area = document.getElementById("message");
+area.addEventListener("input", function () {
+    checkMessage()
+});
+
 
 /**
  * le prénom ne doit pas etre vide et avoir au moins 2 caractères sans chiffre
@@ -23,7 +31,7 @@ for (var i = 0; i < inputs.length; i++) {
  */
 const checkSurname = () => {
     let valid = false
-    const surName = prenomInput.value
+    const surName = prenomInput.value.trim()
     const regex = /^[A-Za-z][a-zA-ZÀ-ÖØ-öø-ÿ\s(--)]+$/
     const estValide = regex.test(surName)
 
@@ -43,20 +51,20 @@ const checkSurname = () => {
  * @returns valid
  */
 const checkName = () => {
-    let valid = false;
-    const name = nomInput.value;
-    const regex = /^[A-Za-z][a-zA-ZÀ-ÖØ-öø-ÿ\s(--)]+$/;
+    let valid = false
+    const name = nomInput.value.trim()
+    const regex = /^[A-Za-z][a-zA-ZÀ-ÖØ-öø-ÿ\s(--)]+$/
     const estValide = regex.test(name);
 
     if (!isRequired(name)) {
-        showError(nomInput, "Le nom ne peut pas être vide");
+        showError(nomInput, "Le nom ne peut pas être vide")
     } else if (!estValide) {
-        showError(nomInput, "Entrez un nom de famille valide");
-        } else  {
-        showSuccess(nomInput);
+        showError(nomInput, "Entrez un nom de famille valide")
+    } else {
+        showSuccess(nomInput)
         valid = true;
     }
-    return valid;
+    return valid
 }
 
 /**
@@ -67,19 +75,35 @@ const checkEmail = () => {
     let valid = false;
     const email = emailInput.value.trim();
     if (!isRequired(email)) {
-        showError(emailInput, "l'email ne peut etre vide");
+        showError(emailInput, "l'email ne peut pas être vide");
     } else if (!isEmailValid(email)) {
         showError(emailInput, "Email non valide");
     } else {
         showSuccess(emailInput);
         valid = true;
     }
-    return valid;
+    return valid
 };
 
+/**
+ * verifie que la zone areatext ne soit pas vide
+ * @returns valid
+ */
+const checkMessage = () => {
+    let valid = false
+    const message = messageTextarea.value.trim()
+    if (!isRequired(message)) {
+        showError(messageTextarea, "Votre message ne dois pas être vide");
+    } else {
+        showSuccess(messageTextarea);
+        valid = true
+    }
+    return valid
+}
+
 const isEmailValid = (email) => {
-    let emailRegExp = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+");
-    return emailRegExp.test(email); 
+    let emailRegExp = /^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z0-9._-]{2,}$/i
+    return emailRegExp.test(email);
 };
 
 // Si la value retourne une chaine de caractére vide alors isRequired = false
@@ -110,67 +134,82 @@ const showSuccess = (input) => {
     error.textContent = "";
 }
 
-
 form.addEventListener("submit", function (event) {
     // empécher l'envois du formulaire(le rechargement de la page)
     event.preventDefault();
-  
+
     // validation des champs
     let isSurnameValid = checkSurname(),
         isNameValid = checkName(),
-        isEmailValid = checkEmail()
+        isEmailValid = checkEmail(),
+        isMessageValid = checkMessage()
 
     let isFormValid =
         isSurnameValid &&
         isNameValid &&
-        isEmailValid
+        isEmailValid &&
+        isMessageValid
 
-        return isFormValid
+    return isFormValid
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//gestion de la modale en matiere d'accessibilité
+const header = document.getElementById("head")
+const main = document.getElementById("main")
+const encart = document.getElementById("encart")
+const modal = document.getElementById("contact_modal")
+const essai = document.getElementById("contact_modal")
+const openButton = document.getElementById("openButton")
+const closeButton = document.querySelector("#closeButton > img")  /*boutton*/
 
 function closeModal() {
-    const modal = document.getElementById("contact_modal");
-    modal.style.display = "none";
+    header.setAttribute('aria-hidden', 'false')
+    main.setAttribute('aria-hidden', 'false')
+    encart.setAttribute('aria-hidden', 'false')
+
+    modal.setAttribute('aria-hidden', 'true')
+
+    setTimeout(() => {
+        openButton.focus()
+
+        if (document.activeElement === openButton) {
+            console.log('L\'élément open a le focus.');
+        } else {
+            console.log('L\'élément n\'a pas le focus.');
+        }
+        modal.style.display = "none";
+    }, 100)
 }
 
-function displayModal() {
-    const modal = document.getElementById("contact_modal");
-    modal.style.display = "block";
+function openModal() {
+    header.setAttribute('aria-hidden', 'true')
+    main.setAttribute('aria-hidden', 'true')
+    encart.setAttribute('aria-hidden', 'true')
+
+
+
+    setTimeout(() => {
+
+        essai.focus()
+        modal.focus()
+        header.focus()
+        closeButton.focus()
+        if (document.activeElement === closeButton) {
+            console.log('L\'élément croix a le focus.');
+        } else {
+            console.log('L\'élément croix n\'a pas le focus.');
+        }
+        modal.style.display = "block";
+    }, 100)
+    modal.setAttribute('aria-hidden', 'false')
+
+
 }
+
+
+
+
+
+
 
 

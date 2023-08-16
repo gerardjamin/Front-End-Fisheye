@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="assets/favicon.png" />
@@ -11,60 +12,68 @@
     <title>Fisheye - photographe</title>
   </head>
   <body>
-    <header>
+    <header id="head">
       <a href="index.html">
-        <img src="assets/images/logo.png" class="logo" alt="logo fisheye" />
+        <img src="assets/images/logo.png" class="logo" alt="logo fisheye home page" />
       </a>
     </header>
-    <main id="main">
+    <main id="main" aria-hidden="false">
       <div class="photograph-header">
         <button
-          class="contact_button"
-          aria-label="ouverture modale de contact "
-          onclick="displayModal()"
+          id="openButton"
+          class="openButton"
+          aria-label="ouverture de la modale de contact "
+          onclick="openModal()"
         >
           Contactez-moi
         </button>
       </div>
       <section class="portfolio_section"></section>
     </main>
-    <div id="contact_modal">
-      <div class="modal">
+    <div id="contact_modal" aria-hidden="true" role="dialog" aria-describedby="contactez-moi" aria-modal=""true>
+      <div class="modal" id="modal">
         <header>
           <h2>Contactez-moi</h2>
-          <img
-            src="assets/icons/close.svg"
-            onclick="closeModal()"
-            aria-level="fermeture de la modale"
-          />
+           <!-- croix de fermeture -->
+           <button class="closeButton" id="closeButton" onclick="closeModal()" aria-label="fermeture de la modale de contact"
+         >
+           <img
+             src="assets/icons/close.svg"
+             alt="Fermer"
+           />
+         </button>
+         
         </header>
        
         <form id="signUp" name="formulaire">
           <div class="formField">
-            <label aria-label="entrez votre prenom">Prénom</label>
+            <label label for="prenom" aria-label="entrez votre prenom">Prénom</label>
             <input type="text" id="prenom" name="prenom"/>
             <small></small>
           </div>
           <div class="formField">
-            <label aria-label="entrez votre nom">Nom</label>
+            <label label for="nom" aria-label="entrez votre nom">Nom</label>
             <input type="text" id="nom" name="nom"/>
             <small></small>
           </div>
           <div class="formField">
-            <label aria-label="entrez votre Email">Email</label>
+            <label label for="email" aria-label="entrez votre Email">Email</label>
             <input type="email" id="email" name="email"/>
             <small></small>
           </div>
-            <label aria-label="entrez votre message">Votre massage</label>
+          <div class="formField">
+            <label label for="message" aria-label="entrez votre message">Votre message</label>
             <textarea name="message" id="message"></textarea>
-          <button class="contact_button" type="submit"   aria-label="validez votre formulaire">
+            <small></small>
+            </div>
+          <button class="submitButton" type="submit"   aria-label="validez votre formulaire">
             Envoyer
           </button>
         </form>
        
       </div>
     </div>
-    <div id="encart" class="bottom-right-encart"></div>
+    <div id="encart" class="bottom-right-encart" aria-hidden="false"></div>
 
     <script src=" /scripts/templates/templatePhotographers.js"></script>
     <script type="module" src="/scripts/pages/photographer.js"></script>
