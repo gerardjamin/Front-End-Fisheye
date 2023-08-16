@@ -101,6 +101,11 @@ const checkMessage = () => {
     return valid
 }
 
+/**
+ * 
+ * @param {*} email 
+ * @returns le resultat du test (false ou true)
+ */
 const isEmailValid = (email) => {
     let emailRegExp = /^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z0-9._-]{2,}$/i
     return emailRegExp.test(email);
@@ -109,6 +114,7 @@ const isEmailValid = (email) => {
 // Si la value retourne une chaine de caractére vide alors isRequired = false
 const isRequired = (value) => (value === "" ? false : true);
 
+//gère l'affichage de l'erreur
 const showError = (input, message) => {
     // Récupération de l'élément parent de formulaire
     const formField = input.parentElement;
@@ -116,7 +122,7 @@ const showError = (input, message) => {
     formField.classList.remove("success");
     formField.classList.add("error");
 
-    // voir le message d'erreur dans la balise small
+    // envoie le message d'erreur dans la balise small
     const error = formField.querySelector("small");
     error.textContent = message;
 }
@@ -134,6 +140,10 @@ const showSuccess = (input) => {
     error.textContent = "";
 }
 
+/**
+ * verification de l'intégrité du formulaire
+ * @returns le resultat de la vérification (false ou true)
+ */
 form.addEventListener("submit", function (event) {
     // empécher l'envois du formulaire(le rechargement de la page)
     event.preventDefault();
@@ -163,6 +173,9 @@ const openButton = document.getElementById("openButton")
 const closeButton = document.querySelector("#closeButton > img")  /*boutton*/
 const inputPrenom = document.getElementById('prenom')
 
+/**
+ * setTimeout pour attendre la mise en focus de l'element
+ */
 function closeModal() {
     modal.style.display = "none";
     header.setAttribute('aria-hidden', 'false')
@@ -185,7 +198,7 @@ function openModal() {
     }, 5)
 }
 
-// fermeture avec la touche escape du clavier
+// fermeture de la modale avec la touche escape du clavier
 window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.style.display === 'block') {
         e.preventDefault();
