@@ -3,11 +3,6 @@
   --success-color:#fff;
 }
 
-/* body {
-  width: 1440;
-  height: 1024;
-} */
-
 /* permet le debug des elements qui ont le focus*/
 *:focus {
   outline: 2px solid red !important;
@@ -209,4 +204,6 @@ form input,textarea {
 .error textarea {
   background: var(--error-color);
 }
+
+
 

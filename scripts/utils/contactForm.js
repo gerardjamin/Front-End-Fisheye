@@ -168,9 +168,8 @@ const header = document.getElementById("head")
 const main = document.getElementById("main")
 const encart = document.getElementById("encart")
 const modal = document.getElementById("contact_modal")
-const essai = document.getElementById("contact_modal")
 const openButton = document.getElementById("openButton")
-const closeButton = document.querySelector("#closeButton > img")  /*boutton*/
+const closeButton = document.querySelector("#closeButton")  /*boutton*/
 const inputPrenom = document.getElementById('prenom')
 
 /**
@@ -194,7 +193,8 @@ function openModal() {
     encart.setAttribute('aria-hidden', 'true')
     modal.setAttribute('aria-hidden', 'false')
     setTimeout(() => {
-        inputPrenom.focus()
+        // inputPrenom.focus()
+        closeButton.focus()
     }, 5)
 }
 

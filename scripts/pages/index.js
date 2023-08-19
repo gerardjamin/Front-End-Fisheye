@@ -15,10 +15,10 @@ async function init() {
     const { photographers } = await getPhotographers();
     //programmation asynchrone => await
     const objetsPhotographer = await factoryObject(photographers, 'photographers')
-    //affichage des articles
+    //affichage des 6 articles pour chaque photographe
     displayData(objetsPhotographer)
 }
 
-//Point d'entrée
+//Point d'entrée dans le fichier
 init();
 

@@ -19,8 +19,10 @@ async function displayData(identity, picture, filteredPhotographers, photographe
     for (const objet of filteredPhotographers) {
         const { id, photographerId, title, image, video, likes, date, price } =
             objet;
+            //ensemble des travaux des photographes
         const portfolioPicture = `../assets/portofolio/${image}`;
         const portfolioVideo = `../assets/portofolio/${video}`;
+
         const portofolioSection = document.querySelector(".portfolio_section")
         const article = document.createElement("article")
         const container = document.createElement("div")
@@ -31,13 +33,16 @@ async function displayData(identity, picture, filteredPhotographers, photographe
         if (image) {
             //partie image
             const imgElement = document.createElement("img")
+            imgElement.classList.add("photo")
             imgElement.setAttribute("src", portfolioPicture)
             imgElement.setAttribute("alt", `le titre de la photo${title}`)
+            //je rempli l'article avec l'image
             article.appendChild(imgElement)
 
-        } else if(video) {
+        } else if (video) {
             //partie video
             const videoElement = document.createElement("video")
+            videoElement.classList.add("video")
             videoElement.setAttribute("src", portfolioVideo)
             videoElement.setAttribute("type", "mp4")
             videoElement.setAttribute("controls", "true")
@@ -92,6 +97,30 @@ async function displayData(identity, picture, filteredPhotographers, photographe
     const h4 = document.createElement('h4');
     h4.textContent = `${priceHour}/jour`
     encart.appendChild(h4)
+
+    //partie qui permet d'ouvrir la light-box au click sur l'element image ou video
+    // Récupérer le tableau d'éléments image et video
+    const myImage = document.getElementsByClassName("photo")
+    const myVideo = document.getElementsByClassName("video")
+
+    // Ajouter un événement onClick() sur chacune des photos ou videos pour ouvrir la light box
+    for (let photo of myImage) {
+        photo.addEventListener("click", function () {
+            // alert("La vidéo a été cliquée !")
+            getTravauxPhotographers(filteredPhotographers,photographerId)
+            alert("La vidéo a été cliquée !")
+        })
+    }
+    for (let video of myVideo) {
+        // Ajoutez l'événement click aux éléments enfants de l'élément vidéo
+        video.addEventListener("click", function (event) {
+            if (event.target !== video) {
+                // Éviter l'interférence des contrôles vidéo
+                getTravauxPhotographers(filteredPhotographers,photographerId)
+            }
+            alert("La vidéo a été cliquée !")
+        });
+    }
 }
 
 async function init() {
@@ -118,7 +147,8 @@ async function init() {
         media
     );
     //affichage du photographe avec son portofolio
-    displayData(identity, picture, filteredPhotographers, photographers);
+    await displayData(identity, picture, filteredPhotographers, photographers);
 }
-//point d'entrée
+
+//point d'entrée dans le fichier
 init();
