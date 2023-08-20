@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="assets/favicon.png" />
@@ -14,7 +14,11 @@
   <body>
     <header id="head">
       <a href="index.html">
-        <img src="assets/images/logo.png" class="logo" alt="logo fisheye home page" />
+        <img
+          src="assets/images/logo.png"
+          class="logo"
+          alt="logo fisheye home page"
+        />
       </a>
     </header>
     <main id="main" aria-hidden="false">
@@ -30,51 +34,79 @@
       </div>
       <section class="portfolio_section"></section>
     </main>
-    <div id="contact_modal" aria-hidden="true" role="contact avec le photographe" aria-describedby="contactez-moi" aria-modal=""true>
+    <div
+      id="contact_modal"
+      aria-hidden="true"
+      role="contact avec le photographe"
+      aria-describedby="contactez-moi"
+      aria-modal=""
+      true
+    >
       <div class="modal" id="modal">
         <header>
           <h2>Contactez-moi</h2>
-           <!-- croix de fermeture -->
-           <button class="closeButton" id="closeButton" onclick="closeModal()" aria-label="fermeture de la modale de contact"
-         >
-           <img
-             src="assets/icons/close.svg"
-             alt="fermeture de la modale de contact"
-           />
-         </button>
-         
+          <!-- croix de fermeture -->
+          <button
+            class="closeButton"
+            id="closeButton"
+            onclick="closeModal()"
+            aria-label="fermeture de la modale de contact"
+          >
+            <img
+              src="assets/icons/close.svg"
+              alt="fermeture de la modale de contact"
+            />
+          </button>
         </header>
-       
+
         <form id="signUp" name="formulaire">
           <div class="formField">
-            <label label for="prenom" aria-label="entrez votre prenom">Prénom</label>
-            <input type="text" id="prenom" name="prenom"/>
+            <label label for="prenom" aria-label="entrez votre prenom"
+              >Prénom</label
+            >
+            <input type="text" id="prenom" name="prenom" />
             <small></small>
           </div>
           <div class="formField">
             <label label for="nom" aria-label="entrez votre nom">Nom</label>
-            <input type="text" id="nom" name="nom"/>
+            <input type="text" id="nom" name="nom" />
             <small></small>
           </div>
           <div class="formField">
-            <label label for="email" aria-label="entrez votre Email">Email</label>
-            <input type="email" id="email" name="email"/>
+            <label label for="email" aria-label="entrez votre Email"
+              >Email</label
+            >
+            <input type="email" id="email" name="email" />
             <small></small>
           </div>
           <div class="formField">
-            <label label for="message" aria-label="entrez votre message">Votre message</label>
+            <label label for="message" aria-label="entrez votre message"
+              >Votre message</label
+            >
             <textarea name="message" id="message"></textarea>
             <small></small>
-            </div>
-          <button class="submitButton" type="submit"   aria-label="validez votre formulaire">
+          </div>
+          <button
+            class="submitButton"
+            type="submit"
+            aria-label="validez votre formulaire"
+          >
             Envoyer
           </button>
         </form>
-       
       </div>
     </div>
     <div id="encart" class="bottom-right-encart" aria-hidden="false"></div>
-    <section id="sectionLight" class="sectionLight"></section>
+    <!-- modale -->
+    <div id="modalLightBox" class="modalLightBox">
+      <!-- bouton de fermeture -->
+      <span id="closeLightBox" class="closeLightBox">&times;</span>
+      <div class="modalLightBox-content">
+        <!-- href sera donné en java script -->
+        <img class="photoLightBox" alt="photoLightBox" name = "photoLightBox" src=""/>
+        <!-- <video src=""></video> -->
+      </div>
+    </div>
 
     <script src=" /scripts/templates/templatePhotographers.js"></script>
     <script type="module" src="/scripts/pages/photographer.js"></script>
@@ -83,8 +115,3 @@
     <script src="/scripts/utils/lightBox.js"></script>
   </body>
 </html>
-
-
-
-
-

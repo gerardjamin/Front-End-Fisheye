@@ -205,5 +205,45 @@ form input,textarea {
   background: var(--error-color);
 }
 
+/*modal*/
+.modalLightBox.show {
+  display:block;
+}
 
+.modalLightBox {
+display: none;
+position: fixed;
+left: 0px;
+top: 0px;
+bottom: 0px;
+right: 0px;
+background:rgba(0, 0, 0, 0.7);
+}
+
+.modalLightBox-content {
+width: 90%;
+margin: auto;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+}
+
+.modalLightBox-content .photoLightBox , .videoLightBox {
+  aspect-ratio: 1/1;
+  width: 50%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.closeLightBox {
+color: white;
+font-size: 4em;
+position: fixed;
+top: 10px;
+right: 10px;
+cursor: pointer;
+}
 

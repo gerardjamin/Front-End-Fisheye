@@ -18,39 +18,11 @@ async function getTravauxPhotographers(filteredPhotographers) {
 
     //tableau regroupant toutes les images et video du photographe
     const tableauVideoImage = portfolioPicture.concat(portfolioVideo);
-    const sectionLight = document.getElementById("sectionLight");
-
-    let indice = 0
-    let carouselContent = "" // Chaîne de contenu HTML pour le carrousel
-
-    for (const objet of tableauVideoImage) {
-        // Concaténer le contenu HTML à chaque itération
-        carouselContent += `
-        <li class="carousel-item item-${indice++}" aria-hidden="false">
-        <div role="button" class="controls controls-left">
-        <span class="img prev-image">
-        <i aria-hidden="true" class="fa fa-arrow-circle-left"></i>
-        </span>
-        <p class="sr-only">Previous</p>
-        </div>
-        <div role="button" class="controls controls-right">
-        <span class="img next-image">
-        <i aria-hidden="true" class="fa fa-arrow-circle-right"></i>
-        </span>
-        <p class="sr-only">Next</p>
-        </div>
-        <div class="caroussel-title">
-        <h2>Item 1</h2>
-        </div>
-        </li>`
     
-    }
-
-    // Insérer le contenu HTML complet dans la sectionLight
-    sectionLight.innerHTML = `<ul>${carouselContent}</ul>`;
-
-
+    return tableauVideoImage
 }
+
+
 
 
 
