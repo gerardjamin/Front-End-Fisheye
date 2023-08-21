@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import { getPhotographers } from "../api/api.js";
 import { compteLikesPhotographer } from "../utils/likes.js"
 /* eslint-disable no-undef */
@@ -112,28 +113,85 @@ async function displayData(identity, picture, filteredPhotographers, photographe
     // Ajouter un événement onClick() sur chacune des photos ou videos pour ouvrir la light box
     for (let photo of myImage) {
         photo.addEventListener("click", function () {
-            //const sourePhoto = getTravauxPhotographers(filteredPhotographers, photographerId)
+           
+            //recuperation de l'index de l'element en cours...
+            let reponse = calculeIndex(filteredPhotographers, this.src)
+            let index = reponse.index
+            // const that = this: memorisation du contexte (click)         
+            modalLightBox.addEventListener('click', function () {
+                index = index + 1
+                if (index === 10) {
+                    index = 0;
+                }
+                
+                const url = reponse.sourcePhoto[index]
+                const taille = reponse.sourcePhoto.length
+                const cheminDuFichier = url
+                const partiesDuChemin = cheminDuFichier.split('.');
+                const extensionDuFichier = partiesDuChemin[partiesDuChemin.length - 1];
+               
+                if (index >= taille) {
+                    // index = 0
+                    // const url = reponse.sourcePhoto[index]
+                    // if(extensionDuFichier === "mp4"){
+                    //     const photoLightBox = document.querySelector(".photoLightBox")
+                    //     photoLightBox.remove()
+                    //     const videoElement = document.createElement("video")
+                    //     videoElement.setAttribute("name", "videoLightBox")
+                    //     videoElement.classList.add("videoLightBox")
+                    //     //recuperation de la source de la video dans le contexte
+                    //     videoElement.setAttribute("src", `${url}`)
+                    //     videoElement.setAttribute("type", "mp4")
+                    //     videoElement.setAttribute("controls", ' ')
+                    //     modalLightBoxContent.appendChild(videoElement)
+                    // }else{
+                    //     index = index + 1
+                    //     const url = reponse.sourcePhoto[index]
+                    //     imageLightBox.setAttribute("src", `${url}`)
+                    // }                 
+                } else {  
+                    if(extensionDuFichier === "mp4"){
+                        const photoLightBox = document.querySelector(".photoLightBox")
+                        photoLightBox.remove()
+                        const videoElement = document.createElement("video")
+                        videoElement.setAttribute("name", "videoLightBox")
+                        videoElement.classList.add("videoLightBox")
+                        //recuperation de la source de la video dans le contexte
+                        videoElement.setAttribute("src", `${url}`)
+                        videoElement.setAttribute("type", "mp4")
+                        videoElement.setAttribute("controls", ' ')
+                        modalLightBoxContent.appendChild(videoElement)
+                    }else{
+                        const url = reponse.sourcePhoto[index]
+                        imageLightBox.setAttribute("src", `${url}`)  
+                    }
+                }
+            })
+
+
+
 
             // On obtient la référence de la collection HTML
             const collection = document.getElementsByTagName('video')
-             // Vérifiez si "photoLightBox" existe dans ma collection avec le nom de la balise img
-             const elementRecherche = collection.namedItem('videoLightBox');
+            // Vérifiez si "photoLightBox" existe dans ma collection avec le nom de la balise img
+            const elementRecherche = collection.namedItem('videoLightBox');
 
-             if (elementRecherche !== null) {
+            if (elementRecherche !== null) {
                 console.log('L\'élément "videoLightBox" existe dans la collection.');
                 const videoLightBox = document.querySelector(".videoLightBox")
                 videoLightBox.remove()
                 const photoElement = document.createElement("img")
-                photoElement.setAttribute("name","photoLightBox")
+                photoElement.setAttribute("name", "photoLightBox")
                 photoElement.classList.add("photoLightBox")
-                 //recuperation de la source de la video dans le contexte
-                 photoElement.src = this.src
+                //recuperation de la source de la video dans le contexte(objet photo)
+                photoElement.src = this.src
                 modalLightBoxContent.appendChild(photoElement)
             } else {
                 console.log('L\'élément "videoLightBox" n\'existe pas dans la collection.');
                 const imageLightBox = document.querySelector(".modalLightBox-content img")
+                //console.log('context', this.src)
                 imageLightBox.setAttribute("src", this.src)
-            }  
+            }
             //affichage de l'image dans la modale
             modalLightBox.classList.add("show")
         })
@@ -153,16 +211,16 @@ async function displayData(identity, picture, filteredPhotographers, photographe
                 const photoLightBox = document.querySelector(".photoLightBox")
                 photoLightBox.remove()
                 const videoElement = document.createElement("video")
-                videoElement.setAttribute("name","videoLightBox")
+                videoElement.setAttribute("name", "videoLightBox")
                 videoElement.classList.add("videoLightBox")
-                 //recuperation de la source de la video dans le contexte
+                //recuperation de la source de la video dans le contexte
                 videoElement.setAttribute("src", this.src)
                 videoElement.setAttribute("type", "mp4")
                 videoElement.setAttribute("controls", ' ')
                 modalLightBoxContent.appendChild(videoElement)
             } else {
                 console.log('L\'élément "photoLightBox" n\'existe pas dans la collection.');
-            }   
+            }
             //affichage de la modale
             modalLightBox.classList.add("show")
         })
@@ -174,9 +232,9 @@ async function displayData(identity, picture, filteredPhotographers, photographe
     })
 
     //on ferme au click sur la modale de la light box
-    modalLightBox.addEventListener("click", function () {
-        modalLightBox.classList.remove("show")
-    })
+    // modalLightBox.addEventListener("click", function () {
+    //     modalLightBox.classList.remove("show")
+    // })
 }
 
 async function init() {
