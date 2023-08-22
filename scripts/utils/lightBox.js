@@ -2,8 +2,8 @@
 
 /**
  * 
- * @param {*} filteredPhotographers 
- * @returns promesse tableauVideoImage
+ * @param {*} filteredPhotographers : tous les travaux du photographe sélectionné
+ * @returns promesse tableauVideoImage : url de chacune des photos
  */
  function getTravauxPhotographers(filteredPhotographers) {
     let portfolioPicture = []
@@ -30,30 +30,32 @@
     return tableauVideoImage
 }
 
+/**
+ ******************************************calcule l'index du tableau de la phto clickée 
+ * @param {*} filteredPhotographers :travaux du photographe sélectionné
+ * @param {*} src :source du context de la photo clickée
+ * @returns : index du tableau de la photo clickée et le tableau sourcePhoto
+ */
 function calculeIndex(filteredPhotographers,src) {
 
   // eslint-disable-next-line no-debugger
+  //dans sourcePhoto on trouve tous les url des photos du photographe
   const sourcePhoto = getTravauxPhotographers(filteredPhotographers)
-  // Le tableau nomsDeFichiers contiendra ["photo1.jpg", "photo2.jpg", "photo3.jpg ...."]
-  const nomsDePhotos = sourcePhoto.map(function (element) {
+  // Le tableau nomsDeFichiers contiendra ["namephoto1.jpg", "namephoto2.jpg", "namephoto3.jpg ...."]
+  const urlDePhotos = sourcePhoto.map(function (element) {
       const chemin = element;
       const partiesDuChemin = chemin.split("/");
+      //retourne le nom de la photo avec l'extension
       return partiesDuChemin[partiesDuChemin.length - 1];
   });
-  //on recupere seulement le nom de la photo qui a ete cliquée du context
+
+  
+  //ici on recupere l'url de la photo clickée
   const chemin = src;
   const partiesDuChemin = chemin.split("/");
   let name = partiesDuChemin[partiesDuChemin.length - 1];
-  //on obtiens l'index du tableau sourcePhoto dans le tableau des photos du photographe
-  let index = nomsDePhotos.findIndex((imageIndex) => imageIndex === name)
-
-  //../assets/portofolio/Travel_Tower.jpg 
-  //../assets/portfolio/${nomsDePhotos[index]}  => donne le chemin de la photo cliquée
-  //on passera a la photo d'apres avec index + 1
-
-//   console.table('sourcePhoto', sourcePhoto)
-//   console.table('nomDePhoto', nomsDePhotos)
-//   console.log('index dans nomsDePhoto', index)
+  //on cherche l'index du tableau sourcePhoto de la photo cliquée
+  let index = urlDePhotos.findIndex((imageIndex) => imageIndex === name)
 
   return {index , sourcePhoto}
 
