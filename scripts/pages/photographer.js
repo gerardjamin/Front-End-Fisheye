@@ -129,10 +129,9 @@ async function displayData(identity, picture, filteredPhotographers, photographe
             lightBoxPrecedent.addEventListener("click", function () {
                 // Code à exécuter lorsque le bouton 2 est cliqué
                 index = index - 1
-                if (index === 0) {
+                if (index < 0) {
                     index = taille - 1;
                 }
-
                 //************************je bascule sur le tableau sourcePhoto pour afficher les photos
                 //url de la photo clickée
                 const url = reponse.sourcePhoto[index]
