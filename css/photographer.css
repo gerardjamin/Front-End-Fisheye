@@ -248,25 +248,20 @@ right: 10px;
 cursor: pointer;
 }
 
-.closeLightBox:hover {
-  opacity:1;
-}
-
-.lightBoxSuivant,
-.lightBoxPrecedent {
-background: url(../assets/svg/🦆\ icon\ _chevron\ right_.svg) center center 100% 100%;
-width:36px;
-height:48px;
+.modalLightBox .lightBoxSuivant,
+.modalLightBox .lightBoxPrecedent {
+background: url(../assets/svg/icon-chevron-right.svg) center center/43px 72px no-repeat;
+width:10%;
+height:100%;
 border: none;
-position:fixe;
-top:0;
-right:0;
-margin-top: -14px;
+position:fixed;
 opacity:0.5;
 text-indent: -3000px;
 cursor: pointer;
 transition:0.4s;
-z-index: 25;
+
+z-index: 20;
+
 }
 
 .lightBoxSuivant:hover,
@@ -274,10 +269,14 @@ z-index: 25;
   opacity:1;
 }
 
-.lightBoxPrecedent {
-  right: auto;
-  left:0;
+.modalLightBox .lightBoxPrecedent {
+  left:10%;
   transform: rotate(180deg);
+}
+
+.modalLightBox .lightBoxSuivant {
+ left:75%;
+  
 }
 
 

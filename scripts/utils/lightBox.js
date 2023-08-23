@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-
 /**
  * 
  * @param {*} filteredPhotographers : tous les travaux du photographe sélectionné
@@ -37,7 +36,6 @@
  * @returns : index du tableau de la photo clickée et le tableau sourcePhoto
  */
 function calculeIndex(filteredPhotographers,src) {
-
   // eslint-disable-next-line no-debugger
   //dans sourcePhoto on trouve tous les url des photos du photographe
   const sourcePhoto = getTravauxPhotographers(filteredPhotographers)
@@ -49,7 +47,6 @@ function calculeIndex(filteredPhotographers,src) {
       return partiesDuChemin[partiesDuChemin.length - 1];
   });
 
-  
   //ici on recupere l'url de la photo clickée
   const chemin = src;
   const partiesDuChemin = chemin.split("/");
@@ -58,18 +55,17 @@ function calculeIndex(filteredPhotographers,src) {
   let index = urlDePhotos.findIndex((imageIndex) => imageIndex === name)
 
   return {index , sourcePhoto}
-
 }
 
-function displayNexPrev(url,type,reponse,index) {
-    // const myImage = document.getElementsByClassName("photo")
-    // const myVideo = document.getElementsByClassName("video")
-    // const modalLightBox = document.querySelector("#modalLightBox")
-    // const closeLightBox = document.querySelector("#closeLightBox")
-    // const imageLightBox = document.querySelector(".modalLightBox-content img")
+/**
+ * affiche l'elements suivant ou precedent
+ * @param {*} url: chemin de l'element
+ * @param {*} type mp4 ou jpg
+ * @param {*} reponse: index de l'element cliqué
+ * @param {*} index: placement dans le tableau de la photo suivante ou precedente
+ */
+function displayNexPrev(url,type,reponse,index) { 
     const modalLightBoxContent = document.querySelector(".modalLightBox-content")
-    // const lightBoxSuivant = document.getElementById("lightBoxSuivant")
-    // const lightBoxPrecedent = document.getElementById("lightBoxPrecedent")
     const videoElement = document.createElement("video")
 
 //on a soit une photo soit une vidéo
