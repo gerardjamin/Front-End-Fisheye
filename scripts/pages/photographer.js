@@ -62,7 +62,6 @@ async function displayData(identity, picture, filteredPhotographers, photographe
                         </clipPath>
                     </defs>
                 </svg> `
-
         container.appendChild(p);
         container.appendChild(span);
         article.appendChild(container);
@@ -108,7 +107,7 @@ async function displayData(identity, picture, filteredPhotographers, photographe
     const myVideo = document.getElementsByClassName("video")
     const modalLightBox = document.querySelector("#modalLightBox")
     const closeLightBox = document.querySelector("#closeLightBox")
-    const imageLightBox = document.querySelector(".modalLightBox-content img")
+    // const imageLightBox = document.querySelector(".modalLightBox-content img")
     const modalLightBoxContent = document.querySelector(".modalLightBox-content")
     const lightBoxSuivant = document.getElementById("lightBoxSuivant")
     const lightBoxPrecedent = document.getElementById("lightBoxPrecedent")
@@ -124,9 +123,12 @@ async function displayData(identity, picture, filteredPhotographers, photographe
             const taille = reponse.sourcePhoto.length
             // const that = this: memorisation du contexte lors du (click) 
 
-            //*****************************************************PARTIE GESTION LIGHT BOX DU SITE****************************************
+            //*****************************************************PARTIE GESTION (prev/next) LIGHT BOX DU SITE****************************************
             //en attente d'un évennement...
-            lightBoxPrecedent.addEventListener("click", function () {
+            const precedent = document.getElementById('modalLightBox').querySelector('.lightBoxPrecedent');
+            precedent.addEventListener("click", function (event) {
+                //arrete la propagation de l'action jusqu'au parent
+                event.stopPropagation()
                 // Code à exécuter lorsque le bouton 2 est cliqué
                 index = index - 1
                 if (index < 0) {
@@ -141,126 +143,30 @@ async function displayData(identity, picture, filteredPhotographers, photographe
                 const partiesDuChemin = cheminDuFichier.split('.');
                 //retourne l'extension du fichier
                 const extensionDuFichier = partiesDuChemin[partiesDuChemin.length - 1];
-
-                //on a soit une photo soit une vidéo
-                if (extensionDuFichier === "mp4") {
-                    //vérification de l'élément video existant dans <modalLightBox-content>
-                    // On récupère la référence de la collection HTML si elle existe..
-                    const collection = document.getElementsByTagName('video')
-                    // Vérifiez si "photoLightBox" existe dans ma collection
-                    const elementRecherche = collection.namedItem('videoLightBox');
-                    if (elementRecherche !== null) {
-                        //injection de l'url de la video du contexte
-                        videoElement.setAttribute("src", `${url}`)
-                    } else {
-                        //si présence d'une image suppression de l'élément et création de l'élément video
-                        const photoLightBox = document.querySelector(".photoLightBox")
-                        photoLightBox.remove()
-                        const videoElement = document.createElement("video")
-                        videoElement.setAttribute("name", "videoLightBox")
-                        videoElement.classList.add("videoLightBox")
-                        //recuperation de la source de la video dans le contexte
-                        videoElement.setAttribute("src", `${url}`)
-                        videoElement.setAttribute("type", "mp4")
-                        videoElement.setAttribute("controls", ' ')
-                        modalLightBoxContent.appendChild(videoElement)
-                    }
-
-                } else {
-                    //alors une image existe
-                    // On obtient la référence de la collection HTML
-                    const collection = document.getElementsByTagName('video')
-                    // Vérifiez si "photoLightBox" existe dans ma collection avec le nom de la balise img
-                    const elementRecherche = collection.namedItem('videoLightBox');
-                    //si présence d'une video suppression de l'élément et création de l'élément image
-                    if (elementRecherche !== null) {
-                        const videoLightBox = document.querySelector(".videoLightBox")
-                        videoLightBox.remove()
-                        const photoElement = document.createElement("img")
-                        photoElement.setAttribute("name", "photoLightBox")
-                        photoElement.classList.add("photoLightBox")
-                        modalLightBoxContent.appendChild(photoElement)
-                        const url = reponse.sourcePhoto[index]
-                        photoElement.setAttribute("src", `${url}`)
-
-                    } else {
-                        //injection de l'url de l'image du contexte
-                        const photoLightBox = document.querySelector(".photoLightBox")
-                        const url = reponse.sourcePhoto[index]
-                        photoLightBox.setAttribute("src", `${url}`)
-                    }
-                }
-                
+                displayNexPrev(url,extensionDuFichier,reponse,index) 
+             
             })
-
-            lightBoxSuivant.addEventListener('click', function () {
+            const suivant = document.getElementById('modalLightBox').querySelector('.lightBoxSuivant');
+            suivant.addEventListener('click', function (event) {
+                //arrete la propagation de l'action jusqu'au parent
+                event.stopPropagation()
                 //augmente l'indice du tableau pour passer a l'element suivant lors du click
                 index = index + 1
                 if (index === taille) {
                     index = 0;
-                }
-              
+                }   
                 //************************je bascule sur le tableau sourcePhoto pour afficher les photos
                 //url de la photo clickée
                 const url = reponse.sourcePhoto[index]
                 const cheminDuFichier = url
-
                 //on separe la chaine de caractère et on retourne la dernière partie de la chaine (extension)
                 const partiesDuChemin = cheminDuFichier.split('.');
                 //retourne l'extension du fichier
                 const extensionDuFichier = partiesDuChemin[partiesDuChemin.length - 1];
-
-                //on a soit une photo soit une vidéo
-                if (extensionDuFichier === "mp4") {
-                    //vérification de l'élément video existant dans <modalLightBox-content>
-                    // On récupère la référence de la collection HTML si elle existe..
-                    const collection = document.getElementsByTagName('video')
-                    // Vérifiez si "photoLightBox" existe dans ma collection
-                    const elementRecherche = collection.namedItem('videoLightBox');
-                    if (elementRecherche !== null) {
-                        //injection de l'url de la video du contexte
-                        videoElement.setAttribute("src", `${url}`)
-                    } else {
-                        //si présence d'une image suppression de l'élément et création de l'élément video
-                        const photoLightBox = document.querySelector(".photoLightBox")
-                        photoLightBox.remove()
-                        const videoElement = document.createElement("video")
-                        videoElement.setAttribute("name", "videoLightBox")
-                        videoElement.classList.add("videoLightBox")
-                        //recuperation de la source de la video dans le contexte
-                        videoElement.setAttribute("src", `${url}`)
-                        videoElement.setAttribute("type", "mp4")
-                        videoElement.setAttribute("controls", ' ')
-                        modalLightBoxContent.appendChild(videoElement)
-                    }
-
-                } else {
-                    //alors une image existe
-                    // On obtient la référence de la collection HTML
-                    const collection = document.getElementsByTagName('video')
-                    // Vérifiez si "photoLightBox" existe dans ma collection avec le nom de la balise img
-                    const elementRecherche = collection.namedItem('videoLightBox');
-                    //si présence d'une video suppression de l'élément et création de l'élément image
-                    if (elementRecherche !== null) {
-                        const videoLightBox = document.querySelector(".videoLightBox")
-                        videoLightBox.remove()
-                        const photoElement = document.createElement("img")
-                        photoElement.setAttribute("name", "photoLightBox")
-                        photoElement.classList.add("photoLightBox")
-                        modalLightBoxContent.appendChild(photoElement)
-                        const url = reponse.sourcePhoto[index]
-                        photoElement.setAttribute("src", `${url}`)
-
-                    } else {
-                        //injection de l'url de l'image du contexte
-                        const photoLightBox = document.querySelector(".photoLightBox")
-                        const url = reponse.sourcePhoto[index]
-                        photoLightBox.setAttribute("src", `${url}`)
-                    }
-                }
+                displayNexPrev(url,extensionDuFichier,reponse,index) 
             })
 
-            //*****************************************************PARTIE ZOOM DE LA PHOTO**************************************************
+            //*****************************************************PARTIE GESTION ZOOM DE LA PHOTO**************************************************
             // On obtient la référence de la collection HTML
             const collection = document.getElementsByTagName('video')
             // Vérifiez si "photoLightBox" existe dans ma collection avec le nom de la balise img
@@ -287,116 +193,15 @@ async function displayData(identity, picture, filteredPhotographers, photographe
         })
     }
 
-    for (let video of myVideo) {
-        // Ajoutez l'événement click aux éléments enfants de l'élément vidéo     
-        video.addEventListener("click", function (event) {
-            event.defaultPrevented
-
-            //recuperation de l'index de l'element en cours...
-            let reponse = calculeIndex(filteredPhotographers, this.src)
-            let index = reponse.index
-            const taille = reponse.sourcePhoto.length
-            // const that = this: memorisation du contexte (click)   
-
-            //*****************************************************PARTIE GESTION LIGHT BOX DU SITE****************************************
-            //en attente d'un evennement...   
-            modalLightBox.addEventListener('click', function () {
-                // index = index + 1
-                // if (index === taille) {
-                //     index = 0;
-                // }
-                index = index - 1
-                if (index === 0) {
-                    index = taille - 1;
-                }
-
-                //************************je bascule sur le tableau sourcePhoto pour afficher les VIDEOS
-                const url = reponse.sourcePhoto[index]
-                const cheminDuFichier = url
-                const partiesDuChemin = cheminDuFichier.split('.');
-                const extensionDuFichier = partiesDuChemin[partiesDuChemin.length - 1];
-
-
-                if (extensionDuFichier === "mp4") {
-                    // On obtient la référence de la collection HTML
-                    const collection = document.getElementsByTagName('video')
-                    // Vérifiez si "photoLightBox" existe dans ma collection avec le nom de la balise img
-                    const elementRecherche = collection.namedItem('videoLightBox');
-                    if (elementRecherche !== null) {
-                        //recuperation de la source de la video dans le contexte
-                        videoElement.setAttribute("src", `${url}`)
-                    } else {
-                        const photoLightBox = document.querySelector(".photoLightBox")
-                        photoLightBox.remove()
-                        const videoElement = document.createElement("video")
-                        videoElement.setAttribute("name", "videoLightBox")
-                        videoElement.classList.add("videoLightBox")
-                        videoElement.setAttribute("type", "mp4")
-                        videoElement.setAttribute("controls", ' ')
-                        modalLightBoxContent.appendChild(videoElement)
-                        //recuperation de la source de la video dans le contexte
-                        videoElement.setAttribute("src", `${url}`)
-                    }
-
-                } else {
-                    // On obtient la référence de la collection HTML
-                    const collection = document.getElementsByTagName('video')
-                    // Vérifiez si "photoLightBox" existe dans ma collection avec le nom de la balise img
-                    const elementRecherche = collection.namedItem('videoLightBox');
-
-                    if (elementRecherche !== null) {
-                        const videoLightBox = document.querySelector(".videoLightBox")
-                        videoLightBox.remove()
-                        const photoElement = document.createElement("img")
-                        photoElement.setAttribute("name", "photoLightBox")
-                        photoElement.classList.add("photoLightBox")
-                        modalLightBoxContent.appendChild(photoElement)
-                        const url = reponse.sourcePhoto[index]
-                        photoElement.setAttribute("src", `${url}`)
-                    } else {
-                        const photoLightBox = document.querySelector(".photoLightBox")
-                        const url = reponse.sourcePhoto[index]
-                        photoLightBox.setAttribute("src", `${url}`)
-                    }
-                }
-            })
-
-            //*****************************************************PARTIE ZOOM DE LA PHOTO**************************************************
-            // On obtient la référence de la collection HTML
-            const collection = document.getElementsByTagName('img');
-
-            // Vérifiez si "photoLightBox" existe dans ma collection avec le nom de la balise img
-            const elementRecherche = collection.namedItem('photoLightBox');
-
-            if (elementRecherche !== null) {
-                console.log('L\'élément "photoLightBox" existe dans la collection.');
-                const photoLightBox = document.querySelector(".photoLightBox")
-                photoLightBox.remove()
-                const videoElement = document.createElement("video")
-                videoElement.setAttribute("name", "videoLightBox")
-                videoElement.classList.add("videoLightBox")
-                //recuperation de la source de la video dans le contexte
-                videoElement.setAttribute("src", this.src)
-                videoElement.setAttribute("type", "mp4")
-                videoElement.setAttribute("controls", ' ')
-                modalLightBoxContent.appendChild(videoElement)
-            } else {
-                console.log('L\'élément "photoLightBox" n\'existe pas dans la collection.');
-            }
-            //affichage de la modale
-            modalLightBox.classList.add("show")
-        })
-    }
-
-    //fermeture de la modale de la light box
+    //fermeture de la modale de la light box sur la croix
     closeLightBox.addEventListener("click", function () {
         modalLightBox.classList.remove("show")
     })
 
     //on ferme au click sur la modale de la light box
-    // modalLightBox.addEventListener("click", function () {
-    //     modalLightBox.classList.remove("show")
-    // })
+    modalLightBox.addEventListener("click", function () {
+        modalLightBox.classList.remove("show")
+    })
 }
 
 async function init() {

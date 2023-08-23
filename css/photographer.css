@@ -239,11 +239,17 @@ transform: translate(-50%, -50%);
 
 .closeLightBox {
 color: white;
-font-size: 4em;
+font-size: 3em;
+width:82px;
+height:82px;
 position: fixed;
-top: 10px;
+top: 20px;
 right: 10px;
 cursor: pointer;
+}
+
+.closeLightBox:hover {
+  opacity:1;
 }
 
 .lightBoxSuivant,
