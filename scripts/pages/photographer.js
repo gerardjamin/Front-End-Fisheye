@@ -1,6 +1,7 @@
 /* eslint-disable no-debugger */
 import { getPhotographers } from "../api/api.js";
 import { compteLikesPhotographer } from "../utils/likes.js"
+
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 // eslint-disable-next-line no-unused-vars
@@ -49,9 +50,13 @@ async function displayData(identity, picture, filteredPhotographers, photographe
             //videoElement.setAttribute("controls", ' ')
             article.appendChild(videoElement)
         }
+
+        //************************************GESTION INCREMENTER LIKES************************************
         //coeur
         const span = document.createElement("span")
-        span.innerHTML = `<span>${likes}</span>
+        span.classList.add("likesPhotographer")
+        span.setAttribute('id', 'likesPhotographer')
+        span.innerHTML = `${likes}
                 <svg xmlns="http://www.w3.org/2000/svg" width="21" height="24" viewBox="0 0 21 24" fill="none">
                     <g clip-path="url(#clip0_120_550)">
                         <path d="M10.5 21.35L9.23125 20.03C4.725 15.36 1.75 12.28 1.75 8.5C1.75 5.42 3.8675 3 6.5625 3C8.085 3 9.54625 3.81 10.5 5.09C11.4537 3.81 12.915 3 14.4375 3C17.1325 3 19.25 5.42 19.25 8.5C19.25 12.28 16.275 15.36 11.7688 20.04L10.5 21.35Z" fill="#911C1C" />
@@ -67,7 +72,7 @@ async function displayData(identity, picture, filteredPhotographers, photographe
         article.appendChild(container);
         portofolioSection.appendChild(article);
     }
-    //partie encart de la page
+    //********************************************GESTION ENCART DE LA PAGE*********************************
     const encart = document.getElementById('encart');
     const { photographerId } = filteredPhotographers[0]
     //recuperer le prix horaire du photographe
@@ -98,7 +103,7 @@ async function displayData(identity, picture, filteredPhotographers, photographe
     h4.textContent = `${priceHour}/jour`
     encart.appendChild(h4)
 
-    //******************************************************LIGHTBOX*LIGHTBOX***************************************************/
+    //******************************************************************LIGHTBOX*LIGHTBOX***************************************************/
 
     //partie qui permet d'ouvrir la light-box au click sur l'element image ou video
     // Récupérer le tableau d'éléments image et video
@@ -143,8 +148,8 @@ async function displayData(identity, picture, filteredPhotographers, photographe
                 const partiesDuChemin = cheminDuFichier.split('.');
                 //retourne l'extension du fichier
                 const extensionDuFichier = partiesDuChemin[partiesDuChemin.length - 1];
-                displayNexPrev(url,extensionDuFichier,reponse,index) 
-             
+                displayNexPrev(url, extensionDuFichier, reponse, index)
+
             })
             const suivant = document.getElementById('modalLightBox').querySelector('.lightBoxSuivant');
             suivant.addEventListener('click', function (event) {
@@ -154,7 +159,7 @@ async function displayData(identity, picture, filteredPhotographers, photographe
                 index = index + 1
                 if (index === taille) {
                     index = 0;
-                }   
+                }
                 //************************je bascule sur le tableau sourcePhoto pour afficher les photos
                 //url de la photo clickée
                 const url = reponse.sourcePhoto[index]
@@ -163,7 +168,7 @@ async function displayData(identity, picture, filteredPhotographers, photographe
                 const partiesDuChemin = cheminDuFichier.split('.');
                 //retourne l'extension du fichier
                 const extensionDuFichier = partiesDuChemin[partiesDuChemin.length - 1];
-                displayNexPrev(url,extensionDuFichier,reponse,index) 
+                displayNexPrev(url, extensionDuFichier, reponse, index)
             })
 
             //*****************************************************PARTIE GESTION ZOOM DE LA PHOTO**************************************************
@@ -202,7 +207,18 @@ async function displayData(identity, picture, filteredPhotographers, photographe
     modalLightBox.addEventListener("click", function () {
         modalLightBox.classList.remove("show")
     })
+//***********************************************************************GESTION DES LIKES********************************************* */
+const likes = document.querySelectorAll(".likesPhotographer")
+
+for(let like of likes){
+    like.addEventListener('click', function () {
+        console.log("Coeur cliqué", like);
+        // Votre code de gestion de clic ici
+    });
+   
+    }
 }
+
 
 async function init() {
     // Obtenir les paramètres de l'URL

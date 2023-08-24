@@ -124,6 +124,7 @@ const showError = (input, message) => {
 
     // envoie le message d'erreur dans la balise small
     const error = formField.querySelector("small");
+    error.style.color = "red";
     error.textContent = message;
 }
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export function compteLikesPhotographer(filteredPhotographers) {
     let totalLikes = 0
     for (const objet of filteredPhotographers) {
@@ -5,3 +6,5 @@ export function compteLikesPhotographer(filteredPhotographers) {
     }
     return totalLikes 
 }
+
+
