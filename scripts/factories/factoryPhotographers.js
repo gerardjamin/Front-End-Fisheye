@@ -14,7 +14,7 @@ async function factoryObject(photographers, type,valeurId,media) {
       const userCardDOM = photographerModel.getUserCardDOM()
       //contient tous les articles
       dataPhographers.push(userCardDOM)
-    });
+    })
     
     //retourne un tableau d'articles pour chaque photographe: 
     // <article>

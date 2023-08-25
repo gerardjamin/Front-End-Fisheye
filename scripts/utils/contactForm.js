@@ -202,8 +202,8 @@ function openModal() {
 // fermeture de la modale avec la touche escape du clavier
 window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.style.display === 'block') {
-        e.preventDefault();
-        closeModal();
+        e.preventDefault()
+        closeModal()
     }
 });
 

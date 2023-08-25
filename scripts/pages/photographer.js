@@ -1,6 +1,6 @@
 /* eslint-disable no-debugger */
-import { getPhotographers } from "../api/api.js";
-import { compteLikesPhotographer } from "../utils/likes.js"
+import { getPhotographers } from "../api/api.js"
+import { compteLikesPhotographer, compteLikesPagePhotographer } from "../utils/likes.js"
 
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
@@ -51,12 +51,12 @@ async function displayData(identity, picture, filteredPhotographers, photographe
             article.appendChild(videoElement)
         }
 
-        //************************************GESTION INCREMENTER LIKES************************************
+        //*************************************************GESTION INCREMENTER LIKES PARTIE HTML************************************
         //coeur
-        const span = document.createElement("span")
-        span.classList.add("likesPhotographer")
-        span.setAttribute('id', 'likesPhotographer')
-        span.innerHTML = `${likes}
+        const div = document.createElement("div")
+        div.classList.add("likesPhotographer")
+        div.setAttribute('id', 'likesPhotographer')
+        div.innerHTML = `<span class="like-${id}" id="likes">${likes}</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="21" height="24" viewBox="0 0 21 24" fill="none">
                     <g clip-path="url(#clip0_120_550)">
                         <path d="M10.5 21.35L9.23125 20.03C4.725 15.36 1.75 12.28 1.75 8.5C1.75 5.42 3.8675 3 6.5625 3C8.085 3 9.54625 3.81 10.5 5.09C11.4537 3.81 12.915 3 14.4375 3C17.1325 3 19.25 5.42 19.25 8.5C19.25 12.28 16.275 15.36 11.7688 20.04L10.5 21.35Z" fill="#911C1C" />
@@ -67,27 +67,33 @@ async function displayData(identity, picture, filteredPhotographers, photographe
                         </clipPath>
                     </defs>
                 </svg> `
-        container.appendChild(p);
-        container.appendChild(span);
-        article.appendChild(container);
-        portofolioSection.appendChild(article);
+        container.appendChild(p)
+        container.appendChild(div)
+        article.appendChild(container)
+        portofolioSection.appendChild(article)
     }
-    //********************************************GESTION ENCART DE LA PAGE*********************************
-    const encart = document.getElementById('encart');
+    //**************************************************************GESTION ENCART DE LA PAGE*********************************
+    const encart = document.getElementById('encart')
     const { photographerId } = filteredPhotographers[0]
-    //recuperer le prix horaire du photographe
+    //const { photographerId } = filteredPhotographers
+
+    //recuperer le prix horaire de chaque photographe
     function recupererProprieteAssociee(photographers, photographerId) {
         for (const objet of photographers) {
             if (objet.id === parseInt(photographerId)) {
-                return objet.price;
+                return objet.price
             }
         }
-        return null; // Si la valeur cherchée n'est pas trouvée
+        return null // Si la valeur cherchée n'est pas trouvée
     }
+
     const priceHour = recupererProprieteAssociee(photographers, photographerId)
+    //comptage des likes de tous les travaux du photographe recuperé dans le fichier JASON
     const totalLikes = compteLikesPhotographer(filteredPhotographers)
-    const span = document.createElement("span")
-    span.innerHTML = `<span>${totalLikes}</span>
+    const div = document.createElement("div")
+    div.setAttribute('id', 'encartLike')
+    div.classList.add("encartLike")
+    div.innerHTML = `<span>${totalLikes}</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="21" height="24" viewBox="0 0 21 24" fill="none">
                     <g clip-path="url(#clip0_120_550)">
                         <path d="M10.5 21.35L9.23125 20.03C4.725 15.36 1.75 12.28 1.75 8.5C1.75 5.42 3.8675 3 6.5625 3C8.085 3 9.54625 3.81 10.5 5.09C11.4537 3.81 12.915 3 14.4375 3C17.1325 3 19.25 5.42 19.25 8.5C19.25 12.28 16.275 15.36 11.7688 20.04L10.5 21.35Z" fill="#000000" />
@@ -98,10 +104,43 @@ async function displayData(identity, picture, filteredPhotographers, photographe
                         </clipPath>
                     </defs>
                 </svg> `
-    encart.appendChild(span);
+    encart.appendChild(div);
     const h4 = document.createElement('h4');
     h4.textContent = `${priceHour}/jour`
     encart.appendChild(h4)
+
+    //***********************************************************************GESTION INCREMENTATION DES LIKES********************************************* */
+    //enregistre dans une liste (node list) les likes de chacune des photos
+    const likesPhoto = document.querySelectorAll(".likesPhotographer")
+    //on boucle sur cette node list en attente d'un evenement
+    for (let like of likesPhoto) {
+        //enregistre la classe du premier enfant du noeud
+        let premierEnfant = like.childNodes[0]
+        //on le selectionne
+        const likeCoeur = like.querySelector("span")
+        //convertit en type entier le contenu de likeCoeur
+        let likesCount = parseInt(likeCoeur.textContent)
+        //ici attente de l'evenement........ 
+        like.addEventListener('click', function () {
+            //initialise getLikeStorage si une valeur existe
+            const getLikeStorage = localStorage.getItem('like')
+            if (getLikeStorage === premierEnfant.classList[0]) {
+                //nothing , on a deja incremente le like de la photo
+            } else {
+                //alors on incremente le like
+                likesCount++
+                //on injecte la valeur dans l'objet HTML du contexte
+                likeCoeur.textContent = likesCount
+                //on appelle la fonction qui compte le nombre total de like de la page actuelle
+                let totalLikes = compteLikesPagePhotographer()
+                const encartLike = document.querySelector(".encartLike span")
+                //on met à jour la nouvelle valeur
+                encartLike.textContent = totalLikes
+                //on enregistre dans le local storage le nom de sa classe (like clické)
+                localStorage.setItem('like', premierEnfant.classList[0]);
+            }
+        })
+    }
 
     //******************************************************************LIGHTBOX*LIGHTBOX***************************************************/
 
@@ -129,15 +168,15 @@ async function displayData(identity, picture, filteredPhotographers, photographe
             // const that = this: memorisation du contexte lors du (click) 
 
             //*****************************************************PARTIE GESTION (prev/next) LIGHT BOX DU SITE****************************************
-            //en attente d'un évennement...
-            const precedent = document.getElementById('modalLightBox').querySelector('.lightBoxPrecedent');
+            const precedent = document.getElementById('modalLightBox').querySelector('.lightBoxPrecedent')
+             //en attente d'un évennement...
             precedent.addEventListener("click", function (event) {
-                //arrete la propagation de l'action jusqu'au parent
+                //evite la propagation de l'evenement jusqu'au parent
                 event.stopPropagation()
-                // Code à exécuter lorsque le bouton 2 est cliqué
+                // decremente l'indice du tableau pour passer a l'element precedent lors du click
                 index = index - 1
                 if (index < 0) {
-                    index = taille - 1;
+                    index = taille - 1
                 }
                 //************************je bascule sur le tableau sourcePhoto pour afficher les photos
                 //url de la photo clickée
@@ -145,13 +184,15 @@ async function displayData(identity, picture, filteredPhotographers, photographe
                 const cheminDuFichier = url
 
                 //on separe la chaine de caractère et on retourne la dernière partie de la chaine (extension)
-                const partiesDuChemin = cheminDuFichier.split('.');
+                const partiesDuChemin = cheminDuFichier.split('.')
                 //retourne l'extension du fichier
-                const extensionDuFichier = partiesDuChemin[partiesDuChemin.length - 1];
+                const extensionDuFichier = partiesDuChemin[partiesDuChemin.length - 1]
+                //appelle la fonction d'affichage
                 displayNexPrev(url, extensionDuFichier, reponse, index)
 
             })
-            const suivant = document.getElementById('modalLightBox').querySelector('.lightBoxSuivant');
+            const suivant = document.getElementById('modalLightBox').querySelector('.lightBoxSuivant')
+            //en attente d'un évennement...
             suivant.addEventListener('click', function (event) {
                 //arrete la propagation de l'action jusqu'au parent
                 event.stopPropagation()
@@ -165,9 +206,10 @@ async function displayData(identity, picture, filteredPhotographers, photographe
                 const url = reponse.sourcePhoto[index]
                 const cheminDuFichier = url
                 //on separe la chaine de caractère et on retourne la dernière partie de la chaine (extension)
-                const partiesDuChemin = cheminDuFichier.split('.');
+                const partiesDuChemin = cheminDuFichier.split('.')
                 //retourne l'extension du fichier
-                const extensionDuFichier = partiesDuChemin[partiesDuChemin.length - 1];
+                const extensionDuFichier = partiesDuChemin[partiesDuChemin.length - 1]
+                 //appelle la fonction d'affichage
                 displayNexPrev(url, extensionDuFichier, reponse, index)
             })
 
@@ -175,10 +217,10 @@ async function displayData(identity, picture, filteredPhotographers, photographe
             // On obtient la référence de la collection HTML
             const collection = document.getElementsByTagName('video')
             // Vérifiez si "photoLightBox" existe dans ma collection avec le nom de la balise img
-            const elementRecherche = collection.namedItem('videoLightBox');
+            const elementRecherche = collection.namedItem('videoLightBox')
 
             if (elementRecherche !== null) {
-                console.log('L\'élément "videoLightBox" existe dans la collection.');
+                console.log('L\'élément "videoLightBox" existe dans la collection.')
                 const videoLightBox = document.querySelector(".videoLightBox")
                 videoLightBox.remove()
                 const photoElement = document.createElement("img")
@@ -188,7 +230,7 @@ async function displayData(identity, picture, filteredPhotographers, photographe
                 photoElement.src = this.src
                 modalLightBoxContent.appendChild(photoElement)
             } else {
-                console.log('L\'élément "videoLightBox" n\'existe pas dans la collection.');
+                console.log('L\'élément "videoLightBox" n\'existe pas dans la collection.')
                 const imageLightBox = document.querySelector(".modalLightBox-content img")
                 //console.log('context', this.src)
                 imageLightBox.setAttribute("src", this.src)
@@ -203,31 +245,32 @@ async function displayData(identity, picture, filteredPhotographers, photographe
         modalLightBox.classList.remove("show")
     })
 
-    //on ferme au click sur la modale de la light box
+    //fermeture au click sur la modale de la light box
     modalLightBox.addEventListener("click", function () {
         modalLightBox.classList.remove("show")
     })
-//***********************************************************************GESTION DES LIKES********************************************* */
-const likes = document.querySelectorAll(".likesPhotographer")
 
-for(let like of likes){
-    like.addEventListener('click', function () {
-        console.log("Coeur cliqué", like);
-        // Votre code de gestion de clic ici
+    // fermeture de la modale modalLightBox avec la touche escape du clavier
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modalLightBox.classList.contains('show')) {
+            e.preventDefault()
+            modalLightBox.classList.remove("show")
+        }
     });
-   
-    }
+
 }
 
 
 async function init() {
+    //suprime la variable like du localstorage
+    localStorage.clear()
     // Obtenir les paramètres de l'URL
-    const urlParams = new URLSearchParams(window.location.search);
+    const urlParams = new URLSearchParams(window.location.search)
     // Récupérez la valeur de la variable "id" de l'URL
-    const valeurId = urlParams.get("id");
+    const valeurId = urlParams.get("id")
     //destructuration
-    const { photographers } = await getPhotographers();
-    const { media } = await getPhotographers();
+    const { photographers } = await getPhotographers()
+    const { media } = await getPhotographers()
     //récupération de l'index du tableau correspondant à l'id du photographe
     const trouverIndexParPropriete = (photographers, id, valeurId) => {
         const indexTrouve = photographers.findIndex(
@@ -235,7 +278,7 @@ async function init() {
         );
         return indexTrouve;
     };
-    const indexTrouve = trouverIndexParPropriete(photographers, "id", valeurId);
+    const indexTrouve = trouverIndexParPropriete(photographers, "id", valeurId)
     const data = photographers[indexTrouve];
     const { identity, picture, filteredPhotographers } = await factoryObject(
         data,
@@ -244,7 +287,7 @@ async function init() {
         media
     );
     //affichage du photographe avec son portofolio
-    await displayData(identity, picture, filteredPhotographers, photographers);
+    await displayData(identity, picture, filteredPhotographers, photographers)
 }
 
 //point d'entrée dans le fichier
