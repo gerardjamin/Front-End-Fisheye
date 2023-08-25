@@ -149,6 +149,8 @@ async function displayData(identity, picture, filteredPhotographers, photographe
 
     const myImage = document.getElementsByClassName("photo")
     const myVideo = document.getElementsByClassName("video")
+    // Utilisation de l'opérateur de propagation (...) pour concaténer
+    const concatenatedArray = [...myImage, ...myVideo];
     const modalLightBox = document.querySelector("#modalLightBox")
     const closeLightBox = document.querySelector("#closeLightBox")
     // const imageLightBox = document.querySelector(".modalLightBox-content img")
@@ -157,7 +159,7 @@ async function displayData(identity, picture, filteredPhotographers, photographe
     const lightBoxPrecedent = document.getElementById("lightBoxPrecedent")
 
     // Ajouter un événement onClick() sur chacune des photos ou videos pour ouvrir la light box
-    for (let photo of myImage) {
+    for (let photo of concatenatedArray) {
         photo.addEventListener("click", function () {
 
             //recuperation de l'index de l'element clické et du tableau de phottos
@@ -167,7 +169,7 @@ async function displayData(identity, picture, filteredPhotographers, photographe
             const taille = reponse.sourcePhoto.length
             // const that = this: memorisation du contexte lors du (click) 
 
-            //*****************************************************PARTIE GESTION (prev/next) LIGHT BOX DU SITE****************************************
+            //*************************************PARTIE GESTION (prev/next) & (arrow left/right) LIGHT BOX DU SITE****************************************
             const precedent = document.getElementById('modalLightBox').querySelector('.lightBoxPrecedent')
             //en attente d'un évennement...
             precedent.addEventListener("click", function (event) {
@@ -186,7 +188,6 @@ async function displayData(identity, picture, filteredPhotographers, photographe
 
             })
 
-
             const suivant = document.getElementById('modalLightBox').querySelector('.lightBoxSuivant')
             //en attente d'un évennement...
             suivant.addEventListener('click', function (event) {
@@ -203,7 +204,7 @@ async function displayData(identity, picture, filteredPhotographers, photographe
                 //appelle la fonction d'affichage
                 displayNexPrev(url, getExtensionFromUrl(url), reponse, index)
             })
-
+            //en attente d'un évennement...
             window.addEventListener('keydown', (e) => {
                 // passage a la photo precedente avec la touche flèche gauche
                 if (e.key === 'ArrowLeft' && modalLightBox.classList.contains('show')) {
@@ -236,28 +237,42 @@ async function displayData(identity, picture, filteredPhotographers, photographe
                 }
             });
 
+            //*****************************************************PARTIE GESTION ZOOM DE LA PHOTO/VIDEO AU CLICK**************************************************
+            let extension = getExtensionFromUrl(this.src)
+            if (extension === 'jpg') {
+                // On obtient la référence de la collection HTML
+                const collection = document.getElementsByTagName('video')
+                // Vérifiez si "photoLightBox" existe dans ma collection avec le nom de la balise img
+                const elementRecherche = collection.namedItem('videoLightBox')
 
-            //*****************************************************PARTIE GESTION ZOOM DE LA PHOTO AU CLICK**************************************************
-            // On obtient la référence de la collection HTML
-            const collection = document.getElementsByTagName('video')
-            // Vérifiez si "photoLightBox" existe dans ma collection avec le nom de la balise img
-            const elementRecherche = collection.namedItem('videoLightBox')
-
-            if (elementRecherche !== null) {
-                console.log('L\'élément "videoLightBox" existe dans la collection.')
-                const videoLightBox = document.querySelector(".videoLightBox")
-                videoLightBox.remove()
-                const photoElement = document.createElement("img")
-                photoElement.setAttribute("name", "photoLightBox")
-                photoElement.classList.add("photoLightBox")
-                //recuperation de la source de la video dans le contexte(objet photo)
-                photoElement.src = this.src
-                modalLightBoxContent.appendChild(photoElement)
+                if (elementRecherche !== null) {
+                    console.log('L\'élément "videoLightBox" existe dans la collection.')
+                    const videoLightBox = document.querySelector(".videoLightBox")
+                    videoLightBox.remove()
+                    const photoElement = document.createElement("img")
+                    photoElement.setAttribute("name", "photoLightBox")
+                    photoElement.classList.add("photoLightBox")
+                    //recuperation de la source de la video dans le contexte(objet photo)
+                    photoElement.src = this.src
+                    modalLightBoxContent.appendChild(photoElement)
+                } else {
+                    console.log('L\'élément "videoLightBox" n\'existe pas dans la collection.')
+                    const imageLightBox = document.querySelector(".modalLightBox-content img")
+                    //console.log('context', this.src)
+                    imageLightBox.setAttribute("src", this.src)
+                }
             } else {
-                console.log('L\'élément "videoLightBox" n\'existe pas dans la collection.')
-                const imageLightBox = document.querySelector(".modalLightBox-content img")
-                //console.log('context', this.src)
-                imageLightBox.setAttribute("src", this.src)
+                //<img> est présent à l'initialisation de la page WEB 
+                const photoLightBox = document.querySelector(".photoLightBox")
+                photoLightBox.remove()
+                const videoElement = document.createElement("video")
+                videoElement.setAttribute("name", "videoLightBox")
+                videoElement.classList.add("videoLightBox")
+                //recuperation de la source de la video dans le contexte
+                videoElement.setAttribute("src", this.src)
+                videoElement.setAttribute("type", "mp4")
+                videoElement.setAttribute("controls", ' ')
+                modalLightBoxContent.appendChild(videoElement)
             }
             //affichage de l'image dans la modale
             modalLightBox.classList.add("show")
