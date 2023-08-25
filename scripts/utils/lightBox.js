@@ -116,6 +116,14 @@ if (type === "mp4") {
 }
 }
 
+function getExtensionFromUrl(url) {
+    const cheminDuFichier = url
+    // On sépare la chaîne de caractères et on retourne la dernière partie de la chaîne (extension)
+    const partiesDuChemin = cheminDuFichier.split('.') 
+    // Retourne l'extension du fichier
+    return partiesDuChemin[partiesDuChemin.length - 1]
+}
+
 
 
 

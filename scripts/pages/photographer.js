@@ -160,7 +160,7 @@ async function displayData(identity, picture, filteredPhotographers, photographe
     for (let photo of myImage) {
         photo.addEventListener("click", function () {
 
-            //recuperation de l'index de l'element clické...
+            //recuperation de l'index de l'element clické et du tableau de phottos
             let reponse = calculeIndex(filteredPhotographers, this.src)
             let index = reponse.index
             //calcule la taille du tableau sourcePhoto
@@ -169,7 +169,7 @@ async function displayData(identity, picture, filteredPhotographers, photographe
 
             //*****************************************************PARTIE GESTION (prev/next) LIGHT BOX DU SITE****************************************
             const precedent = document.getElementById('modalLightBox').querySelector('.lightBoxPrecedent')
-             //en attente d'un évennement...
+            //en attente d'un évennement...
             precedent.addEventListener("click", function (event) {
                 //evite la propagation de l'evenement jusqu'au parent
                 event.stopPropagation()
@@ -181,16 +181,12 @@ async function displayData(identity, picture, filteredPhotographers, photographe
                 //************************je bascule sur le tableau sourcePhoto pour afficher les photos
                 //url de la photo clickée
                 const url = reponse.sourcePhoto[index]
-                const cheminDuFichier = url
-
-                //on separe la chaine de caractère et on retourne la dernière partie de la chaine (extension)
-                const partiesDuChemin = cheminDuFichier.split('.')
-                //retourne l'extension du fichier
-                const extensionDuFichier = partiesDuChemin[partiesDuChemin.length - 1]
                 //appelle la fonction d'affichage
-                displayNexPrev(url, extensionDuFichier, reponse, index)
+                displayNexPrev(url, getExtensionFromUrl(url), reponse, index)
 
             })
+
+
             const suivant = document.getElementById('modalLightBox').querySelector('.lightBoxSuivant')
             //en attente d'un évennement...
             suivant.addEventListener('click', function (event) {
@@ -204,16 +200,44 @@ async function displayData(identity, picture, filteredPhotographers, photographe
                 //************************je bascule sur le tableau sourcePhoto pour afficher les photos
                 //url de la photo clickée
                 const url = reponse.sourcePhoto[index]
-                const cheminDuFichier = url
-                //on separe la chaine de caractère et on retourne la dernière partie de la chaine (extension)
-                const partiesDuChemin = cheminDuFichier.split('.')
-                //retourne l'extension du fichier
-                const extensionDuFichier = partiesDuChemin[partiesDuChemin.length - 1]
-                 //appelle la fonction d'affichage
-                displayNexPrev(url, extensionDuFichier, reponse, index)
+                //appelle la fonction d'affichage
+                displayNexPrev(url, getExtensionFromUrl(url), reponse, index)
             })
 
-            //*****************************************************PARTIE GESTION ZOOM DE LA PHOTO**************************************************
+            window.addEventListener('keydown', (e) => {
+                // passage a la photo precedente avec la touche flèche gauche
+                if (e.key === 'ArrowLeft' && modalLightBox.classList.contains('show')) {
+                    e.preventDefault();
+                    // decremente l'indice du tableau pour passer a l'element precedent lors du click
+                    index = index - 1
+                    if (index < 0) {
+                        index = taille - 1
+                    }
+                    //************************je bascule sur le tableau sourcePhoto pour afficher les photos
+                    //url de la photo clickée
+                    const url = reponse.sourcePhoto[index]
+                    //appelle la fonction d'affichage
+                    displayNexPrev(url, getExtensionFromUrl(url), reponse, index)
+                }
+
+                // passage a la photo suivante avec la touche flèche droite
+                if (e.key === 'ArrowRight' && modalLightBox.classList.contains('show')) {
+                    e.preventDefault();
+                    //augmente l'indice du tableau pour passer a l'element suivant lors du click
+                    index = index + 1
+                    if (index === taille) {
+                        index = 0;
+                    }
+                    //************************je bascule sur le tableau sourcePhoto pour afficher les photos
+                    //url de la photo clickée
+                    const url = reponse.sourcePhoto[index]
+                    //appelle la fonction d'affichage
+                    displayNexPrev(url, getExtensionFromUrl(url), reponse, index)
+                }
+            });
+
+
+            //*****************************************************PARTIE GESTION ZOOM DE LA PHOTO AU CLICK**************************************************
             // On obtient la référence de la collection HTML
             const collection = document.getElementsByTagName('video')
             // Vérifiez si "photoLightBox" existe dans ma collection avec le nom de la balise img
