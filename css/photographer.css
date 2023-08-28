@@ -6,7 +6,7 @@
 
 /* permet le debug des elements qui ont le focus*/
 *:focus {
-  /*outline: 2px solid red !important;*/
+  outline: 2px solid yellow !important;
 }
 
 .photograph-header {

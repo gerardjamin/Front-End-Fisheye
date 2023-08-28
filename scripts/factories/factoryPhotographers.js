@@ -6,12 +6,14 @@
 async function factoryObject(photographers, type,valeurId,media) {
   if (type === "photographers") {
     const dataPhographers = []
+    let tabIndex = 1
 
     photographers.forEach((photographer) => {
+      tabIndex++
       //objet
       const photographerModel = photographerTemplate(photographer)
       //elementHTML article
-      const userCardDOM = photographerModel.getUserCardDOM()
+      const userCardDOM = photographerModel.getUserCardDOM(tabIndex)
       //contient tous les articles
       dataPhographers.push(userCardDOM)
     })

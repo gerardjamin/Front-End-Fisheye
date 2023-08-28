@@ -124,93 +124,121 @@ function getExtensionFromUrl(url) {
     return partiesDuChemin[partiesDuChemin.length - 1]
 }
 
+function openLightbox(modalLightBox,filteredPhotographers,modalLightBoxContent,src) {
 
+    //recuperation de l'index de l'element clické et du tableau de phottos
+    let reponse = calculeIndex(filteredPhotographers, src)
+    let index = reponse.index
+    //calcule la taille du tableau sourcePhoto
+    const taille = reponse.sourcePhoto.length
+    // const that = this: memorisation du contexte lors du (click) 
 
+    //**********PARTIE GESTION (prev/next) & (arrow left/right) LIGHT BOX DU SITE****************************************
+    const precedent = document.getElementById('modalLightBox').querySelector('.lightBoxPrecedent')
+    //en attente d'un évennement...
+    precedent.addEventListener("click", function (event) {
+        //evite la propagation de l'evenement jusqu'au parent
+        event.stopPropagation()
+        // decremente l'indice du tableau pour passer a l'element precedent lors du click
+        index = index - 1
+        if (index < 0) {
+            index = taille - 1
+        }
+        //************************je bascule sur le tableau sourcePhoto pour afficher les photos
+        //url de la photo clickée
+        const url = reponse.sourcePhoto[index]
+        //appelle la fonction d'affichage
+        displayNexPrev(url, getExtensionFromUrl(url), reponse, index)
 
+    })
 
+    const suivant = document.getElementById('modalLightBox').querySelector('.lightBoxSuivant')
+    //en attente d'un évennement...
+    suivant.addEventListener('click', function (event) {
+        //arrete la propagation de l'action jusqu'au parent
+        event.stopPropagation()
+        //augmente l'indice du tableau pour passer a l'element suivant lors du click
+        index = index + 1
+        if (index === taille) {
+            index = 0;
+        }
+        //************************je bascule sur le tableau sourcePhoto pour afficher les photos
+        //url de la photo clickée
+        const url = reponse.sourcePhoto[index]
+        //appelle la fonction d'affichage
+        displayNexPrev(url, getExtensionFromUrl(url), reponse, index)
+    })
+    //en attente d'un évennement...
+    window.addEventListener('keydown', (e) => {
+        // passage a la photo precedente avec la touche flèche gauche
+        if (e.key === 'ArrowLeft' && modalLightBox.classList.contains('show')) {
+            e.preventDefault();
+            // decremente l'indice du tableau pour passer a l'element precedent lors du click
+            index = index - 1
+            if (index < 0) {
+                index = taille - 1
+            }
+            //************************je bascule sur le tableau sourcePhoto pour afficher les photos
+            //url de la photo clickée
+            const url = reponse.sourcePhoto[index]
+            //appelle la fonction d'affichage
+            displayNexPrev(url, getExtensionFromUrl(url), reponse, index)
+        }
 
+        // passage a la photo suivante avec la touche flèche droite
+        if (e.key === 'ArrowRight' && modalLightBox.classList.contains('show')) {
+            e.preventDefault();
+            //augmente l'indice du tableau pour passer a l'element suivant lors du click
+            index = index + 1
+            if (index === taille) {
+                index = 0;
+            }
+            //************************je bascule sur le tableau sourcePhoto pour afficher les photos
+            //url de la photo clickée
+            const url = reponse.sourcePhoto[index]
+            //appelle la fonction d'affichage
+            displayNexPrev(url, getExtensionFromUrl(url), reponse, index)
+        }
+    });
 
+    //*********************************PARTIE GESTION ZOOM DE LA PHOTO/VIDEO AU CLICK**************************************************
+    let extension = getExtensionFromUrl(this.src)
+    if (extension === 'jpg') {
+        // On obtient la référence de la collection HTML
+        const collection = document.getElementsByTagName('video')
+        // Vérifiez si "photoLightBox" existe dans ma collection avec le nom de la balise img
+        const elementRecherche = collection.namedItem('videoLightBox')
 
+        if (elementRecherche !== null) {
+            console.log('L\'élément "videoLightBox" existe dans la collection.')
+            const videoLightBox = document.querySelector(".videoLightBox")
+            videoLightBox.remove()
+            const photoElement = document.createElement("img")
+            photoElement.setAttribute("name", "photoLightBox")
+            photoElement.classList.add("photoLightBox")
+            //recuperation de la source de la video dans le contexte(objet photo)
+            photoElement.src = this.src
+            modalLightBoxContent.appendChild(photoElement)
+        } else {
+            console.log('L\'élément "videoLightBox" n\'existe pas dans la collection.')
+            const imageLightBox = document.querySelector(".modalLightBox-content img")
+            //console.log('context', this.src)
+            imageLightBox.setAttribute("src", this.src)
+        }
+    } else {
+        //<img> est présent à l'initialisation de la page WEB 
+        const photoLightBox = document.querySelector(".photoLightBox")
+        photoLightBox.remove()
+        const videoElement = document.createElement("video")
+        videoElement.setAttribute("name", "videoLightBox")
+        videoElement.classList.add("videoLightBox")
+        //recuperation de la source de la video dans le contexte
+        videoElement.setAttribute("src", this.src)
+        videoElement.setAttribute("type", "mp4")
+        videoElement.setAttribute("controls", ' ')
+        modalLightBoxContent.appendChild(videoElement)
+    }
+    //affichage de l'image dans la modale
+    modalLightBox.classList.add("show")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// let currentPhotoIndex = 0;
-// const photos = [
-//     { src: 'photographer1.jpg', caption: 'Photographer 1' },
-//     { src: 'photographer2.jpg', caption: 'Photographer 2' },
-//     // Ajoutez d'autres photos avec leurs légendes ici
-// ];
-
-// function openLightbox(index) {
-//     const lightbox = document.getElementById("lightbox");
-//     const lightboxImg = document.getElementById("lightbox-img");
-//     const lightboxCaption = document.getElementById("lightbox-caption");
-
-//     currentPhotoIndex = index;
-//     const currentPhoto = photos[currentPhotoIndex];
-//     lightboxImg.src = currentPhoto.src;
-//     lightboxCaption.textContent = currentPhoto.caption;
-//     lightbox.style.display = "block";
-// }
-
-// function changePhoto(offset) {
-//     currentPhotoIndex += offset;
-
-//     if (currentPhotoIndex < 0) {
-//         currentPhotoIndex = photos.length - 1;
-//     } else if (currentPhotoIndex >= photos.length) {
-//         currentPhotoIndex = 0;
-//     }
-
-//     const lightboxImg = document.getElementById("lightbox-img");
-//     const lightboxCaption = document.getElementById("lightbox-caption");
-
-//     const currentPhoto = photos[currentPhotoIndex];
-//     lightboxImg.src = currentPhoto.src;
-//     lightboxCaption.textContent = currentPhoto.caption;
-// }
-
-// ... (votre code existant) ...
+}   //la page web est entièrement chargée

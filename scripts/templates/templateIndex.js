@@ -4,12 +4,14 @@ function photographerTemplate(data) {
     const picture = `../assets/Photographers/${portrait}`;
 
     //object to display
-    function getUserCardDOM() {
+    function getUserCardDOM(tabIndex) {
         const article = document.createElement( 'article' );
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture)  
         img.setAttribute('alt',`Je m'appelle ${name}`)
         const link = document.createElement('a')
+        //gestion accessibilité
+        link.setAttribute("tabindex", `${tabIndex}`)
         link.setAttribute('href','photographer.html?id='+id)
         link.appendChild(img)
         const h1 = document.createElement( 'h2' );

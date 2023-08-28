@@ -18,8 +18,9 @@ async function displayData(identity, picture, filteredPhotographers, photographe
     //premier enfant
     const child = document.querySelector(".openButton")
     photographersSection.insertBefore(identity, child)
+    let tabIndex = 4
 
-    //partie portofolio
+    //**************************************GESTION PARTIE PORTOFOLIO GALERIE********************************
     for (const objet of filteredPhotographers) {
         const { id, photographerId, title, image, video, likes, date, price } =
             objet;
@@ -33,10 +34,12 @@ async function displayData(identity, picture, filteredPhotographers, photographe
         //partie titre de l'image et de la video
         const p = document.createElement("p")
         p.textContent = `${title}`
-
+        tabIndex++
         if (image) {
             //partie image
             const imgElement = document.createElement("img")
+            //gestion accessibilité
+            imgElement.setAttribute("tabindex", `${tabIndex}`)
             imgElement.classList.add("photo")
             imgElement.setAttribute("src", portfolioPicture)
             imgElement.setAttribute("alt", `le titre de la photo${title}`)
@@ -47,6 +50,8 @@ async function displayData(identity, picture, filteredPhotographers, photographe
             //partie video
             const videoElement = document.createElement("video")
             videoElement.classList.add("video")
+            //gestion accessibilité
+            videoElement.setAttribute("tabindex", `${tabIndex}`)
             videoElement.setAttribute("src", portfolioVideo)
             videoElement.setAttribute("type", "mp4")
             //videoElement.setAttribute("controls", ' ')
@@ -112,7 +117,7 @@ async function displayData(identity, picture, filteredPhotographers, photographe
     //h4.textContent = `${priceHour}/jour`
     //encart.appendChild(h4)
 
-    //*******************GESTION INCREMENTATION DES LIKES********************************************* */
+    //*********************************************GESTION INCREMENTATION DES LIKES********************************************* */
     //enregistre dans une liste (node list) les likes de chacune des photos
     const likesPhoto = document.querySelectorAll(".likesPhotographer")
     //on boucle sur cette node list en attente d'un evenement
@@ -145,7 +150,7 @@ async function displayData(identity, picture, filteredPhotographers, photographe
         })
     }
 
-    //******************************************************************LIGHTBOX*LIGHTBOX***************************************************/
+    //*********************************GESTION DE LA LIGHTBOX*LIGHTBOX***************************************************/
 
     //partie qui permet d'ouvrir la light-box au click sur l'element image ou video
     // Récupérer le tableau d'éléments image et video
@@ -163,8 +168,10 @@ async function displayData(identity, picture, filteredPhotographers, photographe
 
     // Ajouter un événement onClick() sur chacune des photos ou videos pour ouvrir la light box
     for (let photo of concatenatedArray) {
-        photo.addEventListener("click", function () {
+         photo.addEventListener("click", function () {
 
+            //openLightbox(modalLightBox,filteredPhotographers,modalLightBoxContent,this.src)
+           
             //recuperation de l'index de l'element clické et du tableau de phottos
             let reponse = calculeIndex(filteredPhotographers, this.src)
             let index = reponse.index
@@ -240,7 +247,7 @@ async function displayData(identity, picture, filteredPhotographers, photographe
                 }
             });
 
-            //*****PARTIE GESTION ZOOM DE LA PHOTO/VIDEO AU CLICK**************************************************
+            //*********************************PARTIE GESTION ZOOM DE LA PHOTO/VIDEO AU CLICK**************************************************
             let extension = getExtensionFromUrl(this.src)
             if (extension === 'jpg') {
                 // On obtient la référence de la collection HTML
@@ -299,7 +306,7 @@ async function displayData(identity, picture, filteredPhotographers, photographe
             modalLightBox.classList.remove("show")
         }
     })
-    //******************************************************************************************* */
+    //*********************************GESTION DU DROPDOWN POUR LE TRIE********************************************************** */
 
     //ferme le dropdown si on clicke a l'exterieur 
     window.onclick = function (event) {
@@ -342,7 +349,12 @@ async function displayData(identity, picture, filteredPhotographers, photographe
         displayData(identity, picture, trieTitre, photographers)
     })
 
-}
+}   //la page web est entièrement chargée
+
+window.addEventListener('load', function () {
+    // Code à exécuter une fois que la page est entièrement chargée
+    console.log('La page est entièrement chargée.');
+});
 
 async function init() {
     //suprime la variable like du localstorage
@@ -373,7 +385,9 @@ async function init() {
     //********************GESTION DE L'AFFICHAGE DU PORTOFOLIO DU PHOTOGRAPHE**************
     await displayData(identity, picture, filteredPhotographers, photographers)
     // const filtrageDate = filtrage("titre", filteredPhotographers)
-    console.log(filteredPhotographers)
+    //console.log(filteredPhotographers)
+
+    /**************************************************************************************************************** */
 }
 
 //point d'entrée dans le fichier

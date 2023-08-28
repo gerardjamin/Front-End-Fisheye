@@ -13,7 +13,7 @@
   </head>
   <body>
     <header id="head">
-      <a href="index.html">
+      <a href="index.html" tabindex="1">
         <img
           src="assets/images/logo.png"
           class="logo"
@@ -24,6 +24,7 @@
     <main id="main" aria-hidden="false">
       <div class="photograph-header">
         <button
+          tabindex="2"
           id="openButton"
           class="openButton"
           aria-label="ouverture de la modale de contact "
@@ -35,9 +36,13 @@
       <!-- GESTION DU DROPDOWN -->
       <div class="dropdown">
         <span>Trier par</span>
-        <button id="dropComment" onclick="showDropdown()" class="dropbtn">Trie</button>
+        <button id="dropComment" onclick="showDropdown()" class="dropbtn" tabindex="2">
+          Trie
+        </button>
         <div id="myDropdown" class="dropdown-content">
-          <a id="popularite" href="#" onclick="changeText('Popularité')">Popularité</a>
+          <a id="popularite" href="#" onclick="changeText('Popularité')"
+            >Popularité</a
+          >
           <a id="date" href="#" onclick="changeText('Date')">Date</a>
           <a id="titre" href="#" onclick="changeText('Titre')">Titre</a>
         </div>
