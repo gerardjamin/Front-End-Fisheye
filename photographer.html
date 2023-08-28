@@ -32,6 +32,16 @@
           Contactez-moi
         </button>
       </div>
+      <!-- GESTION DU DROPDOWN -->
+      <div class="dropdown">
+        <span>Trier par</span>
+        <button id="dropComment" onclick="showDropdown()" class="dropbtn">Trie</button>
+        <div id="myDropdown" class="dropdown-content">
+          <a id="popularite" href="#" onclick="changeText('Popularité')">Popularité</a>
+          <a id="date" href="#" onclick="changeText('Date')">Date</a>
+          <a id="titre" href="#" onclick="changeText('Titre')">Titre</a>
+        </div>
+      </div>
       <section class="portfolio_section"></section>
     </main>
     <div
@@ -99,14 +109,27 @@
     <div id="encart" class="bottom-right-encart" aria-hidden="false"></div>
     <!-- modale  -->
     <div id="modalLightBox" class="modalLightBox">
-      <button id="lightBoxPrecedent" class="lightBoxPrecedent" aria-label="photo precedente"></button>
-      <button id="lightBoxSuivant" class="lightBoxSuivant" aria-label="photo suivante"></button>
+      <button
+        id="lightBoxPrecedent"
+        class="lightBoxPrecedent"
+        aria-label="photo precedente"
+      ></button>
+      <button
+        id="lightBoxSuivant"
+        class="lightBoxSuivant"
+        aria-label="photo suivante"
+      ></button>
 
       <!-- bouton de fermeture -->
       <span id="closeLightBox" class="closeLightBox">&times;</span>
       <div class="modalLightBox-content">
         <!-- href sera donné en java script -->
-        <img class="photoLightBox" alt="photoLightBox" name = "photoLightBox" src=""/>
+        <img
+          class="photoLightBox"
+          alt="photoLightBox"
+          name="photoLightBox"
+          src=""
+        />
         <!-- <video src=""></video> -->
       </div>
     </div>
@@ -116,5 +139,6 @@
     <script src="/scripts/utils/contactForm.js"></script>
     <script src="/scripts/factories/factoryPhotographers.js"></script>
     <script src="/scripts/utils/lightBox.js"></script>
+    <script src="/scripts/utils/dropDown.js"></script>
   </body>
 </html>

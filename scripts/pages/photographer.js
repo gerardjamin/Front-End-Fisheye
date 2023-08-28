@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-debugger */
 import { getPhotographers } from "../api/api.js"
 import { compteLikesPhotographer, compteLikesPagePhotographer } from "../utils/likes.js"
+import { filtrage } from "../utils/sortFiltered.js"
 
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
@@ -93,7 +95,7 @@ async function displayData(identity, picture, filteredPhotographers, photographe
     const div = document.createElement("div")
     div.setAttribute('id', 'encartLike')
     div.classList.add("encartLike")
-    div.innerHTML = `<span>${totalLikes}</span>
+    div.innerHTML = `<span>${totalLikes}
                 <svg xmlns="http://www.w3.org/2000/svg" width="21" height="24" viewBox="0 0 21 24" fill="none">
                     <g clip-path="url(#clip0_120_550)">
                         <path d="M10.5 21.35L9.23125 20.03C4.725 15.36 1.75 12.28 1.75 8.5C1.75 5.42 3.8675 3 6.5625 3C8.085 3 9.54625 3.81 10.5 5.09C11.4537 3.81 12.915 3 14.4375 3C17.1325 3 19.25 5.42 19.25 8.5C19.25 12.28 16.275 15.36 11.7688 20.04L10.5 21.35Z" fill="#000000" />
@@ -103,13 +105,14 @@ async function displayData(identity, picture, filteredPhotographers, photographe
                             <rect width="21" height="24" fill="white" />
                         </clipPath>
                     </defs>
-                </svg> `
+                </svg> </span>
+                <h4>${priceHour}/jour</h4>`
     encart.appendChild(div);
-    const h4 = document.createElement('h4');
-    h4.textContent = `${priceHour}/jour`
-    encart.appendChild(h4)
+    //const h4 = document.createElement('h4');
+    //h4.textContent = `${priceHour}/jour`
+    //encart.appendChild(h4)
 
-    //***********************************************************************GESTION INCREMENTATION DES LIKES********************************************* */
+    //*******************GESTION INCREMENTATION DES LIKES********************************************* */
     //enregistre dans une liste (node list) les likes de chacune des photos
     const likesPhoto = document.querySelectorAll(".likesPhotographer")
     //on boucle sur cette node list en attente d'un evenement
@@ -123,7 +126,7 @@ async function displayData(identity, picture, filteredPhotographers, photographe
         //ici attente de l'evenement........ 
         like.addEventListener('click', function () {
             //initialise getLikeStorage si une valeur existe
-            const getLikeStorage = localStorage.getItem('like')
+            const getLikeStorage = localStorage.getItem(`${premierEnfant.classList[0]}`)
             if (getLikeStorage === premierEnfant.classList[0]) {
                 //nothing , on a deja incremente le like de la photo
             } else {
@@ -137,7 +140,7 @@ async function displayData(identity, picture, filteredPhotographers, photographe
                 //on met à jour la nouvelle valeur
                 encartLike.textContent = totalLikes
                 //on enregistre dans le local storage le nom de sa classe (like clické)
-                localStorage.setItem('like', premierEnfant.classList[0]);
+                localStorage.setItem(`${premierEnfant.classList[0]}`, premierEnfant.classList[0]);
             }
         })
     }
@@ -169,7 +172,7 @@ async function displayData(identity, picture, filteredPhotographers, photographe
             const taille = reponse.sourcePhoto.length
             // const that = this: memorisation du contexte lors du (click) 
 
-            //*************************************PARTIE GESTION (prev/next) & (arrow left/right) LIGHT BOX DU SITE****************************************
+            //**********PARTIE GESTION (prev/next) & (arrow left/right) LIGHT BOX DU SITE****************************************
             const precedent = document.getElementById('modalLightBox').querySelector('.lightBoxPrecedent')
             //en attente d'un évennement...
             precedent.addEventListener("click", function (event) {
@@ -237,7 +240,7 @@ async function displayData(identity, picture, filteredPhotographers, photographe
                 }
             });
 
-            //*****************************************************PARTIE GESTION ZOOM DE LA PHOTO/VIDEO AU CLICK**************************************************
+            //*****PARTIE GESTION ZOOM DE LA PHOTO/VIDEO AU CLICK**************************************************
             let extension = getExtensionFromUrl(this.src)
             if (extension === 'jpg') {
                 // On obtient la référence de la collection HTML
@@ -295,10 +298,51 @@ async function displayData(identity, picture, filteredPhotographers, photographe
             e.preventDefault()
             modalLightBox.classList.remove("show")
         }
-    });
+    })
+    //******************************************************************************************* */
+
+    //ferme le dropdown si on clicke a l'exterieur 
+    window.onclick = function (event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+
+    document.getElementById("popularite").addEventListener("click", function (event) {
+        // Empêcher le comportement par défaut du lien (navigation)
+        event.preventDefault()
+        cleanUp()
+        const triePopularite = filtrage("like", filteredPhotographers)
+        // portfolio_section
+        displayData(identity, picture, triePopularite, photographers)
+    })
+
+    document.getElementById("date").addEventListener("click", function (event) {
+        // Empêcher le comportement par défaut du lien (navigation)
+        event.preventDefault()
+        cleanUp()
+        const trieDate = filtrage("date", filteredPhotographers)
+        // portfolio_section
+        displayData(identity, picture, trieDate, photographers)
+    })
+
+    document.getElementById("titre").addEventListener("click", function (event) {
+        // Empêcher le comportement par défaut du lien (navigation)
+        event.preventDefault()
+        cleanUp()
+        const trieTitre = filtrage("titre", filteredPhotographers)
+        // portfolio_section
+        displayData(identity, picture, trieTitre, photographers)
+    })
 
 }
-
 
 async function init() {
     //suprime la variable like du localstorage
@@ -325,8 +369,11 @@ async function init() {
         valeurId,
         media
     );
-    //affichage du photographe avec son portofolio
+
+    //********************GESTION DE L'AFFICHAGE DU PORTOFOLIO DU PHOTOGRAPHE**************
     await displayData(identity, picture, filteredPhotographers, photographers)
+    // const filtrageDate = filtrage("titre", filteredPhotographers)
+    console.log(filteredPhotographers)
 }
 
 //point d'entrée dans le fichier

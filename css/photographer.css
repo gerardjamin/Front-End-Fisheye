@@ -1,13 +1,13 @@
 :root {
   --error-color: #dc3545;
-  --success-color:#fff;
+  --success-color: #fff;
+  --button-color: #901c1c;
 }
 
 /* permet le debug des elements qui ont le focus*/
 *:focus {
-  outline: 2px solid red !important;
+  /*outline: 2px solid red !important;*/
 }
-
 
 .photograph-header {
   display: flex;
@@ -17,6 +17,7 @@
   height: 300px;
   margin: 0 100px;
   align-items: center;
+  margin-bottom: 20px;;
 }
 
 .photograph-header .identity {
@@ -52,13 +53,13 @@
   grid-template-columns: 1fr 1fr 1fr;
   gap: 80px;
   margin-top: 100px;
-  padding: 50px 50px;
+  padding: 20px 20px;
 }
 
 .portfolio_section article img,
 video {
   aspect-ratio: 1/1;
-  width:100%;
+  width: 100%;
   object-position: center;
   object-fit: cover;
   border-radius: 5px;
@@ -77,13 +78,13 @@ video {
   font-size: 24px;
 }
 
-.portfolio_section article div .likesPhotographer  {
+.portfolio_section article div .likesPhotographer {
   color: #901c1c;
   font-size: 24px;
 }
 
 .bottom-right-encart {
-  display:flex;
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
@@ -92,22 +93,28 @@ video {
   right: 0;
   width: 376px;
   height: 89px;
-  background-color: #DB8876;
+  background-color: #db8876;
   border-radius: 5px;
 }
 
-.bottom-left-encart h4 {
-  display: inline-block;
+.encartLike {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 120px;
   font-size: 24px;
 }
+
 /* partie modale */
 .closeButton {
   background: #db8876;
   cursor: pointer;
-  border:none;
+  border: none;
 }
 
-.openButton,.submitButton {
+.openButton,
+.submitButton {
   font-size: 20px;
   font-weight: bold;
   color: white;
@@ -127,7 +134,7 @@ video {
   top: 5%;
   left: 15%;
   width: 70%;
-  zoom:90%;
+  zoom: 90%;
 }
 
 .modal {
@@ -139,7 +146,7 @@ video {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  gap:1px;
+  gap: 1px;
   padding: 35px;
   margin: auto;
 }
@@ -147,7 +154,7 @@ video {
 .modal header {
   justify-content: space-between;
   width: 100%;
-  background: #DB8876;
+  background: #db8876;
   margin-top: 0%;
 }
 
@@ -170,7 +177,8 @@ form label {
   font-size: 36px;
 }
 
-form input,textarea {
+form input,
+textarea {
   width: 100%;
   height: 68px;
   border: none;
@@ -182,7 +190,7 @@ form input,textarea {
   background: var(--error-color);
 }
 
-.success input{
+.success input {
   background: var(--success-color);
 }
 
@@ -192,82 +200,135 @@ form input,textarea {
 
 /*modal*/
 .modalLightBox.show {
-  display:block;
+  display: block;
 }
 
 .modalLightBox {
-display: none;
-position: fixed;
-left: 0px;
-top: 0px;
-bottom: 0px;
-right: 0px;
-background:rgba(0, 0, 0, 0.7);
+  display: none;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  background: rgba(0, 0, 0, 0.7);
 }
 
 .modalLightBox-content {
-width: 90%;
-margin: auto;
-position: absolute;
-top: 50%;
-left: 70%;
-transform: translate(-50%, -50%);
+  width: 90%;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 70%;
+  transform: translate(-50%, -50%);
 }
 
-.modalLightBox-content .photoLightBox , .videoLightBox {
+.modalLightBox-content .photoLightBox,
+.videoLightBox {
   aspect-ratio: 1/1;
   width: 50%;
-  height:900px;
+  height: 900px;
   object-fit: cover;
   border-radius: 5px;
   cursor: pointer;
+  border: 5px solid #fff;
 }
 
 .closeLightBox {
-color: red;
-font-size: 4em;
-width:82px;
-height:82px;
-position: fixed;
-top: 20px;
-right: 10px;
-cursor: pointer;
-opacity:0.5;
+  color: red;
+  font-size: 4em;
+  width: 82px;
+  height: 82px;
+  position: fixed;
+  top: 20px;
+  right: 10px;
+  cursor: pointer;
+  opacity: 0.5;
 }
 
 .closeLightBox:hover {
-  opacity:1;
- transition :opacity 0.5s;
-  }
+  opacity: 1;
+  transition: opacity 0.5s;
+}
 
 .modalLightBox .lightBoxSuivant,
 .modalLightBox .lightBoxPrecedent {
-background: url(../assets/svg/icon-chevron-right.svg) center center/43px 72px no-repeat;
-width:10%;
-height:100%;
-border: none;
-position:fixed;
-opacity:0.5;
-cursor: pointer;
-transition:0.4s;
-z-index: 20;
+  background: url(../assets/svg/icon-chevron-right.svg) center center/43px 72px
+    no-repeat;
+  width: 10%;
+  height: 100%;
+  border: none;
+  position: fixed;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: 0.4s;
+  z-index: 20;
 }
 
 .lightBoxSuivant:hover,
-.lightBoxPrecedent:hover{
-  opacity:1;
-  transition:opacity 0.5s;
+.lightBoxPrecedent:hover {
+  opacity: 1;
+  transition: opacity 0.5s;
 }
 
 .modalLightBox .lightBoxPrecedent {
-  left:10%;
+  left: 10%;
   transform: rotate(180deg);
 }
 
 .modalLightBox .lightBoxSuivant {
- left:75%;
-  
+  left: 75%;
 }
 
+.dropbtn {
+  background-color: var(--button-color);
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 170px;
+}
 
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: var(--button-color);
+}
 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--button-color);
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  border: solid 5px;
+  border-bottom: white;
+}
+
+.dropdown a:hover {
+  background-color: #ddd;
+}
+
+.dropdown > #dropComment {
+  font-size: 18px;
+  line-height: 23.44px;
+  font-weight: 700;
+  margin: 20px 20px;
+}
+
+.show {
+  display: block;
+}
