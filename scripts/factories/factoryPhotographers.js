@@ -17,15 +17,6 @@ async function factoryObject(photographers, type,valeurId,media) {
       //contient tous les articles
       dataPhographers.push(userCardDOM)
     })
-    
-    //retourne un tableau d'articles pour chaque photographe: 
-    // <article>
-    //   <a href="photographer.html?id=243"><img src="..../MimiKeel.jpg" alt="Je m'appelle Mimi Keel"></a>
-    //   <h2>Mimi Keel</h2>
-    //   <h3>London, UK</h3>
-    //   <p>Voir le beau dans le quotidien</p>
-    //   <h4>400/jour</h4>
-    // </article>
     return dataPhographers
   }
   else if (type === 'identity'){

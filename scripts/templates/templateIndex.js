@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 function photographerTemplate(data) {
     const { name,id,city,country,tagline,price, portrait } = data;
-    const picture = `../assets/Photographers/${portrait}`;
+    //exemple portrait: "portrait": "RhodeDubois.jpg"
+    const picture = `assets/Photographers/${portrait}`;
 
     //object to display
     function getUserCardDOM(tabIndex) {
@@ -12,6 +13,7 @@ function photographerTemplate(data) {
         const link = document.createElement('a')
         //gestion accessibilité
         link.setAttribute("tabindex", `${tabIndex}`)
+        //lien pour acceder a la page de presentation du photographe
         link.setAttribute('href','photographer.html?id='+id)
         link.appendChild(img)
         const h1 = document.createElement( 'h2' );
