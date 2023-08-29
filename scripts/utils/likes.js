@@ -32,4 +32,29 @@ export function compteLikesPagePhotographer() {
     return totalLikes
 }
 
+export function incrementeLikes(premierEnfant,likesCount,likeCoeur) {
+     //initialise getLikeStorage si une valeur existe
+     const getLikeStorage = localStorage.getItem(
+        `${premierEnfant.classList[0]}`
+      );
+      if (getLikeStorage === premierEnfant.classList[0]) {
+        //nothing , on a deja incremente le like de la photo
+      } else {
+        //alors on incremente le like
+        likesCount++;
+        //on injecte la valeur dans l'objet HTML du contexte
+        likeCoeur.textContent = likesCount;
+        //on appelle la fonction qui compte le nombre total de like de la page actuelle
+        let totalLikes = compteLikesPagePhotographer();
+        const encartLike = document.querySelector(".encartLike span");
+        //on met à jour la nouvelle valeur
+        encartLike.textContent = totalLikes;
+        //on enregistre dans le local storage le nom de sa classe (like clické)
+        localStorage.setItem(
+          `${premierEnfant.classList[0]}`,
+          premierEnfant.classList[0]
+        );
+      }
+}
+
 
