@@ -36,15 +36,20 @@
       <!-- GESTION DU DROPDOWN -->
       <div class="dropdown">
         <span>Trier par</span>
-        <button id="dropComment" onclick="showDropdown()" class="dropbtn" tabindex="2">
-          Trie
+        <button
+          id="dropComment"
+          onclick="showDropdown()"
+          class="dropbtn"
+          tabindex="3"
+        >
+          Click
         </button>
         <div id="myDropdown" class="dropdown-content">
-          <a id="popularite" href="#" onclick="changeText('Popularité')"
+          <a  tabindex="4" id="popularite" href="#" onclick="changeText('Popularité')"
             >Popularité</a
           >
-          <a id="date" href="#" onclick="changeText('Date')">Date</a>
-          <a id="titre" href="#" onclick="changeText('Titre')">Titre</a>
+          <a tabindex="5" id="date" href="#" onclick="changeText('Date')">Date</a>
+          <a tabindex="6" id="titre" href="#" onclick="changeText('Titre')">Titre</a>
         </div>
       </div>
       <section class="portfolio_section"></section>
@@ -66,6 +71,7 @@
             id="closeButton"
             onclick="closeModal()"
             aria-label="fermeture de la modale de contact"
+            tabindex="23"
           >
             <img
               src="assets/icons/close.svg"

@@ -79,6 +79,11 @@ video {
 }
 
 .portfolio_section article div .likesPhotographer {
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap:5px;
   color: #901c1c;
   font-size: 24px;
 }
@@ -95,6 +100,10 @@ video {
   height: 89px;
   background-color: #db8876;
   border-radius: 5px;
+}
+
+#encartLike > svg {
+  margin-left: -100px;
 }
 
 .encartLike {
@@ -304,9 +313,9 @@ textarea {
   position: absolute;
   background-color: var(--button-color);
   min-width: 160px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  /* overflow: auto; */
+  /* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); */
+  /* z-index: 1; */
 }
 
 .dropdown-content a {
@@ -316,11 +325,12 @@ textarea {
   display: block;
   border: solid 5px;
   border-bottom: white;
+  height: auto;
 }
 
-.dropdown a:hover {
-  background-color: #ddd;
-}
+/* .dropdown a:hover {
+  opacity: 0.5;
+} */
 
 .dropdown > #dropComment {
   font-size: 18px;
@@ -332,3 +342,10 @@ textarea {
 .show {
   display: block;
 }
+
+
+
+
+
+
+

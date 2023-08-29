@@ -30,16 +30,18 @@
 }
 
 /**
- ******************************************calcule l'index du tableau de la phto clickée 
- * @param {*} filteredPhotographers :travaux du photographe sélectionné
- * @param {*} src :source du context de la photo clickée
+ ******************************************calcule l'index du tableau de la photo clickée *************
+ * @param {*} filteredPhotographers :ensemble des travaux du photographe sélectionné
+ * @param {*} src :chemin de la photo clickée dans le contexte
  * @returns : index du tableau de la photo clickée et le tableau sourcePhoto
  */
 function calculeIndex(filteredPhotographers,src) {
   // eslint-disable-next-line no-debugger
-  //dans sourcePhoto on trouve tous les url des photos du photographe
+
+  //dans sourcePhoto on trouve tous les url des photos du photographe exemple:0: ../assets/portofolio/Fashion_Yellow_Beach.jpg"
+//1: ../assets/portofolio/Fashion_Urban_Jungle.jpg" .....
   const sourcePhoto = getTravauxPhotographers(filteredPhotographers)
-  // Le tableau nomsDeFichiers contiendra ["namephoto1.jpg", "namephoto2.jpg", "namephoto3.jpg ...."]
+  // Le tableau retourné contiendra ["namephoto1.jpg", "namephoto2.jpg", "namephoto3.jpg ...."]
   const urlDePhotos = sourcePhoto.map(function (element) {
       const chemin = element;
       const partiesDuChemin = chemin.split("/");
@@ -47,6 +49,7 @@ function calculeIndex(filteredPhotographers,src) {
       return partiesDuChemin[partiesDuChemin.length - 1];
   });
 
+  //exemple de src = http://127.0.0.1:5501/assets/portofolio/Fashion_Yellow_Beach.jpg
   //ici on recupere l'url de la photo clickée
   const chemin = src;
   const partiesDuChemin = chemin.split("/");
@@ -64,6 +67,7 @@ function calculeIndex(filteredPhotographers,src) {
  * @param {*} reponse: index de l'element cliqué
  * @param {*} index: placement dans le tableau de la photo suivante ou precedente
  */
+
 function displayNexPrev(url,type,reponse,index) { 
     const modalLightBoxContent = document.querySelector(".modalLightBox-content")
     const videoElement = document.createElement("video")
@@ -116,6 +120,7 @@ if (type === "mp4") {
 }
 }
 
+
 function getExtensionFromUrl(url) {
     const cheminDuFichier = url
     // On sépare la chaîne de caractères et on retourne la dernière partie de la chaîne (extension)
@@ -124,10 +129,10 @@ function getExtensionFromUrl(url) {
     return partiesDuChemin[partiesDuChemin.length - 1]
 }
 
-function openLightbox(modalLightBox,filteredPhotographers,modalLightBoxContent,src) {
+function openLightbox(modalLightBox,filteredPhotographers,modalLightBoxContent,that) {
 
-    //recuperation de l'index de l'element clické et du tableau de phottos
-    let reponse = calculeIndex(filteredPhotographers, src)
+    //recuperation de l'index de l'element clické et du tableau de photos
+    let reponse = calculeIndex(filteredPhotographers,that)
     let index = reponse.index
     //calcule la taille du tableau sourcePhoto
     const taille = reponse.sourcePhoto.length
@@ -147,6 +152,7 @@ function openLightbox(modalLightBox,filteredPhotographers,modalLightBoxContent,s
         //************************je bascule sur le tableau sourcePhoto pour afficher les photos
         //url de la photo clickée
         const url = reponse.sourcePhoto[index]
+        console.log("url",url)
         //appelle la fonction d'affichage
         displayNexPrev(url, getExtensionFromUrl(url), reponse, index)
 
@@ -202,7 +208,7 @@ function openLightbox(modalLightBox,filteredPhotographers,modalLightBoxContent,s
     });
 
     //*********************************PARTIE GESTION ZOOM DE LA PHOTO/VIDEO AU CLICK**************************************************
-    let extension = getExtensionFromUrl(this.src)
+    let extension = getExtensionFromUrl(that)
     if (extension === 'jpg') {
         // On obtient la référence de la collection HTML
         const collection = document.getElementsByTagName('video')
@@ -217,13 +223,13 @@ function openLightbox(modalLightBox,filteredPhotographers,modalLightBoxContent,s
             photoElement.setAttribute("name", "photoLightBox")
             photoElement.classList.add("photoLightBox")
             //recuperation de la source de la video dans le contexte(objet photo)
-            photoElement.src = this.src
+            photoElement.src = that
             modalLightBoxContent.appendChild(photoElement)
         } else {
             console.log('L\'élément "videoLightBox" n\'existe pas dans la collection.')
             const imageLightBox = document.querySelector(".modalLightBox-content img")
             //console.log('context', this.src)
-            imageLightBox.setAttribute("src", this.src)
+            imageLightBox.setAttribute("src", that)
         }
     } else {
         //<img> est présent à l'initialisation de la page WEB 
@@ -233,7 +239,7 @@ function openLightbox(modalLightBox,filteredPhotographers,modalLightBoxContent,s
         videoElement.setAttribute("name", "videoLightBox")
         videoElement.classList.add("videoLightBox")
         //recuperation de la source de la video dans le contexte
-        videoElement.setAttribute("src", this.src)
+        videoElement.setAttribute("src", that)
         videoElement.setAttribute("type", "mp4")
         videoElement.setAttribute("controls", ' ')
         modalLightBoxContent.appendChild(videoElement)

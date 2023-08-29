@@ -18,7 +18,7 @@ async function displayData(identity, picture, filteredPhotographers, photographe
     //premier enfant
     const child = document.querySelector(".openButton")
     photographersSection.insertBefore(identity, child)
-    let tabIndex = 4
+    let tabIndex = 7
 
     //**************************************GESTION PARTIE PORTOFOLIO GALERIE********************************
     for (const objet of filteredPhotographers) {
@@ -63,6 +63,7 @@ async function displayData(identity, picture, filteredPhotographers, photographe
         const div = document.createElement("div")
         div.classList.add("likesPhotographer")
         div.setAttribute('id', 'likesPhotographer')
+        //personnalisation du like (id)
         div.innerHTML = `<span class="like-${id}" id="likes">${likes}</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="21" height="24" viewBox="0 0 21 24" fill="none">
                     <g clip-path="url(#clip0_120_550)">
@@ -100,8 +101,8 @@ async function displayData(identity, picture, filteredPhotographers, photographe
     const div = document.createElement("div")
     div.setAttribute('id', 'encartLike')
     div.classList.add("encartLike")
-    div.innerHTML = `<span>${totalLikes}
-                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="24" viewBox="0 0 21 24" fill="none">
+    div.innerHTML = `<span>${totalLikes}</span>
+                <svg class="svg-encart" xmlns="http://www.w3.org/2000/svg" width="21" height="24" viewBox="0 0 21 24" fill="none">
                     <g clip-path="url(#clip0_120_550)">
                         <path d="M10.5 21.35L9.23125 20.03C4.725 15.36 1.75 12.28 1.75 8.5C1.75 5.42 3.8675 3 6.5625 3C8.085 3 9.54625 3.81 10.5 5.09C11.4537 3.81 12.915 3 14.4375 3C17.1325 3 19.25 5.42 19.25 8.5C19.25 12.28 16.275 15.36 11.7688 20.04L10.5 21.35Z" fill="#000000" />
                     </g>
@@ -110,12 +111,12 @@ async function displayData(identity, picture, filteredPhotographers, photographe
                             <rect width="21" height="24" fill="white" />
                         </clipPath>
                     </defs>
-                </svg> </span>
+                </svg> 
                 <h4>${priceHour}/jour</h4>`
     encart.appendChild(div);
-    //const h4 = document.createElement('h4');
-    //h4.textContent = `${priceHour}/jour`
-    //encart.appendChild(h4)
+    // const h4 = document.createElement('h4');
+    // h4.textContent = `${priceHour}/jour`
+    // encart.appendChild(h4)
 
     //*********************************************GESTION INCREMENTATION DES LIKES********************************************* */
     //enregistre dans une liste (node list) les likes de chacune des photos
@@ -167,127 +168,28 @@ async function displayData(identity, picture, filteredPhotographers, photographe
     const lightBoxPrecedent = document.getElementById("lightBoxPrecedent")
 
     // Ajouter un événement onClick() sur chacune des photos ou videos pour ouvrir la light box
+    //et gérer l'accessibilité
     for (let photo of concatenatedArray) {
-         photo.addEventListener("click", function () {
-
-            //openLightbox(modalLightBox,filteredPhotographers,modalLightBoxContent,this.src)
-           
-            //recuperation de l'index de l'element clické et du tableau de phottos
-            let reponse = calculeIndex(filteredPhotographers, this.src)
-            let index = reponse.index
-            //calcule la taille du tableau sourcePhoto
-            const taille = reponse.sourcePhoto.length
-            // const that = this: memorisation du contexte lors du (click) 
-
-            //**********PARTIE GESTION (prev/next) & (arrow left/right) LIGHT BOX DU SITE****************************************
-            const precedent = document.getElementById('modalLightBox').querySelector('.lightBoxPrecedent')
-            //en attente d'un évennement...
-            precedent.addEventListener("click", function (event) {
-                //evite la propagation de l'evenement jusqu'au parent
-                event.stopPropagation()
-                // decremente l'indice du tableau pour passer a l'element precedent lors du click
-                index = index - 1
-                if (index < 0) {
-                    index = taille - 1
-                }
-                //************************je bascule sur le tableau sourcePhoto pour afficher les photos
-                //url de la photo clickée
-                const url = reponse.sourcePhoto[index]
-                //appelle la fonction d'affichage
-                displayNexPrev(url, getExtensionFromUrl(url), reponse, index)
-
-            })
-
-            const suivant = document.getElementById('modalLightBox').querySelector('.lightBoxSuivant')
-            //en attente d'un évennement...
-            suivant.addEventListener('click', function (event) {
-                //arrete la propagation de l'action jusqu'au parent
-                event.stopPropagation()
-                //augmente l'indice du tableau pour passer a l'element suivant lors du click
-                index = index + 1
-                if (index === taille) {
-                    index = 0;
-                }
-                //************************je bascule sur le tableau sourcePhoto pour afficher les photos
-                //url de la photo clickée
-                const url = reponse.sourcePhoto[index]
-                //appelle la fonction d'affichage
-                displayNexPrev(url, getExtensionFromUrl(url), reponse, index)
-            })
-            //en attente d'un évennement...
-            window.addEventListener('keydown', (e) => {
-                // passage a la photo precedente avec la touche flèche gauche
-                if (e.key === 'ArrowLeft' && modalLightBox.classList.contains('show')) {
-                    e.preventDefault();
-                    // decremente l'indice du tableau pour passer a l'element precedent lors du click
-                    index = index - 1
-                    if (index < 0) {
-                        index = taille - 1
-                    }
-                    //************************je bascule sur le tableau sourcePhoto pour afficher les photos
-                    //url de la photo clickée
-                    const url = reponse.sourcePhoto[index]
-                    //appelle la fonction d'affichage
-                    displayNexPrev(url, getExtensionFromUrl(url), reponse, index)
-                }
-
-                // passage a la photo suivante avec la touche flèche droite
-                if (e.key === 'ArrowRight' && modalLightBox.classList.contains('show')) {
-                    e.preventDefault();
-                    //augmente l'indice du tableau pour passer a l'element suivant lors du click
-                    index = index + 1
-                    if (index === taille) {
-                        index = 0;
-                    }
-                    //************************je bascule sur le tableau sourcePhoto pour afficher les photos
-                    //url de la photo clickée
-                    const url = reponse.sourcePhoto[index]
-                    //appelle la fonction d'affichage
-                    displayNexPrev(url, getExtensionFromUrl(url), reponse, index)
-                }
-            });
-
-            //*********************************PARTIE GESTION ZOOM DE LA PHOTO/VIDEO AU CLICK**************************************************
-            let extension = getExtensionFromUrl(this.src)
-            if (extension === 'jpg') {
-                // On obtient la référence de la collection HTML
-                const collection = document.getElementsByTagName('video')
-                // Vérifiez si "photoLightBox" existe dans ma collection avec le nom de la balise img
-                const elementRecherche = collection.namedItem('videoLightBox')
-
-                if (elementRecherche !== null) {
-                    console.log('L\'élément "videoLightBox" existe dans la collection.')
-                    const videoLightBox = document.querySelector(".videoLightBox")
-                    videoLightBox.remove()
-                    const photoElement = document.createElement("img")
-                    photoElement.setAttribute("name", "photoLightBox")
-                    photoElement.classList.add("photoLightBox")
-                    //recuperation de la source de la video dans le contexte(objet photo)
-                    photoElement.src = this.src
-                    modalLightBoxContent.appendChild(photoElement)
-                } else {
-                    console.log('L\'élément "videoLightBox" n\'existe pas dans la collection.')
-                    const imageLightBox = document.querySelector(".modalLightBox-content img")
-                    //console.log('context', this.src)
-                    imageLightBox.setAttribute("src", this.src)
-                }
-            } else {
-                //<img> est présent à l'initialisation de la page WEB 
-                const photoLightBox = document.querySelector(".photoLightBox")
-                photoLightBox.remove()
-                const videoElement = document.createElement("video")
-                videoElement.setAttribute("name", "videoLightBox")
-                videoElement.classList.add("videoLightBox")
-                //recuperation de la source de la video dans le contexte
-                videoElement.setAttribute("src", this.src)
-                videoElement.setAttribute("type", "mp4")
-                videoElement.setAttribute("controls", ' ')
-                modalLightBoxContent.appendChild(videoElement)
-            }
+        photo.addEventListener("click", function () {
+            //je sauvegarde le contexte
+            let that = this.src
+            openLightbox(modalLightBox,filteredPhotographers,modalLightBoxContent,that)
             //affichage de l'image dans la modale
             modalLightBox.classList.add("show")
         })
+
+        photo.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+               //je sauvegarde le contexte
+            let that = this.src
+            openLightbox(modalLightBox,filteredPhotographers,modalLightBoxContent,that)
+            //affichage de l'image dans la modale
+            modalLightBox.classList.add("show")
+            }
+        })
     }
+
+   
 
     //fermeture de la modale de la light box sur la croix
     closeLightBox.addEventListener("click", function () {
