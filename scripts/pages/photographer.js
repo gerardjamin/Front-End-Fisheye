@@ -41,7 +41,7 @@ async function displayData(
     for (const objet of filteredPhotographers) {
         const { id, photographerId, title, image, video, likes, date, price } =
             objet;
-       
+
         const portfolioPicture = `../assets/portofolio/${image}`;
         const portfolioVideo = `../assets/portofolio/${video}`;
 
@@ -131,7 +131,7 @@ async function displayData(
                 <h4>${priceHour}/jour</h4>`;
     encart.appendChild(div);
 
-    //*********************************************LIKES INCREMENT MAGMENT********************************************* */
+    //*********************************************LIKES INCREMENT MANAGMENT********************************************* */
     //Store the likes of each photo in a NodeList
     const likesPhoto = document.querySelectorAll(".likesPhotographer");
     //We loop through this NodeList, waiting for an event
@@ -198,6 +198,9 @@ async function displayData(
                 )
                 //display image into the modale
                 modalLightBox.classList.add("show");
+                //managment accessibility
+                const videoLightBox = document.querySelector(".videoLightBox");
+                videoLightBox.focus();
             }
         })
     }
