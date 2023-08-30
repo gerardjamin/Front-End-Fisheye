@@ -18,6 +18,7 @@ function photographerTemplate(data) {
         const link = document.createElement('a')
         //managment accessibility
         link.setAttribute("tabindex", `${tabIndex}`)
+        link.setAttribute("title","afficher la page de profil de ${name} ?")
         //Link to access the photographer's presentation page
         link.setAttribute('href','photographer.html?id='+id)
         link.appendChild(img)

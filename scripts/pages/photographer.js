@@ -57,9 +57,10 @@ async function displayData(
             const imgElement = document.createElement("img");
             //Management accessibility
             imgElement.setAttribute("tabindex", `${tabIndex}`);
+            imgElement.setAttribute("role","link")
             imgElement.classList.add("photo");
             imgElement.setAttribute("src", portfolioPicture);
-            imgElement.setAttribute("alt", `le titre de la photo${title}`);
+            imgElement.setAttribute("alt", `${title}`);
             //I am filling the article with the image
             article.appendChild(imgElement);
         } else if (video) {
@@ -81,7 +82,7 @@ async function displayData(
         div.setAttribute("id", "likesPhotographer");
         div.setAttribute("tabindex", `${tabIndex}`);
         //Customization of the Like (id)
-        div.innerHTML = `<span class="like-${id}" id="likes">${likes}</span>
+        div.innerHTML = `<span class="like-${id}" id="likes" role="button" aria-label="bouton j'aime">${likes}</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="21" height="24" viewBox="0 0 21 24" fill="none">
                     <g clip-path="url(#clip0_120_550)">
                         <path d="M10.5 21.35L9.23125 20.03C4.725 15.36 1.75 12.28 1.75 8.5C1.75 5.42 3.8675 3 6.5625 3C8.085 3 9.54625 3.81 10.5 5.09C11.4537 3.81 12.915 3 14.4375 3C17.1325 3 19.25 5.42 19.25 8.5C19.25 12.28 16.275 15.36 11.7688 20.04L10.5 21.35Z" fill="#911C1C" />
@@ -113,10 +114,10 @@ async function displayData(
 
     const priceHour = recupererProprieteAssociee(photographers, photographerId);
     //Counting the likes for all the works of the photographer retrieved from the JSON file
-    const totalLikes = compteLikesPhotographer(filteredPhotographers);
-    const div = document.createElement("div");
-    div.setAttribute("id", "encartLike");
-    div.classList.add("encartLike");
+    const totalLikes = compteLikesPhotographer(filteredPhotographers)
+    const div = document.createElement("div")
+    div.setAttribute("id", "encartLike")
+    div.classList.add("encartLike")
     div.innerHTML = `<span>${totalLikes}</span>
                 <svg class="svg-encart" xmlns="http://www.w3.org/2000/svg" width="21" height="24" viewBox="0 0 21 24" fill="none">
                     <g clip-path="url(#clip0_120_550)">
@@ -128,8 +129,8 @@ async function displayData(
                         </clipPath>
                     </defs>
                 </svg> 
-                <h4>${priceHour}/jour</h4>`;
-    encart.appendChild(div);
+                <h4>${priceHour}/jour</h4>`
+    encart.appendChild(div)
 
     //*********************************************LIKES INCREMENT MANAGMENT********************************************* */
     //Store the likes of each photo in a NodeList

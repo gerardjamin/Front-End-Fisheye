@@ -6,7 +6,7 @@
  * @returns 
  */
 function photographerHeader(data) {
-console.log('data',data)
+
     const { name, id,city, country, tagline, portrait} = data;
     const picture = `../assets/Photographers/${portrait}`;
 
@@ -16,7 +16,7 @@ console.log('data',data)
         //Creation of the node to be inserted
         const identity = document.createElement('article');
         identity.className = "identity"
-        const h2 = document.createElement('h1');
+        const h2 = document.createElement('h2');
         h2.textContent = name;
         const h3 = document.createElement('h3');
         h3.textContent = `${city}, ${country}`;
@@ -29,7 +29,7 @@ console.log('data',data)
 
         const img = document.createElement('img');
         img.setAttribute("src", picture)
-        img.setAttribute('alt', `Je m'appelle ${name}`)
+        img.setAttribute('alt', `photo de profil de ${name}`)
 
         return { identity: identity, picture: img }; // Return the article element and the image
     }
