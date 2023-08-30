@@ -4,7 +4,7 @@
   --button-color: #901c1c;
 }
 
-/* permet le debug des elements qui ont le focus*/
+/*use for debug elements with focus*/
 *:focus {
   outline: 2px solid yellow !important;
 }
@@ -115,7 +115,7 @@ video {
   font-size: 24px;
 }
 
-/* partie modale */
+/* part modal */
 .closeButton {
   background: #db8876;
   cursor: pointer;
@@ -195,6 +195,7 @@ textarea {
   font-size: 36px;
 }
 
+/*managment error about form*/
 .error input {
   background: var(--error-color);
 }
@@ -207,7 +208,7 @@ textarea {
   background: var(--error-color);
 }
 
-/*modal*/
+/*appear modal*/
 .modalLightBox.show {
   display: block;
 }
@@ -313,9 +314,6 @@ textarea {
   position: absolute;
   background-color: var(--button-color);
   min-width: 160px;
-  /* overflow: auto; */
-  /* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); */
-  /* z-index: 1; */
 }
 
 .dropdown-content a {
@@ -327,10 +325,6 @@ textarea {
   border-bottom: white;
   height: auto;
 }
-
-/* .dropdown a:hover {
-  opacity: 0.5;
-} */
 
 .dropdown > #dropComment {
   font-size: 18px;

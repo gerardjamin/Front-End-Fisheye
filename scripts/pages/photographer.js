@@ -12,55 +12,61 @@ import { filtrage } from "../utils/sortFiltered.js";
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 // eslint-disable-next-line no-unused-vars
-//Mettre le code JavaScript lié à la page photographer.html ici
+/**
+ * 
+ * @param {*} identity ("identity of the photographer.)
+ * @param {*} picture (Portrait of the photographer.)
+ * @param {*} filteredPhotographers (Data from the photographers array in the .json file.)
+ * @param {*} photographers (Data from the media array in the .json file. )
+ */
 async function displayData(
     identity,
     picture,
     filteredPhotographers,
     photographers
 ) {
-    //partie identite
+    //identity part
     const photographersHeader = document.querySelector(".photograph-header");
     photographersHeader.appendChild(identity);
     photographersHeader.appendChild(picture);
-    //noeud parent
+    //node parent
     const photographersSection = document.querySelector(".photograph-header");
-    //premier enfant
+    //first child
     const child = document.querySelector(".openButton");
     photographersSection.insertBefore(identity, child);
-    //initialisation du nombre de TAB 
+    //init of number TAB
     let tabIndex = 7;
 
-    //**************************************GESTION PARTIE PORTOFOLIO GALERIE********************************
+    //**************************************PORTFOLIO MANAGMENT SECTION(GALERY)********************************
     for (const objet of filteredPhotographers) {
         const { id, photographerId, title, image, video, likes, date, price } =
             objet;
-        //ensemble des travaux des photographes
+       
         const portfolioPicture = `../assets/portofolio/${image}`;
         const portfolioVideo = `../assets/portofolio/${video}`;
 
         const portofolioSection = document.querySelector(".portfolio_section");
         const article = document.createElement("article");
         const container = document.createElement("div");
-        //partie titre de l'image et de la video
+        //Title Section for Images and Videos
         const p = document.createElement("p");
         p.textContent = `${title}`;
         tabIndex++;
         if (image) {
-            //partie image
+            //part image
             const imgElement = document.createElement("img");
-            //gestion accessibilité
+            //Management accessibility
             imgElement.setAttribute("tabindex", `${tabIndex}`);
             imgElement.classList.add("photo");
             imgElement.setAttribute("src", portfolioPicture);
             imgElement.setAttribute("alt", `le titre de la photo${title}`);
-            //je rempli l'article avec l'image
+            //I am filling the article with the image
             article.appendChild(imgElement);
         } else if (video) {
-            //partie video
+            //part video
             const videoElement = document.createElement("video");
             videoElement.classList.add("video");
-            //gestion accessibilité
+            //Management accessibility
             videoElement.setAttribute("tabindex", `${tabIndex}`);
             videoElement.setAttribute("src", portfolioVideo);
             videoElement.setAttribute("type", "mp4");
@@ -68,13 +74,13 @@ async function displayData(
             article.appendChild(videoElement);
         }
 
-        //*************************************************GESTION INCREMENTER LIKES PARTIE HTML************************************
-        //coeur
+        //*************************************************INCREMENT LIKES MANAGEMENT IN HTML SECTION************************************
+        //heart
         const div = document.createElement("div");
         div.classList.add("likesPhotographer");
         div.setAttribute("id", "likesPhotographer");
         div.setAttribute("tabindex", `${tabIndex}`);
-        //personnalisation du like (id)
+        //Customization of the Like (id)
         div.innerHTML = `<span class="like-${id}" id="likes">${likes}</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="21" height="24" viewBox="0 0 21 24" fill="none">
                     <g clip-path="url(#clip0_120_550)">
@@ -91,23 +97,22 @@ async function displayData(
         article.appendChild(container);
         portofolioSection.appendChild(article);
     }
-    //**************************************************************GESTION ENCART DE LA PAGE*********************************
+    //**************************************************************MANAGMENT ENCART OF THE PAGE*********************************
     const encart = document.getElementById("encart");
     const { photographerId } = filteredPhotographers[0];
-    //const { photographerId } = filteredPhotographers
 
-    //recuperer le prix horaire de chaque photographe
+    //To retrieve the hourly rate of each photographer.
     function recupererProprieteAssociee(photographers, photographerId) {
         for (const objet of photographers) {
             if (objet.id === parseInt(photographerId)) {
                 return objet.price;
             }
         }
-        return null; // Si la valeur cherchée n'est pas trouvée
+        return null; // If the sought value is not found
     }
 
     const priceHour = recupererProprieteAssociee(photographers, photographerId);
-    //comptage des likes de tous les travaux du photographe recuperé dans le fichier JASON
+    //Counting the likes for all the works of the photographer retrieved from the JSON file
     const totalLikes = compteLikesPhotographer(filteredPhotographers);
     const div = document.createElement("div");
     div.setAttribute("id", "encartLike");
@@ -126,23 +131,23 @@ async function displayData(
                 <h4>${priceHour}/jour</h4>`;
     encart.appendChild(div);
 
-    //*********************************************GESTION INCREMENTATION DES LIKES********************************************* */
-    //enregistre dans une liste (node list) les likes de chacune des photos
+    //*********************************************LIKES INCREMENT MAGMENT********************************************* */
+    //Store the likes of each photo in a NodeList
     const likesPhoto = document.querySelectorAll(".likesPhotographer");
-    //on boucle sur cette node list en attente d'un evenement
+    //We loop through this NodeList, waiting for an event
     for (let like of likesPhoto) {
-        //enregistre la classe du premier enfant du noeud
+        //Record the class of the first child node
         let premierEnfant = like.childNodes[0]
-        //on le selectionne
+        //We select it
         const likeCoeur = like.querySelector("span")
-        //convertit en type entier le contenu de likeCoeur
+        //Convert the content of likeCoeur to an integer type
         let likesCount = parseInt(likeCoeur.textContent)
 
-        //ici attente de l'evenement click........
+        //Here, waiting for the click event......
         like.addEventListener("click", function () {
             incrementeLikes(premierEnfant, likesCount, likeCoeur)
         })
-        //gestion de l'accessibilité
+        //managment of l'accessibility
         like.addEventListener("keydown", function (event) {
             if (event.key === "Enter") {
                 incrementeLikes(premierEnfant, likesCount, likeCoeur)
@@ -150,27 +155,26 @@ async function displayData(
         })
     }
 
-    //*********************************GESTION DE LA LIGHTBOX*LIGHTBOX***************************************************/
+    //*************************************************MANAGMENT LIGHTBOX***************************************************/
 
-    //partie qui permet d'ouvrir la light-box au click sur l'element image ou video
-    // Récupérer le tableau d'éléments image et video
+    //Section that enables opening the lightbox when clicking on the image or video element
+    // To retrieve the array of image and video elements.
 
     const myImage = document.getElementsByClassName("photo");
     const myVideo = document.getElementsByClassName("video");
-    // Utilisation de l'opérateur de propagation (...) pour concaténer
+    // Using the spread operator (...) to concatenate.
     const concatenatedArray = [...myImage, ...myVideo];
     const modalLightBox = document.querySelector("#modalLightBox");
     const closeLightBox = document.querySelector("#closeLightBox");
-    // const imageLightBox = document.querySelector(".modalLightBox-content img")
     const modalLightBoxContent = document.querySelector(".modalLightBox-content");
     const lightBoxSuivant = document.getElementById("lightBoxSuivant");
     const lightBoxPrecedent = document.getElementById("lightBoxPrecedent");
 
-    // Ajouter un événement onClick() sur chacune des photos ou videos pour ouvrir la light box
-    //et gérer l'accessibilité
+    // Add an onClick() event on each of the photos or videos to open the lightbox
+    // and manage accessibility.
     for (let photo of concatenatedArray) {
         photo.addEventListener("click", function () {
-            //je sauvegarde le contexte
+            //record the context
             let that = this.src;
             openLightbox(
                 modalLightBox,
@@ -178,13 +182,13 @@ async function displayData(
                 modalLightBoxContent,
                 that
             )
-            //affichage de l'image dans la modale
+            //display image into the modale
             modalLightBox.classList.add("show");
         });
 
         photo.addEventListener("keydown", function (event) {
             if (event.key === "Enter") {
-                //je sauvegarde le contexte
+                //record the context
                 let that = this.src;
                 openLightbox(
                     modalLightBox,
@@ -192,32 +196,32 @@ async function displayData(
                     modalLightBoxContent,
                     that
                 )
-                //affichage de l'image dans la modale
+                //display image into the modale
                 modalLightBox.classList.add("show");
             }
         })
     }
 
-    //fermeture de la modale de la light box sur la croix
+    //Closing the modal of the lightbox by clicking the cross
     closeLightBox.addEventListener("click", function () {
         modalLightBox.classList.remove("show");
     });
 
-    //fermeture au click sur la modale de la light box
+    //Closing on click inside the lightbox modal.
     modalLightBox.addEventListener("click", function () {
         modalLightBox.classList.remove("show");
     });
 
-    // fermeture de la modale modalLightBox avec la touche escape du clavier
+    // Closing the modal modalLightBox with the escape key on the keyboard.
     window.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && modalLightBox.classList.contains("show")) {
             e.preventDefault();
             modalLightBox.classList.remove("show");
         }
     });
-    //*********************************GESTION DU DROPDOWN POUR LE TRIE********************************************************** */
+    //*********************************DROPDOWN SORTING MANAGMENT********************************************************** */
 
-    //ferme le dropdown si on clicke a l'exterieur
+    //Close the dropdown if clicked outside
     window.onclick = function (event) {
         if (!event.target.matches(".dropbtn")) {
             var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -231,11 +235,11 @@ async function displayData(
         }
     };
 
-    //trie par catégorie
+    //Sorting by Category.
     document
         .getElementById("popularite")
         .addEventListener("click", function (event) {
-            // Empêcher le comportement par défaut du lien (navigation)
+            // Prevent the default behavior of the link (navigation)
             event.preventDefault();
             cleanUp();
             const triePopularite = filtrage("like", filteredPhotographers);
@@ -244,7 +248,7 @@ async function displayData(
         });
 
     document.getElementById("date").addEventListener("click", function (event) {
-        // Empêcher le comportement par défaut du lien (navigation)
+        // Prevent the default behavior of the link (navigation)
         event.preventDefault();
         cleanUp();
         const trieDate = filtrage("date", filteredPhotographers);
@@ -253,31 +257,30 @@ async function displayData(
     });
 
     document.getElementById("titre").addEventListener("click", function (event) {
-        // Empêcher le comportement par défaut du lien (navigation)
+        // Prevent the default behavior of the link (navigation)
         event.preventDefault();
         cleanUp();
         const trieTitre = filtrage("titre", filteredPhotographers);
         // portfolio_section
         displayData(identity, picture, trieTitre, photographers);
     });
-} //ici, la page web est entièrement chargée
+} //here, the page is loaded
 
 window.addEventListener("load", function () {
-    // Code à exécuter une fois que la page est entièrement chargée
     console.log("La page est entièrement chargée.");
 });
 
 async function init() {
-    //suprime la variable like du localstorage
+    //Remove the 'like' variable from local storage
     localStorage.clear();
-    // Obtenir les paramètres de l'URL
+    // Get the parameters from the URL
     const urlParams = new URLSearchParams(window.location.search);
-    // Récupérez la valeur de la variable "id" de l'URL
+    // Retrieve the value of the 'id' variable from the URL
     const valeurId = urlParams.get("id");
     //destructuration
     const { photographers } = await getPhotographers();
     const { media } = await getPhotographers();
-    //récupération de l'index du tableau correspondant à l'id du photographe
+    //Retrieving the index of the array corresponding to the photographer's ID.
     const trouverIndexParPropriete = (photographers, id, valeurId) => {
         const indexTrouve = photographers.findIndex(
             (objet) => objet[id] === parseInt(valeurId)
@@ -293,10 +296,10 @@ async function init() {
         media
     );
 
-    //********************GESTION DE L'AFFICHAGE DU PORTOFOLIO DU PHOTOGRAPHE**************
+    //********************PHOTOGRAPHER'S PORTFOLIO DISPLAY MANAGMENT**************************************************
     await displayData(identity, picture, filteredPhotographers, photographers);
     /**************************************************************************************************************** */
 }
 
-//point d'entrée dans le fichier
+//enter point into the file
 init();

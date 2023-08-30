@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
-//partie vérification du formulaire
+//Form Validation Section
 const form = document.querySelector("#signUp")
 const prenomInput = document.forms.formulaire.prenom;
 const nomInput = document.forms.formulaire.nom;
 const emailInput = document.forms.formulaire.email;
 const messageTextarea = document.forms.formulaire.message;
 
-//correction en temps reel des champs du formulaire
+//Real-time Form Field Correction.
 var formulaire = document.getElementById("signUp");
 var inputs = formulaire.getElementsByTagName("input");
 for (var i = 0; i < inputs.length; i++) {
@@ -18,7 +18,7 @@ for (var i = 0; i < inputs.length; i++) {
     });
 }
 
-//correction en temps reel de la zone areatext
+//Real-time Form Field zone-text.
 var area = document.getElementById("message");
 area.addEventListener("input", function () {
     checkMessage()
@@ -26,7 +26,7 @@ area.addEventListener("input", function () {
 
 
 /**
- * le prénom ne doit pas etre vide et avoir au moins 2 caractères sans chiffre
+ * The first name must not be empty and should have at least 2 characters without any digits.
  * @returns valid
  */
 const checkSurname = () => {
@@ -47,7 +47,7 @@ const checkSurname = () => {
 }
 
 /**
- * le nom de famille ne doit pas etre vide et avoir au moins  2 caractères sans chiffre
+ * The family name must not be empty and should have at least 2 characters without any digits.
  * @returns valid
  */
 const checkName = () => {
@@ -68,7 +68,7 @@ const checkName = () => {
 }
 
 /**
- * utilisation d'une regex pour comparer le format type mail (ex:const resultat = /^coucou/.test(chaine))
+ * Using a regex to match the email format (e.g., const result = /^hello/.test(string))
  * @returns valid
  */
 const checkEmail = () => {
@@ -86,7 +86,7 @@ const checkEmail = () => {
 };
 
 /**
- * verifie que la zone areatext ne soit pas vide
+ * Verify that the textarea is not empty.
  * @returns valid
  */
 const checkMessage = () => {
@@ -104,52 +104,52 @@ const checkMessage = () => {
 /**
  * 
  * @param {*} email 
- * @returns le resultat du test (false ou true)
+ * @returns The result of the test (false or true)
  */
 const isEmailValid = (email) => {
     let emailRegExp = /^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z0-9._-]{2,}$/i
     return emailRegExp.test(email);
 };
 
-// Si la value retourne une chaine de caractére vide alors isRequired = false
+// If the value returns an empty string, then isRequired = false.
 const isRequired = (value) => (value === "" ? false : true);
 
-//gère l'affichage de l'erreur
+//Manage the display of the error
 const showError = (input, message) => {
-    // Récupération de l'élément parent de formulaire
+    // Retrieval of the parent element of the form
     const formField = input.parentElement;
-    // ajout de la classe error
+    // Adding the 'error' class.
     formField.classList.remove("success");
     formField.classList.add("error");
 
-    // envoie le message d'erreur dans la balise small
+    // Sending the error message into the 'small' tag
     const error = formField.querySelector("small");
     error.style.color = "red";
     error.textContent = message;
 }
 
 const showSuccess = (input) => {
-    // Récupération de l'élément parent de formulaire
+    // Retrieving the parent element of the form
     const formField = input.parentElement;
 
-    // supprimer la classe error
+    // delete class error
     formField.classList.remove("error");
     formField.classList.add("success");
 
-    // cacher le message d'erreur dans la balise small
+    // Hiding the error message in the 'small' tag.
     const error = formField.querySelector("small");
     error.textContent = "";
 }
 
 /**
- * verification de l'intégrité du formulaire
- * @returns le resultat de la vérification (false ou true)
+ * Verification of the form's integrity
+ * @returns The result of the verification (false or true)
  */
 form.addEventListener("submit", function (event) {
-    // empécher l'envois du formulaire(le rechargement de la page)
+    // Prevent form submission (page reload).
     event.preventDefault();
 
-    // validation des champs
+    // Field validation
     let isSurnameValid = checkSurname(),
         isNameValid = checkName(),
         isEmailValid = checkEmail(),
@@ -164,7 +164,7 @@ form.addEventListener("submit", function (event) {
     return isFormValid
 })
 
-//gestion de la modale en matiere d'accessibilité
+//Modal Accessibility Management
 const header = document.getElementById("head")
 const main = document.getElementById("main")
 const encart = document.getElementById("encart")
@@ -174,7 +174,7 @@ const closeButton = document.querySelector("#closeButton")  /*boutton*/
 const inputPrenom = document.getElementById('prenom')
 
 /**
- * setTimeout pour attendre la mise en focus de l'element
+ * setTimeout to wait for the element to receive focus.
  */
 function closeModal() {
     modal.style.display = "none";
@@ -194,12 +194,11 @@ function openModal() {
     encart.setAttribute('aria-hidden', 'true')
     modal.setAttribute('aria-hidden', 'false')
     setTimeout(() => {
-        // inputPrenom.focus()
         closeButton.focus()
     }, 5)
 }
 
-// fermeture de la modale avec la touche escape du clavier
+// Closing the modal with the keyboard's escape key
 window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.style.display === 'block') {
         e.preventDefault()

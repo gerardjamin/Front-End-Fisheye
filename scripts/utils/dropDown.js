@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
 /**
- * apparition de la box filtrage
+ * Displaying the filtering box
  */
 function showDropdown() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
 
 /**
- * nettoyage de la gallerie photo avant affichage par (date/popularité/titre)
+ * Cleaning the photo gallery before displaying it by (date/popularity/title)
  */
 function cleanUp() {
   const portofolio = document.querySelectorAll(".portfolio_section article")
@@ -19,7 +19,7 @@ function cleanUp() {
 }
 
 /**
- * affiche le type de trie dans le boutton
+ * Display the sorting type in the button
  * @param {*} newText 
  */
 function changeText(newText) {

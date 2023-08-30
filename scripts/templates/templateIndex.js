@@ -1,19 +1,24 @@
 /* eslint-disable no-unused-vars */
+/**
+ * 
+ * @param {*} data ( or array photoGraphers)
+ * @returns array of objects java script
+ */
 function photographerTemplate(data) {
     const { name,id,city,country,tagline,price, portrait } = data;
-    //exemple portrait: "portrait": "RhodeDubois.jpg"
+    //exemple portrait: "portrait" = "RhodeDubois.jpg"
     const picture = `assets/Photographers/${portrait}`;
 
-    //object to display
+    //objects to display
     function getUserCardDOM(tabIndex) {
         const article = document.createElement( 'article' );
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture)  
         img.setAttribute('alt',`Je m'appelle ${name}`)
         const link = document.createElement('a')
-        //gestion accessibilité
+        //managment accessibility
         link.setAttribute("tabindex", `${tabIndex}`)
-        //lien pour acceder a la page de presentation du photographe
+        //Link to access the photographer's presentation page
         link.setAttribute('href','photographer.html?id='+id)
         link.appendChild(img)
         const h1 = document.createElement( 'h2' );
@@ -35,6 +40,6 @@ function photographerTemplate(data) {
         article.appendChild(h4);
         return (article);
     }
-    //retourne l'objet java script
+    //Return the JavaScript object
     return ({ getUserCardDOM })
 }

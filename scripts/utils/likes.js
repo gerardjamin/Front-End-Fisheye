@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /**
- * compte les likes de chaque photographe issue du fichier JSON
+ * Count the likes of each photographer from the JSON file
  * @param {*} filteredPhotographers 
  * @returns 
  */
@@ -13,19 +13,18 @@ export function compteLikesPhotographer(filteredPhotographers) {
 }
 
 /**
- * compte les likes de chacun des photographes issue de la page photographer.html
- * et update le nombre total de likes
+ * Count the likes of each photographer from the photographer.html page and update the total number of likes
  * @param {*}  
  * @returns totalLikes
  */
 export function compteLikesPagePhotographer() {
     let totalLikes = 0
-    //enregistre dans une liste (node list) les likes de chacune des photos
+    //Save the likes of each photo in a node list
     const likes = document.querySelectorAll(".likesPhotographer")
-    //on boucle sur la liste
+    //We loop through the list
     for (let like of likes) {
         const likeCoeur = like.querySelector("#likes")
-        //passage en entier du contenu de likeCoeur
+        //convert in number
         let likes = parseInt(likeCoeur.textContent)
         totalLikes += likes
     }
@@ -33,23 +32,23 @@ export function compteLikesPagePhotographer() {
 }
 
 export function incrementeLikes(premierEnfant,likesCount,likeCoeur) {
-     //initialise getLikeStorage si une valeur existe
+     //init getLikeStorage if a value exist
      const getLikeStorage = localStorage.getItem(
         `${premierEnfant.classList[0]}`
       );
       if (getLikeStorage === premierEnfant.classList[0]) {
-        //nothing , on a deja incremente le like de la photo
+        //nothing , because already increase 
       } else {
-        //alors on incremente le like
+        //increment
         likesCount++;
-        //on injecte la valeur dans l'objet HTML du contexte
+        //Inject the value into the HTML object within the context
         likeCoeur.textContent = likesCount;
-        //on appelle la fonction qui compte le nombre total de like de la page actuelle
+        //Call the function that counts the total number of likes on the current page
         let totalLikes = compteLikesPagePhotographer();
         const encartLike = document.querySelector(".encartLike span");
-        //on met à jour la nouvelle valeur
+        //update the new value
         encartLike.textContent = totalLikes;
-        //on enregistre dans le local storage le nom de sa classe (like clické)
+        //Save the name of its class (clicked like) in the local storage.
         localStorage.setItem(
           `${premierEnfant.classList[0]}`,
           premierEnfant.classList[0]

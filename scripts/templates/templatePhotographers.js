@@ -1,13 +1,19 @@
 /* eslint-disable no-unused-vars */
-function photographerHeader(data) {
 
+/**
+ * 
+ * @param {*} data ( or array photoGraphers)
+ * @returns 
+ */
+function photographerHeader(data) {
+console.log('data',data)
     const { name, id,city, country, tagline, portrait} = data;
     const picture = `../assets/Photographers/${portrait}`;
 
     //object to display
     function getUserCardDOM() {
 
-        //creation du noeud à inserer
+        //Creation of the node to be inserted
         const identity = document.createElement('article');
         identity.className = "identity"
         const h2 = document.createElement('h1');
@@ -25,9 +31,9 @@ function photographerHeader(data) {
         img.setAttribute("src", picture)
         img.setAttribute('alt', `Je m'appelle ${name}`)
 
-        return { identity: identity, picture: img }; // Retourne l'élément article et l'image
+        return { identity: identity, picture: img }; // Return the article element and the image
     }
 
-    //retourne l'objet java script
+    //Return the JavaScript object
     return {getUserCardDOM} 
 }
