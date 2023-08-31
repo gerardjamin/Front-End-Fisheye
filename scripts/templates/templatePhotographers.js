@@ -6,10 +6,6 @@
  * @returns object java script
  */
 function photographerHeader(data) {
-<<<<<<< HEAD
-=======
-
->>>>>>> ce9ba1911bb0d1cb0c31a11357613bc9b2be51a0
     const { name, id,city, country, tagline, portrait} = data;
     const picture = `../assets/Photographers/${portrait}`;
 
