@@ -6,6 +6,10 @@
  * @returns object java script
  */
 function photographerHeader(data) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> ce9ba1911bb0d1cb0c31a11357613bc9b2be51a0
     const { name, id,city, country, tagline, portrait} = data;
     const picture = `../assets/Photographers/${portrait}`;
 
@@ -15,7 +19,7 @@ function photographerHeader(data) {
         //Creation of the node to be inserted
         const identity = document.createElement('article');
         identity.className = "identity"
-        const h2 = document.createElement('h1');
+        const h2 = document.createElement('h2');
         h2.textContent = name;
         const h3 = document.createElement('h3');
         h3.textContent = `${city}, ${country}`;
@@ -28,7 +32,7 @@ function photographerHeader(data) {
 
         const img = document.createElement('img');
         img.setAttribute("src", picture)
-        img.setAttribute('alt', `Je m'appelle ${name}`)
+        img.setAttribute('alt', `photo de profil de ${name}`)
 
         return { identity: identity, picture: img }; // Return the article element and the image
     }
