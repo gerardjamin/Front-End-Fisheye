@@ -3,10 +3,9 @@
 /**
  * 
  * @param {*} data ( or array photoGraphers)
- * @returns 
+ * @returns object java script
  */
 function photographerHeader(data) {
-console.log('data',data)
     const { name, id,city, country, tagline, portrait} = data;
     const picture = `../assets/Photographers/${portrait}`;
 

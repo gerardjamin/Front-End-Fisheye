@@ -27,7 +27,7 @@ area.addEventListener("input", function () {
 
 /**
  * The first name must not be empty and should have at least 2 characters without any digits.
- * @returns valid
+ * @returns true or false
  */
 const checkSurname = () => {
     let valid = false
@@ -48,7 +48,7 @@ const checkSurname = () => {
 
 /**
  * The family name must not be empty and should have at least 2 characters without any digits.
- * @returns valid
+ * @returns true or false
  */
 const checkName = () => {
     let valid = false
@@ -69,7 +69,7 @@ const checkName = () => {
 
 /**
  * Using a regex to match the email format (e.g., const result = /^hello/.test(string))
- * @returns valid
+ * @returns true or false
  */
 const checkEmail = () => {
     let valid = false;
@@ -87,7 +87,7 @@ const checkEmail = () => {
 
 /**
  * Verify that the textarea is not empty.
- * @returns valid
+ * @returns true or false
  */
 const checkMessage = () => {
     let valid = false

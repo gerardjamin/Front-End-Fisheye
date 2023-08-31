@@ -2,7 +2,7 @@
 /**
  *
  * @param {*} filteredPhotographers : All the works of the selected photographer.
- * @returns Promise for the array of videos and images : URLs of each of the photos
+ * @returns Promise for the array of videos and images : URLs of each of the photos and video
  */
 function getTravauxPhotographers(filteredPhotographers) {
   let portfolioPicture = [];
@@ -219,36 +219,43 @@ function openLightbox(
     const elementRecherche = collection.namedItem("videoLightBox");
 
     if (elementRecherche !== null) {
-      console.log('L\'élément "videoLightBox" existe dans la collection.');
-      const videoLightBox = document.querySelector(".videoLightBox");
+      console.log('L\'élément "videoLightBox" existe dans la collection.')
+      const videoLightBox = document.querySelector(".videoLightBox")
       videoLightBox.remove();
-      const photoElement = document.createElement("img");
-      photoElement.setAttribute("name", "photoLightBox");
-      photoElement.classList.add("photoLightBox");
+      const photoElement = document.createElement("img")
+      photoElement.setAttribute("name", "photoLightBox")
+      photoElement.classList.add("photoLightBox")
       //Retrieving the source of the video in the context (photo object)
       photoElement.src = that;
-      modalLightBoxContent.appendChild(photoElement);
+      modalLightBoxContent.appendChild(photoElement)
     } else {
+      //not video tag
       console.log(
         "L'élément \"videoLightBox\" n'existe pas dans la collection."
       );
       const imageLightBox = document.querySelector(
         ".modalLightBox-content img"
       );
-      imageLightBox.setAttribute("src", that);
+      //give a new clicked source
+      imageLightBox.setAttribute("src", that)
     }
   } else {
-    //The phrase "img is present at the initialization of the web page
-    const photoLightBox = document.querySelector(".photoLightBox");
-    photoLightBox.remove();
-    const videoElement = document.createElement("video");
-    videoElement.setAttribute("name", "videoLightBox");
-    videoElement.classList.add("videoLightBox");
-    //retrieving the source of video into the context
-    videoElement.setAttribute("src", that);
-    videoElement.setAttribute("type", "mp4");
-    videoElement.setAttribute("controls", " ");
-    modalLightBoxContent.appendChild(videoElement);
+    const videoLightBox = document.querySelector(".videoLightBox")
+    if (videoLightBox !== null) {
+      //nothing to do , the tag video already exist
+    } else {
+      //The tag "img" is present at the initialization of the web page(the first time loaded page web)
+      const photoLightBox = document.querySelector(".photoLightBox")
+      photoLightBox.remove()
+      const videoElement = document.createElement("video")
+      videoElement.setAttribute("name", "videoLightBox")
+      videoElement.classList.add("videoLightBox")
+      //retrieving the source of video into the context
+      videoElement.setAttribute("src", that)
+      videoElement.setAttribute("type", "mp4")
+      videoElement.setAttribute("controls", " ")
+      modalLightBoxContent.appendChild(videoElement)
+    }
   }
   //display of image into the modal
   modalLightBox.classList.add("show");

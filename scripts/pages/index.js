@@ -3,7 +3,7 @@ import { getPhotographers} from '../api/api.js';
 /* eslint-disable no-undef */
 /**
  * display the index.html page
- * @param {*} dataPhographers: A table gathering all the article tags of the photographers on the index.html page
+ * @param {*} dataPhographers: A table gathering all the article tags of the photographers for the index.html page
  */
 function displayData(dataPhographers) {
     const photographersSection = document.querySelector(".photographer_section")

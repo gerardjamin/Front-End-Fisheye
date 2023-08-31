@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /**
- * Displaying the filtering box
+ * Displaying the sorting box
  */
 function showDropdown() {
   document.getElementById("myDropdown").classList.toggle("show");

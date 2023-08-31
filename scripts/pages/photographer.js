@@ -167,8 +167,8 @@ async function displayData(
     const modalLightBox = document.querySelector("#modalLightBox");
     const closeLightBox = document.querySelector("#closeLightBox");
     const modalLightBoxContent = document.querySelector(".modalLightBox-content");
-    const lightBoxSuivant = document.getElementById("lightBoxSuivant");
-    const lightBoxPrecedent = document.getElementById("lightBoxPrecedent");
+    // const lightBoxSuivant = document.getElementById("lightBoxSuivant");
+    // const lightBoxPrecedent = document.getElementById("lightBoxPrecedent");
 
     // Add an onClick() event on each of the photos or videos to open the lightbox
     // and manage accessibility.
@@ -196,21 +196,23 @@ async function displayData(
                     modalLightBoxContent,
                     that
                 )
-                //display image into the modale
+                //display image/video into the modale
                 modalLightBox.classList.add("show");
                 //managment accessibility
-                const videoLightBox = document.querySelector(".videoLightBox");
-                videoLightBox.focus();
+                const videoLightBox = document.querySelector(".videoLightBox")
+                if (videoLightBox !== null) {
+                    videoLightBox.focus()
+                }
             }
         })
     }
 
-    //Closing the modal of the lightbox by clicking the cross
+    //Closing the modalLightBox by clicking the cross
     closeLightBox.addEventListener("click", function () {
         modalLightBox.classList.remove("show");
     });
 
-    //Closing on click inside the lightbox modal.
+    //Closing on click inside the modalLightBox.
     modalLightBox.addEventListener("click", function () {
         modalLightBox.classList.remove("show");
     });
@@ -250,23 +252,25 @@ async function displayData(
             displayData(identity, picture, triePopularite, photographers);
         });
 
-    document.getElementById("date").addEventListener("click", function (event) {
-        // Prevent the default behavior of the link (navigation)
-        event.preventDefault();
-        cleanUp();
-        const trieDate = filtrage("date", filteredPhotographers);
-        // portfolio_section
-        displayData(identity, picture, trieDate, photographers);
-    });
+    document
+        .getElementById("date").addEventListener("click", function (event) {
+            // Prevent the default behavior of the link (navigation)
+            event.preventDefault();
+            cleanUp();
+            const trieDate = filtrage("date", filteredPhotographers);
+            // portfolio_section
+            displayData(identity, picture, trieDate, photographers);
+        });
 
-    document.getElementById("titre").addEventListener("click", function (event) {
-        // Prevent the default behavior of the link (navigation)
-        event.preventDefault();
-        cleanUp();
-        const trieTitre = filtrage("titre", filteredPhotographers);
-        // portfolio_section
-        displayData(identity, picture, trieTitre, photographers);
-    });
+    document
+        .getElementById("titre").addEventListener("click", function (event) {
+            // Prevent the default behavior of the link (navigation)
+            event.preventDefault();
+            cleanUp();
+            const trieTitre = filtrage("titre", filteredPhotographers);
+            // portfolio_section
+            displayData(identity, picture, trieTitre, photographers);
+        });
 } //here, the page is loaded
 
 window.addEventListener("load", function () {
