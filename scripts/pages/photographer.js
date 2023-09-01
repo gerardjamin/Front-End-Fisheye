@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-debugger */
-import { getPhotographers } from "../api/api.js";
+import { getPhotographers } from "../api/api.js"
 import {
     compteLikesPhotographer,
     compteLikesPagePhotographer,
     incrementeLikes
-} from "../utils/likes.js";
-import { filtrage } from "../utils/sortFiltered.js";
+} from "../utils/likes.js"
+import { filtrage } from "../utils/sortFiltered.js"
 
 
 /* eslint-disable no-undef */
@@ -26,61 +26,61 @@ async function displayData(
     photographers
 ) {
     //identity part
-    const photographersHeader = document.querySelector(".photograph-header");
-    photographersHeader.appendChild(identity);
-    photographersHeader.appendChild(picture);
+    const photographersHeader = document.querySelector(".photograph-header")
+    photographersHeader.appendChild(identity)
+    photographersHeader.appendChild(picture)
     //node parent
-    const photographersSection = document.querySelector(".photograph-header");
+    const photographersSection = document.querySelector(".photograph-header")
     //first child
-    const child = document.querySelector(".openButton");
-    photographersSection.insertBefore(identity, child);
+    const child = document.querySelector(".openButton")
+    photographersSection.insertBefore(identity, child)
     //init of number TAB
-    let tabIndex = 7;
+    let tabIndex = 7
 
     //**************************************PORTFOLIO MANAGMENT SECTION(GALERY)********************************
     for (const objet of filteredPhotographers) {
         const { id, photographerId, title, image, video, likes, date, price } =
-            objet;
+            objet
 
-        const portfolioPicture = `../assets/portofolio/${image}`;
-        const portfolioVideo = `../assets/portofolio/${video}`;
+        const portfolioPicture = `../assets/portofolio/${image}`
+        const portfolioVideo = `../assets/portofolio/${video}`
 
-        const portofolioSection = document.querySelector(".portfolio_section");
-        const article = document.createElement("article");
-        const container = document.createElement("div");
+        const portofolioSection = document.querySelector(".portfolio_section")
+        const article = document.createElement("article")
+        const container = document.createElement("div")
         //Title Section for Images and Videos
-        const p = document.createElement("p");
-        p.textContent = `${title}`;
-        tabIndex++;
+        const p = document.createElement("p")
+        p.textContent = `${title}`
+        tabIndex++
         if (image) {
             //part image
-            const imgElement = document.createElement("img");
+            const imgElement = document.createElement("img")
             //Management accessibility
-            imgElement.setAttribute("tabindex", `${tabIndex}`);
-            imgElement.setAttribute("role","link")
-            imgElement.classList.add("photo");
-            imgElement.setAttribute("src", portfolioPicture);
-            imgElement.setAttribute("alt", `${title}`);
+            imgElement.setAttribute("tabindex", `${tabIndex}`)
+            imgElement.setAttribute("role", "link")
+            imgElement.classList.add("photo")
+            imgElement.setAttribute("src", portfolioPicture)
+            imgElement.setAttribute("alt", `${title}`)
             //I am filling the article with the image
-            article.appendChild(imgElement);
+            article.appendChild(imgElement)
         } else if (video) {
             //part video
-            const videoElement = document.createElement("video");
-            videoElement.classList.add("video");
+            const videoElement = document.createElement("video")
+            videoElement.classList.add("video")
             //Management accessibility
-            videoElement.setAttribute("tabindex", `${tabIndex}`);
-            videoElement.setAttribute("src", portfolioVideo);
-            videoElement.setAttribute("type", "mp4");
+            videoElement.setAttribute("tabindex", `${tabIndex}`)
+            videoElement.setAttribute("src", portfolioVideo)
+            videoElement.setAttribute("type", "mp4")
             //videoElement.setAttribute("controls", ' ')
-            article.appendChild(videoElement);
+            article.appendChild(videoElement)
         }
 
         //*************************************************INCREMENT LIKES MANAGEMENT IN HTML SECTION************************************
         //heart
-        const div = document.createElement("div");
+        const div = document.createElement("div")
         div.classList.add("likesPhotographer");
-        div.setAttribute("id", "likesPhotographer");
-        div.setAttribute("tabindex", `${tabIndex}`);
+        div.setAttribute("id", "likesPhotographer")
+        div.setAttribute("tabindex", `${tabIndex}`)
         //Customization of the Like (id)
         div.innerHTML = `<span class="like-${id}" id="likes" role="button" aria-label="bouton j'aime">${likes}</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="21" height="24" viewBox="0 0 21 24" fill="none">
@@ -93,26 +93,26 @@ async function displayData(
                         </clipPath>
                     </defs>
                 </svg> `;
-        container.appendChild(p);
-        container.appendChild(div);
-        article.appendChild(container);
-        portofolioSection.appendChild(article);
+        container.appendChild(p)
+        container.appendChild(div)
+        article.appendChild(container)
+        portofolioSection.appendChild(article)
     }
     //**************************************************************MANAGMENT ENCART OF THE PAGE*********************************
-    const encart = document.getElementById("encart");
-    const { photographerId } = filteredPhotographers[0];
+    const encart = document.getElementById("encart")
+    const { photographerId } = filteredPhotographers[0]
 
     //To retrieve the hourly rate of each photographer.
     function recupererProprieteAssociee(photographers, photographerId) {
         for (const objet of photographers) {
             if (objet.id === parseInt(photographerId)) {
-                return objet.price;
+                return objet.price
             }
         }
         return null; // If the sought value is not found
     }
 
-    const priceHour = recupererProprieteAssociee(photographers, photographerId);
+    const priceHour = recupererProprieteAssociee(photographers, photographerId)
     //Counting the likes for all the works of the photographer retrieved from the JSON file
     const totalLikes = compteLikesPhotographer(filteredPhotographers)
     const div = document.createElement("div")
@@ -134,7 +134,7 @@ async function displayData(
 
     //*********************************************LIKES INCREMENT MANAGMENT********************************************* */
     //Store the likes of each photo in a NodeList
-    const likesPhoto = document.querySelectorAll(".likesPhotographer");
+    const likesPhoto = document.querySelectorAll(".likesPhotographer")
     //We loop through this NodeList, waiting for an event
     for (let like of likesPhoto) {
         //Record the class of the first child node
@@ -161,13 +161,13 @@ async function displayData(
     //Section that enables opening the lightbox when clicking on the image or video element
     // To retrieve the array of image and video elements.
 
-    const myImage = document.getElementsByClassName("photo");
-    const myVideo = document.getElementsByClassName("video");
+    const myImage = document.getElementsByClassName("photo")
+    const myVideo = document.getElementsByClassName("video")
     // Using the spread operator (...) to concatenate.
-    const concatenatedArray = [...myImage, ...myVideo];
-    const modalLightBox = document.querySelector("#modalLightBox");
-    const closeLightBox = document.querySelector("#closeLightBox");
-    const modalLightBoxContent = document.querySelector(".modalLightBox-content");
+    const concatenatedArray = [...myImage, ...myVideo]
+    const modalLightBox = document.querySelector("#modalLightBox")
+    const closeLightBox = document.querySelector("#closeLightBox")
+    const modalLightBoxContent = document.querySelector(".modalLightBox-content")
     // const lightBoxSuivant = document.getElementById("lightBoxSuivant");
     // const lightBoxPrecedent = document.getElementById("lightBoxPrecedent");
 
@@ -177,6 +177,9 @@ async function displayData(
         photo.addEventListener("click", function () {
             //record the context
             let that = this.src;
+            // Add class "overlay" to element of main content
+            const main = document.getElementById('main')
+            main.classList.add('overlay')
             openLightbox(
                 modalLightBox,
                 filteredPhotographers,
@@ -210,19 +213,28 @@ async function displayData(
 
     //Closing the modalLightBox by clicking the cross
     closeLightBox.addEventListener("click", function () {
-        modalLightBox.classList.remove("show");
+        modalLightBox.classList.remove("show")
+        // remove class "overlay" 
+        const main = document.getElementById('main')
+        main.classList.remove('overlay')
     });
 
     //Closing on click inside the modalLightBox.
     modalLightBox.addEventListener("click", function () {
-        modalLightBox.classList.remove("show");
+        modalLightBox.classList.remove("show")
+        // remove class "overlay" 
+        const main = document.getElementById('main')
+        main.classList.remove('overlay')
     });
 
     // Closing the modal modalLightBox with the escape key on the keyboard.
     window.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && modalLightBox.classList.contains("show")) {
             e.preventDefault();
-            modalLightBox.classList.remove("show");
+            modalLightBox.classList.remove("show")
+            // remove class "overlay" 
+            const main = document.getElementById('main')
+            main.classList.remove('overlay')
         }
     });
     //*********************************DROPDOWN SORTING MANAGMENT********************************************************** */
@@ -248,9 +260,9 @@ async function displayData(
             // Prevent the default behavior of the link (navigation)
             event.preventDefault();
             cleanUp();
-            const triePopularite = filtrage("like", filteredPhotographers);
+            const triePopularite = filtrage("like", filteredPhotographers)
             // portfolio_section
-            displayData(identity, picture, triePopularite, photographers);
+            displayData(identity, picture, triePopularite, photographers)
         });
 
     document
@@ -258,9 +270,9 @@ async function displayData(
             // Prevent the default behavior of the link (navigation)
             event.preventDefault();
             cleanUp();
-            const trieDate = filtrage("date", filteredPhotographers);
+            const trieDate = filtrage("date", filteredPhotographers)
             // portfolio_section
-            displayData(identity, picture, trieDate, photographers);
+            displayData(identity, picture, trieDate, photographers)
         });
 
     document
@@ -268,46 +280,46 @@ async function displayData(
             // Prevent the default behavior of the link (navigation)
             event.preventDefault();
             cleanUp();
-            const trieTitre = filtrage("titre", filteredPhotographers);
+            const trieTitre = filtrage("titre", filteredPhotographers)
             // portfolio_section
-            displayData(identity, picture, trieTitre, photographers);
+            displayData(identity, picture, trieTitre, photographers)
         });
 } //here, the page is loaded
 
 window.addEventListener("load", function () {
-    console.log("La page est entièrement chargée.");
+    console.log("La page est entièrement chargée.")
 });
 
 async function init() {
     //Remove the 'like' variable from local storage
-    localStorage.clear();
+    localStorage.clear()
     // Get the parameters from the URL
-    const urlParams = new URLSearchParams(window.location.search);
+    const urlParams = new URLSearchParams(window.location.search)
     // Retrieve the value of the 'id' variable from the URL
-    const valeurId = urlParams.get("id");
-    //destructuration
-    const { photographers } = await getPhotographers();
-    const { media } = await getPhotographers();
+    const valeurId = urlParams.get("id")
+    //destructuration part media and photographers
+    const { photographers } = await getPhotographers()
+    const { media } = await getPhotographers()
     //Retrieving the index of the array corresponding to the photographer's ID.
     const trouverIndexParPropriete = (photographers, id, valeurId) => {
         const indexTrouve = photographers.findIndex(
             (objet) => objet[id] === parseInt(valeurId)
         );
-        return indexTrouve;
+        return indexTrouve
     };
-    const indexTrouve = trouverIndexParPropriete(photographers, "id", valeurId);
-    const data = photographers[indexTrouve];
+    const indexTrouve = trouverIndexParPropriete(photographers, "id", valeurId)
+    const data = photographers[indexTrouve]
     const { identity, picture, filteredPhotographers } = await factoryObject(
         data,
         "identity",
         valeurId,
         media
-    );
+    )
 
     //********************PHOTOGRAPHER'S PORTFOLIO DISPLAY MANAGMENT**************************************************
-    await displayData(identity, picture, filteredPhotographers, photographers);
+    await displayData(identity, picture, filteredPhotographers, photographers)
     /**************************************************************************************************************** */
 }
 
 //enter point into the file
-init();
+init()

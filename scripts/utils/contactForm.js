@@ -177,6 +177,9 @@ const inputPrenom = document.getElementById('prenom')
  * setTimeout to wait for the element to receive focus.
  */
 function closeModal() {
+    // remove class "overlay" 
+    const main = document.getElementById('main')
+    main.classList.remove('overlay')
     modal.style.display = "none";
     header.setAttribute('aria-hidden', 'false')
     main.setAttribute('aria-hidden', 'false')
@@ -188,6 +191,10 @@ function closeModal() {
 }
 
 function openModal() {
+    // Add class "overlay" to element of main content
+    const main = document.getElementById('main')
+    main.classList.add('overlay')
+
     modal.style.display = "block";
     header.setAttribute('aria-hidden', 'true')
     main.setAttribute('aria-hidden', 'true')

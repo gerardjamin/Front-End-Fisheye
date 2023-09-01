@@ -41,8 +41,6 @@ Ce site est accessible et dynamique
 - debut de projet: 02/08/2023
 
 
-
-
 ## Used By
 
 This project is used by the following users:
