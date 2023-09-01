@@ -17,7 +17,7 @@ function displayData(dataPhographers) {
  * 
  */
 async function init() {
-    // Retrieve photographer data (object destructuring)
+    // Retrieve photographer data (object destructuring part photographers)
     const { photographers } = await getPhotographers();
     //programmation asynchrone => await
     const objetsPhotographer = await factoryObject(photographers, 'photographers')
