@@ -50,7 +50,7 @@ function calculeIndex(filteredPhotographers, src) {
   //Here, we retrieve the URL of the clicked photo
   const chemin = src;
   const partiesDuChemin = chemin.split("/");
-  let name = partiesDuChemin[partiesDuChemin.length - 1];
+  let name = partiesDuChemin[partiesDuChemin.length - 1]
   //We are looking for the index of the clicked photo in the sourcePhoto array.
   let index = urlDePhotos.findIndex((imageIndex) => imageIndex === name);
 
@@ -129,8 +129,10 @@ function openLightbox(
   modalLightBox,
   filteredPhotographers,
   modalLightBoxContent,
-  that
+  that,
+  name
 ) {
+
   //Retrieval of the index of the clicked element and the array of photos
   let reponse = calculeIndex(filteredPhotographers, that);
   let index = reponse.index;
@@ -153,8 +155,26 @@ function openLightbox(
     }
     //************************I switch to the sourcePhoto array to display the photos.
     //URL of the clicked photo.
+
+    console.log(reponse.sourcePhoto)
     const url = reponse.sourcePhoto[index];
-    console.log("url", url);
+
+    //add the name's photo under photo
+    const partiesDuChemin = url.split("/");
+    let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
+    const name = wholeName.replace(/\.jpg$/, '')
+    //remove legend class if exist
+    const legend = document.querySelector('.legende');
+    if (legend) {
+      legend.remove(); // Supprime l'élément s'il existe
+    }
+
+    //Title Section for Images and Videos
+    const text = document.createElement("p")
+    text.style.color = "white"
+    text.textContent = name
+    text.classList.add('legende')
+    modalLightBoxContent.appendChild(text)
     //Call the display function
     displayNexPrev(url, getExtensionFromUrl(url), reponse, index);
   });
@@ -174,6 +194,22 @@ function openLightbox(
     //************************I switch to the sourcePhoto array to display the photos.
     //URL of the clicked photo.
     const url = reponse.sourcePhoto[index];
+
+
+    const partiesDuChemin = url.split("/");
+    let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
+    const name = wholeName.replace(/\.jpg$/, '')
+    //remove legend class if exist
+    const legend = document.querySelector('.legende');
+    if (legend) {
+      legend.remove(); // Supprime l'élément s'il existe
+    }
+    //  //Title Section for Images and Videos
+    const text = document.createElement("p")
+    text.style.color = "white"
+    text.textContent = name
+    text.classList.add('legende')
+    modalLightBoxContent.appendChild(text)
     //Call the display function
     displayNexPrev(url, getExtensionFromUrl(url), reponse, index);
   });
@@ -210,7 +246,8 @@ function openLightbox(
     }
   });
 
-  //*********************************ZOOM MANAGMENT FOR PHOTO/VIDEO ON CLICK SECTION**************************************************
+  //***************ZOOM MANAGMENT FOR PHOTO/VIDEO ON CLICK SECTION (closeUp view)***********
+
   let extension = getExtensionFromUrl(that);
   if (extension === "jpg") {
     // We obtain the reference to the HTML collection
@@ -227,15 +264,59 @@ function openLightbox(
       photoElement.classList.add("photoLightBox")
       //Retrieving the source of the video in the context (photo object)
       photoElement.src = that;
+
+      const partiesDuChemin = that.split("/");
+      let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
+      const name = wholeName.replace(/\.jpg$/, '')
+      //remove legend class if exist
+      const legend = document.querySelector('.legende');
+
+      if (legend) {
+        legend.remove(); // Supprime l'élément s'il existe
+      }
+      //  //Title Section for Images and Videos
+      const text = document.createElement("p")
+      text.style.color = "white"
+      text.textContent = name
+      text.classList.add('legende')
+      modalLightBoxContent.appendChild(text)
+
+
+
       modalLightBoxContent.appendChild(photoElement)
     } else {
       //not video tag
       console.log(
         "L'élément \"videoLightBox\" n'existe pas dans la collection."
       );
+
       const imageLightBox = document.querySelector(
         ".modalLightBox-content img"
       );
+
+
+
+      const partiesDuChemin = that.split("/");
+      let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
+      const name = wholeName.replace(/\.jpg$/, '')
+      console.log(name)
+      //remove legend class if exist
+      const legend = document.querySelector('.legende');
+
+      if (legend) {
+        legend.remove(); // Supprime l'élément s'il existe
+      }
+      //  //Title Section for Images and Videos
+      const text = document.createElement("p")
+      text.style.color = "white"
+      text.textContent = name
+      text.classList.add('legende')
+      modalLightBoxContent.appendChild(text)
+
+
+
+
+
       //give a new clicked source
       imageLightBox.setAttribute("src", that)
     }

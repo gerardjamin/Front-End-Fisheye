@@ -2,18 +2,18 @@
 <html lang="fr">
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="css/style.css" rel="stylesheet" type="text/css" />
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="assets/favicon.png" />
-  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
   <title>Fisheye - photographe</title>
 </head>
 
 <body>
   <header id="head">
-    <a href="index.html" tabindex="1">
-      <img src="assets/images/logo.png" class="logo" alt="logo fisheye home page" title="retour à la page d'accueil" />
+    <a id="homePage" href="index.html" tabindex="1">
+      <img src="assets/images/logo.png" class="logo" alt="logo fisheye home page" title="retour à la page d'accueil">
     </a>
   </header>
   <main id="main" aria-hidden="false">
@@ -24,7 +24,7 @@
       </button>
     </div>
     <!-- MANAGMENT OF DROPDOWN -->
-    <div class="dropdown" role="trieBox">
+    <div class="dropdown">
       <span>Trier par</span>
       <button id="dropComment" onclick="showDropdown()" class="dropbtn" tabindex="3" aria-label="trieBox"
         aria-expanded="false">
@@ -39,38 +39,39 @@
           title="cliquer pour trier les photos par titre">Titre</a>
       </div>
     </div>
-    <section class="portfolio_section"></section>
+    <section class="portfolio_section">
+      <!-- in order to keep semantic structure -->
+      <h2 class="visually-hidden">Portfolio</h2>
+    </section>
   </main>
-  <div id="contact_modal" aria-hidden="true" role="contact avec le photographe" aria-describedby="contactez-moi"
-    aria-modal="" true>
+  <div id="contact_modal" aria-hidden="true" aria-describedby="openButton">
     <div class="modal" id="modal">
       <header>
         <h2>Contactez-moi</h2>
         <!-- close cross" -->
-        <button class="closeButton" id="closeButton" onclick="closeModal()"
-          aria-label="fermeture de la modale de contact" tabindex="23">
-          <img src="assets/icons/close.svg" alt="fermeture de la modale de contact" />
+        <button class="closeButton" id="closeButton" onclick="closeModal()" aria-label="fermeture de la modale de contact" tabindex="23">
+          <img src="assets/icons/close.svg" alt="fermeture de la modale de contact">
         </button>
       </header>
 
       <form id="signUp" name="formulaire">
         <div class="formField">
-          <label label for="prenom" aria-label="entrez votre prenom">Prénom</label>
-          <input type="text" id="prenom" name="prenom" />
+          <label for="prenom" aria-label="entrez votre prenom">Prénom</label>
+          <input type="text" id="prenom" name="prenom">
           <small></small>
         </div>
         <div class="formField">
-          <label label for="nom" aria-label="entrez votre nom">Nom</label>
-          <input type="text" id="nom" name="nom" />
+          <label for="nom" aria-label="entrez votre nom">Nom</label>
+          <input type="text" id="nom" name="nom">
           <small></small>
         </div>
         <div class="formField">
-          <label label for="email" aria-label="entrez votre Email">Email</label>
-          <input type="email" id="email" name="email" />
+          <label for="email" aria-label="entrez votre Email">Email</label>
+          <input type="email" id="email" name="email">
           <small></small>
         </div>
         <div class="formField">
-          <label label for="message" aria-label="entrez votre message">Votre message</label>
+          <label for="message" aria-label="entrez votre message">Votre message</label>
           <textarea name="message" id="message"></textarea>
           <small></small>
         </div>
@@ -90,11 +91,18 @@
     <span id="closeLightBox" class="closeLightBox">&times;</span>
     <div class="modalLightBox-content">
       <!-- href will give in java script -->
-      <img class="photoLightBox" alt="photoLightBox" name="photoLightBox" src="" />
+      <img class="photoLightBox" alt="photoLightBox" src="#">
       <!-- <video src=""></video> -->
     </div>
   </div>
-  </div>
+
+  <p>
+    <a href="http://jigsaw.w3.org/css-validator/check/referer">
+        <img style="border:0;width:88px;height:31px"
+            src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+            alt="CSS Valide !" />
+        </a>
+    </p>
 
   <script src=" /scripts/templates/templatePhotographers.js"></script>
   <script type="module" src="/scripts/pages/photographer.js"></script>

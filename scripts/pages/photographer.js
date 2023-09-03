@@ -175,8 +175,13 @@ async function displayData(
     // and manage accessibility.
     for (let photo of concatenatedArray) {
         photo.addEventListener("click", function () {
+
             //record the context
             let that = this.src;
+            //Retrieve the name's picture
+            const partiesDuChemin = that.split("/");
+            let name = partiesDuChemin[partiesDuChemin.length - 1];
+           
             // Add class "overlay" to element of main content
             const main = document.getElementById('main')
             main.classList.add('overlay')
@@ -184,7 +189,8 @@ async function displayData(
                 modalLightBox,
                 filteredPhotographers,
                 modalLightBoxContent,
-                that
+                that,
+                name
             )
             //display image into the modale
             modalLightBox.classList.add("show");
@@ -285,6 +291,14 @@ async function displayData(
             displayData(identity, picture, trieTitre, photographers)
         });
 } //here, the page is loaded
+
+window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+        e.preventDefault();
+        const home = document.getElementById('homePage');
+        home.focus();
+    }
+});
 
 window.addEventListener("load", function () {
     console.log("La page est entièrement chargée.")

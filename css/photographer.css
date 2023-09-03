@@ -346,6 +346,17 @@ textarea {
   opacity:0.4; 
 }
 
+/* avoid to display H2 into the section */
+.visually-hidden {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
 
 
 
