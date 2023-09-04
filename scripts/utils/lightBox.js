@@ -169,7 +169,7 @@ function openLightbox(
 
     //Title Section for Images and Videos
     const text = document.createElement("p")
-    text.style.color = "#901C1C"
+    text.style.color = "white"
     text.textContent = name
     text.classList.add('legende')
     modalLightBoxContent.appendChild(text)
