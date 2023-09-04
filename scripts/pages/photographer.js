@@ -34,8 +34,8 @@ async function displayData(
         const { id, photographerId, title, image, video, likes, date, price } =
             objet
 
-        const portfolioPicture = `../assets/portofolio/${image}`
-        const portfolioVideo = `../assets/portofolio/${video}`
+        const portfolioPicture = `assets/portofolio/${image}`
+        const portfolioVideo = `assets/portofolio/${video}`
 
         const portofolioSection = document.querySelector(".portfolio_section")
         const article = document.createElement("article")
