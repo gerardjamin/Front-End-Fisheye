@@ -14,11 +14,11 @@ function getTravauxPhotographers(filteredPhotographers) {
       objet;
     //Array containing the photos
     if (image !== undefined) {
-      portfolioPicture.push(`../assets/portofolio/${image}`);
+      portfolioPicture.push(`assets/portofolio/${image}`);
     }
     //Array containing the videos
     if (video !== undefined) {
-      portfolioVideo.push(`../assets/portofolio/${video}`);
+      portfolioVideo.push(`assets/portofolio/${video}`);
     }
   }
   //Array gathering all the images and videos of the photographer
