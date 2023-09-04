@@ -173,7 +173,7 @@ async function displayData(
             //Retrieve the name's picture
             const partiesDuChemin = that.split("/");
             let name = partiesDuChemin[partiesDuChemin.length - 1];
-           
+
             // Add class "overlay" to element main content that darkened the background
             const main = document.getElementById('main')
             main.classList.add('overlay')

@@ -341,22 +341,6 @@ function openLightbox(
     const videoLightBox = document.querySelector(".videoLightBox");
     if (videoLightBox !== null) {
       //nothing to do , the tag video already exist
-
-      // const partiesDuChemin = that.split("/");
-      // let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
-      // const name = wholeName.replace(/\.jpg$/, "");
-      // //remove legend class if exist
-      // const legend = document.querySelector(".legende");
-
-      // if (legend) {
-      //   legend.remove(); // Supprime l'élément s'il existe
-      // }
-      // //  //Title Section for Images and Videos
-      // const text = document.createElement("p");
-      // text.style.color = "white";
-      // text.textContent = name;
-      // text.classList.add("legende");
-      // modalLightBoxContent.appendChild(text);
     } else {
       //The tag "img" is present at the initialization of the web page(the first time loaded page web)
       const photoLightBox = document.querySelector(".photoLightBox")
