@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-export function filtrage(type, filteredPhotographers) {
+function filtrage(type, filteredPhotographers) {
 
     //Filter the table by decreasing popularity.
     if (type === "like") {

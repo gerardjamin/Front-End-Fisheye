@@ -4,7 +4,7 @@
  * @param {*} filteredPhotographers 
  * @returns 
  */
-export function compteLikesPhotographer(filteredPhotographers) {
+function compteLikesPhotographer(filteredPhotographers) {
     let totalLikes = 0
     for (const objet of filteredPhotographers) {
         totalLikes += parseInt(objet.likes)
@@ -17,7 +17,7 @@ export function compteLikesPhotographer(filteredPhotographers) {
  * @param {*}  
  * @returns totalLikes
  */
-export function compteLikesPagePhotographer() {
+function compteLikesPagePhotographer() {
     let totalLikes = 0
     //Save the likes of each photo in a node list
     const likes = document.querySelectorAll(".likesPhotographer")
@@ -31,7 +31,7 @@ export function compteLikesPagePhotographer() {
     return totalLikes
 }
 
-export function incrementeLikes(premierEnfant,likesCount,likeCoeur) {
+function incrementeLikes(premierEnfant,likesCount,likeCoeur) {
      //init getLikeStorage if a value exist
      const getLikeStorage = localStorage.getItem(
         `${premierEnfant.classList[0]}`

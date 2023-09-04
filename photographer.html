@@ -1,115 +1,179 @@
 <!DOCTYPE html>
 <html lang="fr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <title>Fisheye - photographe</title>
+  </head>
 
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="css/style.css" rel="stylesheet" type="text/css">
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="assets/favicon.png">
-  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-  <title>Fisheye - photographe</title>
-</head>
+  <body>
+    <header id="head">
+      <a id="homePage" href="index.html" tabindex="1">
+        <img
+          src="assets/images/logo.png"
+          class="logo"
+          alt="logo fisheye home page"
+          title="retour à la page d'accueil"
+        />
+      </a>
+    </header>
+    <main id="main" aria-hidden="false">
+      <div class="photograph-header">
+        <button
+          tabindex="2"
+          id="openButton"
+          class="openButton"
+          aria-label="ouverture de la modale de contact "
+          onclick="openModal()"
+        >
+          Contactez-moi
+        </button>
+      </div>
+      <!-- MANAGMENT OF DROPDOWN -->
+      <div class="dropdown">
+        <span>Trier par</span>
+        <button
+          id="dropComment"
+          onclick="showDropdown()"
+          class="dropbtn"
+          tabindex="3"
+          aria-label="trieBox"
+          aria-expanded="false"
+        >
+          Click
+        </button>
+        <div id="myDropdown" class="dropdown-content" aria-hidden="true">
+          <a
+            tabindex="4"
+            id="popularite"
+            href="#"
+            onclick="changeText('Popularité')"
+            title="cliquer pour trier les photos par popularité"
+            >Popularité</a
+          >
+          <a
+            tabindex="5"
+            id="date"
+            href="#"
+            onclick="changeText('Date')"
+            title="cliquer pour trier les photos par date"
+            >Date</a
+          >
+          <a
+            tabindex="6"
+            id="titre"
+            href="#"
+            onclick="changeText('Titre')"
+            title="cliquer pour trier les photos par titre"
+            >Titre</a
+          >
+        </div>
+      </div>
+      <section class="portfolio_section">
+        <!-- in order to keep semantic structure -->
+        <h2 class="visually-hidden">Portfolio</h2>
+      </section>
+    </main>
+    <div id="contact_modal" aria-hidden="true" aria-describedby="openButton">
+      <div class="modal" id="modal">
+        <header>
+          <h2>Contactez-moi</h2>
+          <!-- close cross" -->
+          <button
+            class="closeButton"
+            id="closeButton"
+            onclick="closeModal()"
+            aria-label="fermeture de la modale de contact"
+            tabindex="23"
+          >
+            <img
+              src="assets/icons/close.svg"
+              alt="fermeture de la modale de contact"
+            />
+          </button>
+        </header>
 
-<body>
-  <header id="head">
-    <a id="homePage" href="index.html" tabindex="1">
-      <img src="assets/images/logo.png" class="logo" alt="logo fisheye home page" title="retour à la page d'accueil">
-    </a>
-  </header>
-  <main id="main" aria-hidden="false">
-    <div class="photograph-header">
-      <button tabindex="2" id="openButton" class="openButton" aria-label="ouverture de la modale de contact "
-        onclick="openModal()">
-        Contactez-moi
-      </button>
-    </div>
-    <!-- MANAGMENT OF DROPDOWN -->
-    <div class="dropdown">
-      <span>Trier par</span>
-      <button id="dropComment" onclick="showDropdown()" class="dropbtn" tabindex="3" aria-label="trieBox"
-        aria-expanded="false">
-        Click
-      </button>
-      <div id="myDropdown" class="dropdown-content" aria-hidden="true">
-        <a tabindex="4" id="popularite" href="#" onclick="changeText('Popularité')"
-          title="cliquer pour trier les photos par popularité">Popularité</a>
-        <a tabindex="5" id="date" href="#" onclick="changeText('Date')"
-          title="cliquer pour trier les photos par date">Date</a>
-        <a tabindex="6" id="titre" href="#" onclick="changeText('Titre')"
-          title="cliquer pour trier les photos par titre">Titre</a>
+        <form id="signUp" name="formulaire">
+          <div class="formField">
+            <label for="prenom" aria-label="entrez votre prenom">Prénom</label>
+            <input type="text" id="prenom" name="prenom" />
+            <small></small>
+          </div>
+          <div class="formField">
+            <label for="nom" aria-label="entrez votre nom">Nom</label>
+            <input type="text" id="nom" name="nom" />
+            <small></small>
+          </div>
+          <div class="formField">
+            <label for="email" aria-label="entrez votre Email">Email</label>
+            <input type="email" id="email" name="email" />
+            <small></small>
+          </div>
+          <div class="formField">
+            <label for="message" aria-label="entrez votre message"
+              >Votre message</label
+            >
+            <textarea name="message" id="message"></textarea>
+            <small></small>
+          </div>
+          <button
+            class="submitButton"
+            type="submit"
+            aria-label="validez votre formulaire"
+          >
+            Envoyer
+          </button>
+        </form>
       </div>
     </div>
-    <section class="portfolio_section">
-      <!-- in order to keep semantic structure -->
-      <h2 class="visually-hidden">Portfolio</h2>
-    </section>
-  </main>
-  <div id="contact_modal" aria-hidden="true" aria-describedby="openButton">
-    <div class="modal" id="modal">
-      <header>
-        <h2>Contactez-moi</h2>
-        <!-- close cross" -->
-        <button class="closeButton" id="closeButton" onclick="closeModal()" aria-label="fermeture de la modale de contact" tabindex="23">
-          <img src="assets/icons/close.svg" alt="fermeture de la modale de contact">
-        </button>
-      </header>
+    <div id="encart" class="bottom-right-encart" aria-hidden="false"></div>
+    <!-- modale  -->
+    <div id="modalLightBox" class="modalLightBox">
+      <button
+        id="lightBoxPrecedent"
+        class="lightBoxPrecedent"
+        aria-label="photo precedente"
+      ></button>
+      <button
+        id="lightBoxSuivant"
+        class="lightBoxSuivant"
+        aria-label="photo suivante"
+      ></button>
 
-      <form id="signUp" name="formulaire">
-        <div class="formField">
-          <label for="prenom" aria-label="entrez votre prenom">Prénom</label>
-          <input type="text" id="prenom" name="prenom">
-          <small></small>
-        </div>
-        <div class="formField">
-          <label for="nom" aria-label="entrez votre nom">Nom</label>
-          <input type="text" id="nom" name="nom">
-          <small></small>
-        </div>
-        <div class="formField">
-          <label for="email" aria-label="entrez votre Email">Email</label>
-          <input type="email" id="email" name="email">
-          <small></small>
-        </div>
-        <div class="formField">
-          <label for="message" aria-label="entrez votre message">Votre message</label>
-          <textarea name="message" id="message"></textarea>
-          <small></small>
-        </div>
-        <button class="submitButton" type="submit" aria-label="validez votre formulaire">
-          Envoyer
-        </button>
-      </form>
+      <!-- close cross lightbox -->
+      <span id="closeLightBox" class="closeLightBox">&times;</span>
+      <div class="modalLightBox-content">
+        <!-- href will give in java script -->
+        <img class="photoLightBox" alt="photoLightBox" src="#" />
+        <!-- <video src=""></video> -->
+      </div>
     </div>
-  </div>
-  <div id="encart" class="bottom-right-encart" aria-hidden="false"></div>
-  <!-- modale  -->
-  <div id="modalLightBox" class="modalLightBox">
-    <button id="lightBoxPrecedent" class="lightBoxPrecedent" aria-label="photo precedente"></button>
-    <button id="lightBoxSuivant" class="lightBoxSuivant" aria-label="photo suivante"></button>
 
-    <!-- close cross lightbox -->
-    <span id="closeLightBox" class="closeLightBox">&times;</span>
-    <div class="modalLightBox-content">
-      <!-- href will give in java script -->
-      <img class="photoLightBox" alt="photoLightBox" src="#">
-      <!-- <video src=""></video> -->
-    </div>
-  </div>
-
-  <p>
-    <a href="http://jigsaw.w3.org/css-validator/check/referer">
-        <img style="border:0;width:88px;height:31px"
-            src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
-            alt="CSS Valide !" />
-        </a>
+    <p>
+      <a href="http://jigsaw.w3.org/css-validator/check/referer">
+        <img
+          style="border: 0; width: 88px; height: 31px"
+          src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+          alt="CSS Valide !"
+        />
+      </a>
     </p>
 
-  <script src="scripts/templates/templatePhotographers.js"></script>
-  <script src="scripts/pages/photographer.js"></script>
-  <script src="scripts/utils/contactForm.js"></script>
-  <script src="scripts/factories/factoryPhotographers.js"></script>
-  <script src="scripts/utils/lightBox.js"></script>
-  <script src="scripts/utils/dropDown.js"></script>
-</body>
+    <script src="scripts/api/api.js"></script>
+    <script src="scripts/utils/likes.js"></script>
+    <script src="scripts/utils/sortFiltered.js"></script>
 
+    <script src="scripts/templates/templatePhotographers.js"></script>
+    <script src="scripts/pages/photographer.js"></script>
+    <script src="scripts/utils/contactForm.js"></script>
+    <script src="scripts/factories/factoryPhotographers.js"></script>
+    <script src="scripts/utils/lightBox.js"></script>
+    <script src="scripts/utils/dropDown.js"></script>
+  </body>
 </html>

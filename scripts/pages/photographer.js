@@ -1,17 +1,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-debugger */
-import { getPhotographers } from "../api/api.js"
-import {
-    compteLikesPhotographer,
-    compteLikesPagePhotographer,
-    incrementeLikes
-} from "../utils/likes.js"
-import { filtrage } from "../utils/sortFiltered.js"
-
-
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 // eslint-disable-next-line no-unused-vars
+// import { getPhotographers} from '../api/api.js'
 /**
  * 
  * @param {*} identity ("identity of the photographer.)
@@ -182,7 +174,7 @@ async function displayData(
             const partiesDuChemin = that.split("/");
             let name = partiesDuChemin[partiesDuChemin.length - 1];
            
-            // Add class "overlay" to element of main content
+            // Add class "overlay" to element main content that darkened the background
             const main = document.getElementById('main')
             main.classList.add('overlay')
             openLightbox(

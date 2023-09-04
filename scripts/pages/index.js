@@ -1,4 +1,4 @@
-import { getPhotographers} from '../api/api.js'
+//import { getPhotographers} from '../api/api.js'
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /**

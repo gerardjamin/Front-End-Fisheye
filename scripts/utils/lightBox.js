@@ -169,7 +169,7 @@ function openLightbox(
 
     //Title Section for Images and Videos
     const text = document.createElement("p")
-    text.style.color = "white"
+    text.style.color = "#901C1C"
     text.textContent = name
     text.classList.add('legende')
     modalLightBoxContent.appendChild(text)
@@ -239,9 +239,6 @@ function openLightbox(
       text.textContent = name
       text.classList.add('legende')
       modalLightBoxContent.appendChild(text)
-
-
-
       //Call the display function
       displayNexPrev(url, getExtensionFromUrl(url), reponse, index);
     }
@@ -257,9 +254,6 @@ function openLightbox(
       //************************I switch to the sourcePhoto array to display the photos
       //URL of the clicked photo.
       const url = reponse.sourcePhoto[index];
-
-
-
       const partiesDuChemin = url.split("/");
       let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
       const name = wholeName.replace(/\.jpg$/, '')
@@ -276,11 +270,6 @@ function openLightbox(
       text.textContent = name
       text.classList.add('legende')
       modalLightBoxContent.appendChild(text)
-
-
-
-
-
       //Call the display function
       displayNexPrev(url, getExtensionFromUrl(url), reponse, index);
     }
@@ -372,20 +361,6 @@ function openLightbox(
       text.textContent = name
       text.classList.add('legende')
       modalLightBoxContent.appendChild(text)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     } else {
       //The tag "img" is present at the initialization of the web page(the first time loaded page web)
       const photoLightBox = document.querySelector(".photoLightBox")
@@ -413,17 +388,7 @@ function openLightbox(
       text.style.color = "white"
       text.textContent = name
       text.classList.add('legende')
-
-
-
       modalLightBoxContent.appendChild(text)
-
-
-
-
-
-
-
       modalLightBoxContent.appendChild(videoElement)
     }
   }
