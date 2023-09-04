@@ -7,7 +7,7 @@
 function photographerTemplate(data) {
     const { name, id, city, country, tagline, price, portrait } = data;
     //exemple portrait: "portrait" = "RhodeDubois.jpg"
-    const picture = `assets/Photographers/${portrait}`;
+    const picture = `assets/photographers/${portrait}`;
 
     //objects to display
     function getUserCardDOM(tabIndex) {
