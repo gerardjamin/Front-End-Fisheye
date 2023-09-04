@@ -7,7 +7,7 @@
  */
 function photographerHeader(data) {
     const { name, id,city, country, tagline, portrait} = data;
-    const picture = `../assets/Photographers/${portrait}`;
+    const picture = `../assets/photographers/${portrait}`;
 
     //object to display
     function getUserCardDOM() {
