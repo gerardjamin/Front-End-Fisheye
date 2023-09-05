@@ -22,8 +22,8 @@ function photographerTemplate(data) {
         //Link to access the photographer's presentation page
         link.setAttribute('href', 'photographer.html?id=' + id)
         link.appendChild(img)
-        const h1 = document.createElement('h2');
-        h1.textContent = name;
+        const h2 = document.createElement('h2');
+        h2.textContent = name;
         const h3 = document.createElement('h3');
         h3.textContent = `${city}, ${country}`;
         const p = document.createElement('p');
@@ -35,7 +35,7 @@ function photographerTemplate(data) {
         identificateur.className = "identificateur"
 
         article.appendChild(link)
-        article.appendChild(h1);
+        article.appendChild(h2);
         article.appendChild(h3);
         article.appendChild(p);
         article.appendChild(h4);

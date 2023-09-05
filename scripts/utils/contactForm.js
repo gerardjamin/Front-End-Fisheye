@@ -191,10 +191,9 @@ function closeModal() {
 }
 
 function openModal() {
-    // Add class "overlay" to element of main content
+    // Add class "overlay" (put backward all elements)
     const main = document.getElementById('main')
     main.classList.add('overlay')
-
     modal.style.display = "block";
     header.setAttribute('aria-hidden', 'true')
     main.setAttribute('aria-hidden', 'true')

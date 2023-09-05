@@ -18,18 +18,19 @@
         <img
           src="assets/images/logo.png"
           class="logo"
-          alt="logo fisheye home page"
+          alt="Fisheye Home page"
           title="retour à la page d'accueil"
         />
       </a>
     </header>
     <main id="main" aria-hidden="false">
       <div class="photograph-header">
+        <!--open div contact_modal-->
         <button
           tabindex="2"
           id="openButton"
           class="openButton"
-          aria-label="ouverture de la modale de contact "
+          aria-label="ouvre la fenêtre de contact "
           onclick="openModal()"
         >
           Contactez-moi
@@ -43,7 +44,7 @@
           onclick="showDropdown()"
           class="dropbtn"
           tabindex="3"
-          aria-label="trieBox"
+          aria-label="ouvre le menu déroulant de trie"
           aria-expanded="false"
         >
           Click
@@ -54,7 +55,7 @@
             id="popularite"
             href="#"
             onclick="changeText('Popularité')"
-            title="cliquer pour trier les photos par popularité"
+            title="trier les photos par popularité"
             >Popularité</a
           >
           <a
@@ -62,7 +63,7 @@
             id="date"
             href="#"
             onclick="changeText('Date')"
-            title="cliquer pour trier les photos par date"
+            title="trier les photos par date"
             >Date</a
           >
           <a
@@ -70,7 +71,7 @@
             id="titre"
             href="#"
             onclick="changeText('Titre')"
-            title="cliquer pour trier les photos par titre"
+            title="trier les photos par titre"
             >Titre</a
           >
         </div>
@@ -82,9 +83,8 @@
     </main>
     <div id="contact_modal" aria-hidden="true" aria-describedby="openButton">
       <div class="modal" id="modal">
-        <header>
-          <h2>Contactez-moi</h2>
-          <!-- close cross" -->
+        <header id="cross">
+          <!-- cross" -->
           <button
             class="closeButton"
             id="closeButton"
@@ -101,22 +101,22 @@
 
         <form id="signUp" name="formulaire">
           <div class="formField">
-            <label for="prenom" aria-label="entrez votre prenom">Prénom</label>
+            <label for="prenom" aria-label="prenom">Prénom</label>
             <input type="text" id="prenom" name="prenom" />
             <small></small>
           </div>
           <div class="formField">
-            <label for="nom" aria-label="entrez votre nom">Nom</label>
+            <label for="nom" aria-label="nom">Nom</label>
             <input type="text" id="nom" name="nom" />
             <small></small>
           </div>
           <div class="formField">
-            <label for="email" aria-label="entrez votre Email">Email</label>
+            <label for="email" aria-label="Email">Email</label>
             <input type="email" id="email" name="email" />
             <small></small>
           </div>
           <div class="formField">
-            <label for="message" aria-label="entrez votre message"
+            <label for="message" aria-label="votre message"
               >Votre message</label
             >
             <textarea name="message" id="message"></textarea>
@@ -125,7 +125,7 @@
           <button
             class="submitButton"
             type="submit"
-            aria-label="validez votre formulaire"
+            aria-label="envoie le formulaire"
           >
             Envoyer
           </button>
@@ -133,20 +133,20 @@
       </div>
     </div>
     <div id="encart" class="bottom-right-encart" aria-hidden="false"></div>
-    <!-- modale  -->
-    <div id="modalLightBox" class="modalLightBox">
+    <!-- closeup view  -->
+    <div id="modalLightBox" class="modalLightBox" aria-label="image closeup view">
       <button
         id="lightBoxPrecedent"
         class="lightBoxPrecedent"
-        aria-label="photo precedente"
+        aria-label="Previous image"
       ></button>
       <button
         id="lightBoxSuivant"
         class="lightBoxSuivant"
-        aria-label="photo suivante"
+        aria-label="Next image"
       ></button>
 
-      <!-- close cross lightbox -->
+      <!-- cross lightbox -->
       <span id="closeLightBox" class="closeLightBox">&times;</span>
       <div class="modalLightBox-content">
         <!-- href will give in java script -->
@@ -155,6 +155,7 @@
       </div>
     </div>
 
+    <!-- validation W3C -->
     <p>
       <a href="http://jigsaw.w3.org/css-validator/check/referer">
         <img

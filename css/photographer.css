@@ -94,7 +94,7 @@ video {
   align-items: center;
   justify-content: space-around;
   position: fixed;
-  bottom: 0;
+  bottom: -10px;
   right: 0;
   width: 376px;
   height: 89px;
@@ -115,11 +115,17 @@ video {
   font-size: 24px;
 }
 
-/* part modal */
+/* header cross */
+#cross {
+  position: relative;
+}
+/* cross */
 .closeButton {
   background: #db8876;
   cursor: pointer;
   border: none;
+  position: absolute;
+  right: 10px;
 }
 
 .openButton,
