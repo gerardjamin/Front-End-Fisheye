@@ -248,7 +248,8 @@ textarea {
   bottom: 0px;
   right: 0px;
   transform: translate(-50%, -50%);
-  background: rgba(235, 229, 229, 0.5);
+  /* background: rgba(235, 229, 229, 0.5); */
+  background: #fff;
   max-width: 1242px;
   height: 850px;
 }
@@ -258,7 +259,7 @@ textarea {
   margin: auto;
   position: absolute;
   top: 50%;
-  left: 65%;
+  left:60%;
   transform: translate(-50%, -50%);
   max-width: 1050px;
 }
@@ -304,14 +305,22 @@ textarea {
   z-index: 20;
 }
 
-.lightBoxSuivant:hover,
+/* .lightBoxSuivant:hover,
 .lightBoxPrecedent:hover {
   opacity: 1;
   transition: opacity 0.5s;
+  
+} */
+
+.lightBoxSuivant:focus,
+.lightBoxPrecedent:focus {
+  opacity: 1;
+  transition: opacity 0.5s;
+  
 }
 
 .modalLightBox .lightBoxPrecedent {
-  left: 10%;
+  left: 1%;
   transform: rotate(180deg);
 }
 

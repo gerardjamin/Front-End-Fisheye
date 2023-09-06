@@ -178,7 +178,7 @@ function openLightbox(
 
     //Title Section for Images and Videos
     const text = document.createElement("p")
-    text.style.color = "white"
+    text.style.color = "#DB8876"
     text.textContent = name
     text.classList.add("legende")
     //Call the display function
@@ -211,7 +211,7 @@ function openLightbox(
     }
     //  //Title Section for Images and Videos
     const text = document.createElement("p")
-    text.style.color = "white"
+    text.style.color = "#DB8876"
     text.textContent = name
     text.classList.add("legende")
     //Call the display function
@@ -244,7 +244,7 @@ function openLightbox(
       }
       //  //Title Section for Images and Videos
       const text = document.createElement("p")
-      text.style.color = "white"
+      text.style.color = "#DB8876"
       text.textContent = name
       text.classList.add("legende")
       //Call the display function
@@ -275,7 +275,7 @@ function openLightbox(
       }
       //  //Title Section for Images and Videos
       const text = document.createElement("p")
-      text.style.color = "white"
+      text.style.color = "#DB8876"
       text.textContent = name
       text.classList.add("legende")
       //Call the display function
@@ -317,7 +317,7 @@ function openLightbox(
       }
       //Title Section for Images and Videos
       const text = document.createElement("p")
-      text.style.color = "white"
+      text.style.color = "#DB8876"
       text.textContent = name
       text.classList.add("legende")
       modalLightBoxContent.appendChild(photoElement)
@@ -341,7 +341,7 @@ function openLightbox(
       }
       //Title Section for Images and Videos
       const text = document.createElement("p")
-      text.style.color = "white"
+      text.style.color = "#DB8876"
       text.textContent = name
       text.classList.add("legende")
       //give a new clicked source
@@ -372,7 +372,7 @@ function openLightbox(
       }
       //  //Title Section for Images and Videos
       const text = document.createElement("p")
-      text.style.color = "white"
+      text.style.color = "#DB8876"
       text.textContent = name
       text.classList.add("legende")
       modalLightBoxContent.appendChild(videoElement)
