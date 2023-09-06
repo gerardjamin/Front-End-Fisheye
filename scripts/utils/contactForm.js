@@ -191,7 +191,7 @@ function closeModal() {
 }
 
 function openModal() {
-    // Add class "overlay" (put backward all elements)
+    // Add class "overlay" (role: put backward all elements)
     const main = document.getElementById('main')
     main.classList.add('overlay')
     modal.style.display = "block";
@@ -199,6 +199,9 @@ function openModal() {
     main.setAttribute('aria-hidden', 'true')
     encart.setAttribute('aria-hidden', 'true')
     modal.setAttribute('aria-hidden', 'false')
+    const nameHeader = document.querySelector("#contact-Name")
+    const nameForm = document.querySelector("#main > div.photograph-header > article > h1").textContent
+    nameHeader.textContent = nameForm
     setTimeout(() => {
         closeButton.focus()
     }, 5)
