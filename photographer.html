@@ -19,7 +19,7 @@
           src="assets/images/logo.png"
           class="logo"
           alt="Fisheye Home page"
-          title="retour à la page d'accueil"
+          aria-label="retour à la page d'accueil"
         />
       </a>
     </header>
@@ -44,7 +44,7 @@
           onclick="showDropdown()"
           class="dropbtn"
           tabindex="3"
-          aria-label="ouvre le menu déroulant de trie"
+          aria-label="ouvre le menu déroulant"
           aria-expanded="false"
         >
           Click
@@ -55,7 +55,7 @@
             id="popularite"
             href="#"
             onclick="changeText('Popularité')"
-            title="trier les photos par popularité"
+            aria-label="trier les photos par popularité"
             >Popularité</a
           >
           <a
@@ -63,7 +63,7 @@
             id="date"
             href="#"
             onclick="changeText('Date')"
-            title="trier les photos par date"
+            aria-label="trier les photos par date"
             >Date</a
           >
           <a
@@ -71,7 +71,7 @@
             id="titre"
             href="#"
             onclick="changeText('Titre')"
-            title="trier les photos par titre"
+            aria-label="trier les photos par titre"
             >Titre</a
           >
         </div>

@@ -52,7 +52,7 @@ async function displayData(
             imgElement.setAttribute("role", "link")
             imgElement.classList.add("photo")
             imgElement.setAttribute("src", portfolioPicture)
-            imgElement.setAttribute("alt", `${title}`)
+            imgElement.setAttribute("alt", `closeup picture ${title}`)
             //I am filling the article with the image
             article.appendChild(imgElement)
         } else if (video) {
@@ -63,18 +63,19 @@ async function displayData(
             videoElement.setAttribute("tabindex", `${tabIndex}`)
             videoElement.setAttribute("src", portfolioVideo)
             videoElement.setAttribute("type", "mp4")
+            videoElement.setAttribute("aria-label", `video ${title}`)
             //videoElement.setAttribute("controls", ' ')
             article.appendChild(videoElement)
         }
 
-        //*************************************************INCREMENT LIKES MANAGEMENT IN HTML SECTION************************************
+        //*************************************************INCREMENT LIKES MANAGEMENT IN page HTML SECTION************************************
         //heart
         const div = document.createElement("div")
         div.classList.add("likesPhotographer");
         div.setAttribute("id", "likesPhotographer")
         div.setAttribute("tabindex", `${tabIndex}`)
         //Customization of the Like (id)
-        div.innerHTML = `<span class="like-${id}" id="likes" role="button" aria-label="bouton j'aime">${likes}</span>
+        div.innerHTML = `<span class="like-${id}" id="likes" role="button" aria-label="bouton likes">${likes}</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="21" height="24" viewBox="0 0 21 24" fill="none">
                     <g clip-path="url(#clip0_120_550)">
                         <path d="M10.5 21.35L9.23125 20.03C4.725 15.36 1.75 12.28 1.75 8.5C1.75 5.42 3.8675 3 6.5625 3C8.085 3 9.54625 3.81 10.5 5.09C11.4537 3.81 12.915 3 14.4375 3C17.1325 3 19.25 5.42 19.25 8.5C19.25 12.28 16.275 15.36 11.7688 20.04L10.5 21.35Z" fill="#911C1C" />
@@ -90,11 +91,11 @@ async function displayData(
         article.appendChild(container)
         portofolioSection.appendChild(article)
     }
-    //**************************************************************MANAGMENT ENCART OF THE PAGE*********************************
+    //**************************************************************MANAGMENT ENCART OF THE PAGE HTML*********************************
     const encart = document.getElementById("encart")
     const { photographerId } = filteredPhotographers[0]
 
-    //To retrieve the hourly rate of each photographer.
+    //To retrieve the (hourly rate) of each photographer.
     function recupererProprieteAssociee(photographers, photographerId) {
         for (const objet of photographers) {
             if (objet.id === parseInt(photographerId)) {
@@ -124,10 +125,10 @@ async function displayData(
                 <h4>${priceHour}/jour</h4>`
     encart.appendChild(div)
 
-    //*********************************************LIKES INCREMENT MANAGMENT********************************************* */
+    //************************************************************LIKES INCREMENT MANAGMENT***************************** */
     //Store the likes of each photo in a NodeList
     const likesPhoto = document.querySelectorAll(".likesPhotographer")
-    //We loop through this NodeList, waiting for an event
+    //We loop through this NodeList, and waiting for an event
     for (let like of likesPhoto) {
         //Record the class of the first child node
         let premierEnfant = like.childNodes[0]
@@ -140,7 +141,7 @@ async function displayData(
         like.addEventListener("click", function () {
             incrementeLikes(premierEnfant, likesCount, likeCoeur)
         })
-        //managment of l'accessibility
+        //managment of l'accessibility (increment)
         like.addEventListener("keydown", function (event) {
             if (event.key === "Enter") {
                 incrementeLikes(premierEnfant, likesCount, likeCoeur)
@@ -148,33 +149,31 @@ async function displayData(
         })
     }
 
-    //*************************************************MANAGMENT LIGHTBOX***************************************************/
+    //*************************************************MANAGMENT LIGHTBOX (closeUp)***************************************************/
 
     //Section that enables opening the lightbox when clicking on the image or video element
     // To retrieve the array of image and video elements.
 
     const myImage = document.getElementsByClassName("photo")
     const myVideo = document.getElementsByClassName("video")
-    // Using the spread operator (...) to concatenate.
+    // Using the spread operator (...) to concatenate two array.
     const concatenatedArray = [...myImage, ...myVideo]
     const modalLightBox = document.querySelector("#modalLightBox")
     const closeLightBox = document.querySelector("#closeLightBox")
     const modalLightBoxContent = document.querySelector(".modalLightBox-content")
-    // const lightBoxSuivant = document.getElementById("lightBoxSuivant");
-    // const lightBoxPrecedent = document.getElementById("lightBoxPrecedent");
 
-    // Add an onClick() event on each of the photos or videos to open the lightbox
+    // Add an onClick() event on each of the photos or videos and open the lightbox
     // and manage accessibility.
     for (let photo of concatenatedArray) {
         photo.addEventListener("click", function () {
 
-            //record the context
+            //record the context du click
             let that = this.src;
             //Retrieve the name's picture
-            const partiesDuChemin = that.split("/");
-            let name = partiesDuChemin[partiesDuChemin.length - 1];
+            const partiesDuChemin = that.split("/")
+            let name = partiesDuChemin[partiesDuChemin.length - 1]
 
-            // Add class "overlay" to element main content that darkened the background
+            // Add class "overlay" in order to darkened the background (all elements main content)
             const main = document.getElementById('main')
             main.classList.add('overlay')
             openLightbox(
@@ -184,10 +183,15 @@ async function displayData(
                 that,
                 name
             )
-            //display image into the modale
-            modalLightBox.classList.add("show");
-        });
-
+            //display image into the modale lightBox
+            modalLightBox.classList.add("show")
+            //give the focus to video element
+            const videoLightBox = document.querySelector(".videoLightBox")
+            if (videoLightBox !== null) {
+                videoLightBox.focus()
+            }
+        })
+        //select photo by tabIndex and manage videos & pictures with return key
         photo.addEventListener("keydown", function (event) {
             if (event.key === "Enter") {
                 //record the context
@@ -215,7 +219,7 @@ async function displayData(
         // remove class "overlay" 
         const main = document.getElementById('main')
         main.classList.remove('overlay')
-    });
+    })
 
     //Closing on click inside the modalLightBox.
     modalLightBox.addEventListener("click", function () {
@@ -223,7 +227,7 @@ async function displayData(
         // remove class "overlay" 
         const main = document.getElementById('main')
         main.classList.remove('overlay')
-    });
+    })
 
     // Closing the modal modalLightBox with the escape key on the keyboard.
     window.addEventListener("keydown", (e) => {
@@ -234,7 +238,7 @@ async function displayData(
             const main = document.getElementById('main')
             main.classList.remove('overlay')
         }
-    });
+    })
     //*********************************DROPDOWN SORTING MANAGMENT********************************************************** */
 
     //Close the dropdown if clicked outside
@@ -249,7 +253,7 @@ async function displayData(
                 }
             }
         }
-    };
+    }
 
     //Sorting by Category.
     document
@@ -261,7 +265,7 @@ async function displayData(
             const triePopularite = filtrage("like", filteredPhotographers)
             // portfolio_section
             displayData(identity, picture, triePopularite, photographers)
-        });
+        })
 
     document
         .getElementById("date").addEventListener("click", function (event) {
@@ -271,7 +275,7 @@ async function displayData(
             const trieDate = filtrage("date", filteredPhotographers)
             // portfolio_section
             displayData(identity, picture, trieDate, photographers)
-        });
+        })
 
     document
         .getElementById("titre").addEventListener("click", function (event) {
@@ -281,7 +285,7 @@ async function displayData(
             const trieTitre = filtrage("titre", filteredPhotographers)
             // portfolio_section
             displayData(identity, picture, trieTitre, photographers)
-        });
+        })
 } //here, the page is loaded
 
 window.addEventListener("keydown", (e) => {
@@ -290,11 +294,11 @@ window.addEventListener("keydown", (e) => {
         const home = document.getElementById('homePage');
         home.focus();
     }
-});
+})
 
 window.addEventListener("load", function () {
     console.log("La page est entièrement chargée.")
-});
+})
 
 async function init() {
     //Remove the 'like' variable from local storage

@@ -58,7 +58,7 @@ function calculeIndex(filteredPhotographers, src) {
 }
 
 /**
- * Display the next or previous element
+ * Display the closeUP picture/video
  * @param {*} url: Path of the element
  * @param {*} type mp4 or jpg
  * @param {*} reponse: Index of the clicked element
@@ -83,7 +83,8 @@ function displayNexPrev(url, type, reponse, index) {
     const elementRecherche = collection.namedItem("videoLightBox");
     if (elementRecherche !== null) {
       //Injecting the URL of the video from the context
-      videoElement.setAttribute("src", `${url}`);
+      videoElement.setAttribute("src", `${url}`)
+      videoElement.focus()
     } else {
       //If an image is present, remove the element and create the video element.
       const photoLightBox = document.querySelector(".photoLightBox");
@@ -96,6 +97,7 @@ function displayNexPrev(url, type, reponse, index) {
       videoElement.setAttribute("type", "mp4");
       videoElement.setAttribute("controls", " ");
       modalLightBoxContent.appendChild(videoElement);
+      videoElement.focus()
     }
   } else {
     //So, an image exists
@@ -115,12 +117,17 @@ function displayNexPrev(url, type, reponse, index) {
       modalLightBoxContent.appendChild(photoElement);
       const url = reponse.sourcePhoto[index];
       photoElement.setAttribute("src", `${url}`);
+      photoElement.focus()
     } else {
-      //Injecting the URL of the image from the context
-      const photoLightBox = document.querySelector(".photoLightBox");
-      photoLightBox.setAttribute("alt", name)
-      const url = reponse.sourcePhoto[index];
-      photoLightBox.setAttribute("src", `${url}`);
+      //Injecting the URL into the image from the context
+      const photoElement = document.querySelector(".photoLightBox");
+      photoElement.setAttribute("alt", name)
+      const url = reponse.sourcePhoto[index]
+      photoElement.setAttribute("src", `${url}`)
+      photoElement.focus()
+
+
+
     }
   }
 }
@@ -147,7 +154,7 @@ function openLightbox(
   const taille = reponse.sourcePhoto.length
   // const that = this: Storing the context during the (click)
 
-  //***********************MANAGMENT PART GESTION (prev/next) & (arrow left/right)*******************
+  //************************************************MANAGMENT CHEVRON LEFT/RIGHT**************************** */
   const precedent = document
     .getElementById("modalLightBox")
     .querySelector(".lightBoxPrecedent")
@@ -218,6 +225,8 @@ function openLightbox(
     displayNexPrev(url, getExtensionFromUrl(url), reponse, index)
     modalLightBoxContent.appendChild(text)
   })
+
+  //************************************************MANAGMENT ARROW LEFT/RIGHT**************************** */
   //Waiting for an event...
   window.addEventListener("keydown", (e) => {
     // Moving to the previous photo with the left arrow key.
@@ -284,7 +293,7 @@ function openLightbox(
     }
   })
 
-  //***************ZOOM MANAGMENT FOR PHOTO/VIDEO ON CLICK SECTION (closeUp view)***********
+  //*************************************ZOOM MANAGMENT FOR PHOTO/VIDEO ON CLICK SECTION (closeUp view)***************************
 
   let extension = getExtensionFromUrl(that);
   if (extension === "jpg") {

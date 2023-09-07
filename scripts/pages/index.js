@@ -13,6 +13,23 @@ function displayData(dataPhographers) {
     }
 }
 
+//accessibilite: available escape key in order to go to first element 
+// j'attends que la page soit complètement chargée
+document.addEventListener("DOMContentLoaded", () => {
+    // j'attends l'événement de la touche "Escape"
+    window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            e.preventDefault()
+            // je trouve le premier élément focusable de ma page
+            const firstElement = document.querySelector("a, button, input, select, textarea")
+            if (firstElement) {
+                firstElement.focus()
+            }
+        }
+    })
+})
+
+
 /**
  * 
  */
