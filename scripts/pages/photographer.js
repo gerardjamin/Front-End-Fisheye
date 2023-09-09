@@ -26,10 +26,12 @@ async function displayData(
     //first child
     const child = document.querySelector(".openButton")
     photographersSection.insertBefore(identity, child)
-    //init of number TAB
+    //initialisation  tabindex
     let tabIndex = 7
 
     //**************************************PORTFOLIO MANAGMENT SECTION(GALERY)********************************
+    //loop on all photographers
+    const sizeFiteredPhotographers = filteredPhotographers
     for (const objet of filteredPhotographers) {
         const { id, photographerId, title, image, video, likes, date, price } =
             objet
@@ -47,24 +49,26 @@ async function displayData(
         if (image) {
             //part image
             const imgElement = document.createElement("img")
-            //Management accessibility
+            //Management accessibility by tabindex
             imgElement.setAttribute("tabindex", `${tabIndex}`)
             imgElement.setAttribute("role", "link")
             imgElement.classList.add("photo")
             imgElement.setAttribute("src", portfolioPicture)
             imgElement.setAttribute("alt", `closeup picture ${title}`)
+
             //I am filling the article with the image
             article.appendChild(imgElement)
         } else if (video) {
             //part video
             const videoElement = document.createElement("video")
             videoElement.classList.add("video")
-            //Management accessibility
+            //Management accessibility by tabindex
             videoElement.setAttribute("tabindex", `${tabIndex}`)
             videoElement.setAttribute("src", portfolioVideo)
             videoElement.setAttribute("type", "mp4")
             videoElement.setAttribute("aria-label", `video ${title}`)
             //videoElement.setAttribute("controls", ' ')
+            //I am filling the article with the video
             article.appendChild(videoElement)
         }
 
@@ -73,6 +77,7 @@ async function displayData(
         const div = document.createElement("div")
         div.classList.add("likesPhotographer");
         div.setAttribute("id", "likesPhotographer")
+        //managment acessibility by tabindex
         div.setAttribute("tabindex", `${tabIndex}`)
         //Customization of the Like (id)
         div.innerHTML = `<span class="like-${id}" id="likes" role="button" aria-label="bouton likes">${likes}</span>
@@ -164,6 +169,7 @@ async function displayData(
 
     // Add an onClick() event on each of the photos or videos and open the lightbox
     // and manage accessibility.
+    //looping on all elements
     for (let photo of concatenatedArray) {
         photo.addEventListener("click", function () {
 
@@ -185,11 +191,19 @@ async function displayData(
             )
             //display image into the modale lightBox
             modalLightBox.classList.add("show")
+
+            //accessibilite
             //give the focus to video element
             const videoLightBox = document.querySelector(".videoLightBox")
             if (videoLightBox !== null) {
                 videoLightBox.focus()
             }
+            //give the focus to photo element
+            const photoLightBox = document.querySelector(".photoLightBox")
+            if (photoLightBox !== null) {
+                photoLightBox.focus()
+            }
+
         })
         //select photo by tabIndex and manage videos & pictures with return key
         photo.addEventListener("keydown", function (event) {
@@ -215,14 +229,6 @@ async function displayData(
 
     //Closing the modalLightBox by clicking the cross
     closeLightBox.addEventListener("click", function () {
-        modalLightBox.classList.remove("show")
-        // remove class "overlay" 
-        const main = document.getElementById('main')
-        main.classList.remove('overlay')
-    })
-
-    //Closing on click inside the modalLightBox.
-    modalLightBox.addEventListener("click", function () {
         modalLightBox.classList.remove("show")
         // remove class "overlay" 
         const main = document.getElementById('main')

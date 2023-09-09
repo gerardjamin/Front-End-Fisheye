@@ -14,13 +14,13 @@ function displayData(dataPhographers) {
 }
 
 //accessibilite: available escape key in order to go to first element 
-// j'attends que la page soit complètement chargée
+//I'm wating for than the page is loaded
 document.addEventListener("DOMContentLoaded", () => {
-    // j'attends l'événement de la touche "Escape"
+    // I'm wating for than the key "Escape" is pressed
     window.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
             e.preventDefault()
-            // je trouve le premier élément focusable de ma page
+            //I found the first element which can be focusable
             const firstElement = document.querySelector("a, button, input, select, textarea")
             if (firstElement) {
                 firstElement.focus()

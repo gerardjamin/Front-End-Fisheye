@@ -305,19 +305,18 @@ textarea {
   z-index: 20;
 }
 
-/* .lightBoxSuivant:hover,
+.lightBoxSuivant:hover,
 .lightBoxPrecedent:hover {
   opacity: 1;
-  transition: opacity 0.5s;
-  
-} */
+  transition: opacity 0.5s; 
+}
 
-.lightBoxSuivant:focus,
+/* .lightBoxSuivant:focus,
 .lightBoxPrecedent:focus {
   opacity: 1;
   transition: opacity 0.5s;
   
-}
+} */
 
 .modalLightBox .lightBoxPrecedent {
   left: 1%;

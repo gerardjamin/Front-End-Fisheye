@@ -1,10 +1,19 @@
 /* eslint-disable no-unused-vars */
 //Form Validation Section
 const form = document.querySelector("#signUp")
-const prenomInput = document.forms.formulaire.prenom;
-const nomInput = document.forms.formulaire.nom;
-const emailInput = document.forms.formulaire.email;
-const messageTextarea = document.forms.formulaire.message;
+const prenomInput = document.forms.formulaire.prenom
+const nomInput = document.forms.formulaire.nom
+const emailInput = document.forms.formulaire.email
+const messageTextarea = document.forms.formulaire.message
+
+//Modal Accessibility Management
+const header = document.getElementById("head")
+const main = document.getElementById("main")
+const encart = document.getElementById("encart")
+const modal = document.getElementById("contact_modal")
+const openButton = document.getElementById("openButton")
+const closeButton = document.querySelector("#closeButton")  /*boutton*/
+const inputPrenom = document.getElementById('prenom')
 
 //Real-time Form Field Correction.
 var formulaire = document.getElementById("signUp");
@@ -15,14 +24,14 @@ for (var i = 0; i < inputs.length; i++) {
         checkName()
         checkEmail()
         checkMessage()
-    });
+    })
 }
 
 //Real-time Form Field zone-text.
 var area = document.getElementById("message");
 area.addEventListener("input", function () {
     checkMessage()
-});
+})
 
 
 /**
@@ -40,10 +49,10 @@ const checkSurname = () => {
     } else if (!estValide) {
         showError(nomInput, "Entrez un prénom valide")
     } else {
-        showSuccess(prenomInput);
-        valid = true;
+        showSuccess(prenomInput)
+        valid = true
     }
-    return valid;
+    return valid
 }
 
 /**
@@ -62,7 +71,7 @@ const checkName = () => {
         showError(nomInput, "Entrez un nom de famille valide")
     } else {
         showSuccess(nomInput)
-        valid = true;
+        valid = true
     }
     return valid
 }
@@ -72,15 +81,15 @@ const checkName = () => {
  * @returns true or false
  */
 const checkEmail = () => {
-    let valid = false;
-    const email = emailInput.value.trim();
+    let valid = false
+    const email = emailInput.value.trim()
     if (!isRequired(email)) {
-        showError(emailInput, "l'email ne peut pas être vide");
+        showError(emailInput, "l'email ne peut pas être vide")
     } else if (!isEmailValid(email)) {
-        showError(emailInput, "Email non valide");
+        showError(emailInput, "Email non valide")
     } else {
-        showSuccess(emailInput);
-        valid = true;
+        showSuccess(emailInput)
+        valid = true
     }
     return valid
 };
@@ -95,7 +104,7 @@ const checkMessage = () => {
     if (!isRequired(message)) {
         showError(messageTextarea, "Votre message ne dois pas être vide");
     } else {
-        showSuccess(messageTextarea);
+        showSuccess(messageTextarea)
         valid = true
     }
     return valid
@@ -108,7 +117,7 @@ const checkMessage = () => {
  */
 const isEmailValid = (email) => {
     let emailRegExp = /^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z0-9._-]{2,}$/i
-    return emailRegExp.test(email);
+    return emailRegExp.test(email)
 };
 
 // If the value returns an empty string, then isRequired = false.
@@ -117,37 +126,38 @@ const isRequired = (value) => (value === "" ? false : true);
 //Manage the display of the error
 const showError = (input, message) => {
     // Retrieval of the parent element of the form
-    const formField = input.parentElement;
+    const formField = input.parentElement
     // Adding the 'error' class.
-    formField.classList.remove("success");
-    formField.classList.add("error");
+    formField.classList.remove("success")
+    formField.classList.add("error")
 
     // Sending the error message into the 'small' tag
-    const error = formField.querySelector("small");
-    error.style.color = "red";
-    error.textContent = message;
+    const error = formField.querySelector("small")
+    error.style.color = "red"
+    error.textContent = message
 }
 
 const showSuccess = (input) => {
     // Retrieving the parent element of the form
-    const formField = input.parentElement;
+    const formField = input.parentElement
 
     // delete class error
-    formField.classList.remove("error");
-    formField.classList.add("success");
+    formField.classList.remove("error")
+    formField.classList.add("success")
 
     // Hiding the error message in the 'small' tag.
-    const error = formField.querySelector("small");
-    error.textContent = "";
+    const error = formField.querySelector("small")
+    error.textContent = ""
 }
 
 /**
  * Verification of the form's integrity
  * @returns The result of the verification (false or true)
  */
+
 form.addEventListener("submit", function (event) {
     // Prevent form submission (page reload).
-    event.preventDefault();
+    event.preventDefault()
 
     // Field validation
     let isSurnameValid = checkSurname(),
@@ -160,18 +170,17 @@ form.addEventListener("submit", function (event) {
         isNameValid &&
         isEmailValid &&
         isMessageValid
-
-    return isFormValid
+   // check if the form is empty
+   if (isFormValid) {
+    console.log("OK");
+    // next step : send the valid form to server
+    // form.submit();
+    //give the focus at the cross
+    closeButton.focus()
+} else {
+    console.log("Vous devez remplir le formulaire correctement !");
+}
 })
-
-//Modal Accessibility Management
-const header = document.getElementById("head")
-const main = document.getElementById("main")
-const encart = document.getElementById("encart")
-const modal = document.getElementById("contact_modal")
-const openButton = document.getElementById("openButton")
-const closeButton = document.querySelector("#closeButton")  /*boutton*/
-const inputPrenom = document.getElementById('prenom')
 
 /**
  * setTimeout to wait for the element to receive focus.

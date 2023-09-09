@@ -70,9 +70,9 @@ function displayNexPrev(url, type, reponse, index) {
   const videoElement = document.createElement("video");
 
   //pick up name and add the name's photo into the alt
-  const partiesDuChemin = url.split("/")
-  let wholeName = partiesDuChemin[partiesDuChemin.length - 1]
-  const name = wholeName.replace(/\.jpg$/, "")
+  const partiesDuChemin = url.split("/");
+  let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
+  const name = wholeName.replace(/\.jpg$/, "");
 
   //We have either a photo or a video
   if (type === "mp4") {
@@ -83,8 +83,8 @@ function displayNexPrev(url, type, reponse, index) {
     const elementRecherche = collection.namedItem("videoLightBox");
     if (elementRecherche !== null) {
       //Injecting the URL of the video from the context
-      videoElement.setAttribute("src", `${url}`)
-      videoElement.focus()
+      videoElement.setAttribute("src", `${url}`);
+      videoElement.focus();
     } else {
       //If an image is present, remove the element and create the video element.
       const photoLightBox = document.querySelector(".photoLightBox");
@@ -97,7 +97,7 @@ function displayNexPrev(url, type, reponse, index) {
       videoElement.setAttribute("type", "mp4");
       videoElement.setAttribute("controls", " ");
       modalLightBoxContent.appendChild(videoElement);
-      videoElement.focus()
+      videoElement.focus();
     }
   } else {
     //So, an image exists
@@ -113,31 +113,28 @@ function displayNexPrev(url, type, reponse, index) {
       photoElement.setAttribute("name", "photoLightBox");
       photoElement.classList.add("photoLightBox");
       //accessibilité
-      photoElement.setAttribute("alt", name)
+      photoElement.setAttribute("alt", name);
       modalLightBoxContent.appendChild(photoElement);
       const url = reponse.sourcePhoto[index];
       photoElement.setAttribute("src", `${url}`);
-      photoElement.focus()
+      photoElement.focus();
     } else {
       //Injecting the URL into the image from the context
       const photoElement = document.querySelector(".photoLightBox");
-      photoElement.setAttribute("alt", name)
-      const url = reponse.sourcePhoto[index]
-      photoElement.setAttribute("src", `${url}`)
-      photoElement.focus()
-
-
-
+      photoElement.setAttribute("alt", name);
+      const url = reponse.sourcePhoto[index];
+      photoElement.setAttribute("src", `${url}`);
+      photoElement.focus();
     }
   }
 }
 
 function getExtensionFromUrl(url) {
-  const cheminDuFichier = url
+  const cheminDuFichier = url;
   // We split the string and return the last part of the string (extension).
-  const partiesDuChemin = cheminDuFichier.split(".")
+  const partiesDuChemin = cheminDuFichier.split(".");
   // Return the file extension.
-  return partiesDuChemin[partiesDuChemin.length - 1]
+  return partiesDuChemin[partiesDuChemin.length - 1];
 }
 
 function openLightbox(
@@ -148,58 +145,60 @@ function openLightbox(
   name
 ) {
   //Retrieval of the index of the clicked element and the array of photos
-  let reponse = calculeIndex(filteredPhotographers, that)
+  let reponse = calculeIndex(filteredPhotographers, that);
   let index = reponse.index;
   //Calculate the size of the sourcePhoto array
-  const taille = reponse.sourcePhoto.length
+  const taille = reponse.sourcePhoto.length;
   // const that = this: Storing the context during the (click)
+  const LightBox = document.getElementById("modalLightBox");
+  //I must put tabindex = -1 in order to be able to focus and to do a managment of custom tabindex
+  LightBox.setAttribute("tabindex", "-1");
 
   //************************************************MANAGMENT CHEVRON LEFT/RIGHT**************************** */
-  const precedent = document
-    .getElementById("modalLightBox")
-    .querySelector(".lightBoxPrecedent")
+  const precedent = LightBox.querySelector(".lightBoxPrecedent");
+  //precedent.setAttribute("tabindex","1")
 
   //Waiting for an event...
   precedent.addEventListener("click", function (event) {
     //Prevents event propagation to the parent
-    event.stopPropagation()
+    event.stopPropagation();
     // Decrement the index of the array to move to the previous element on click
-    index = index - 1
+    index = index - 1;
     if (index < 0) {
-      index = taille - 1
+      index = taille - 1;
     }
     //************************I switch to the sourcePhoto array to display the photos.
     //URL of the clicked photo.
-    const url = reponse.sourcePhoto[index]
+    const url = reponse.sourcePhoto[index];
 
     //retry name and add the name's photo under photo
-    const partiesDuChemin = url.split("/")
-    let wholeName = partiesDuChemin[partiesDuChemin.length - 1]
-    const name = wholeName.replace(/\.jpg$/, "")
+    const partiesDuChemin = url.split("/");
+    let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
+    const name = wholeName.replace(/\.jpg$/, "");
 
     //remove legend class if exist
-    const legend = document.querySelector(".legende")
+    const legend = document.querySelector(".legende");
     if (legend) {
       legend.remove(); // Supprime l'élément s'il existe
     }
 
     //Title Section for Images and Videos
-    const text = document.createElement("p")
-    text.style.color = "#DB8876"
-    text.textContent = name
-    text.classList.add("legende")
+    const text = document.createElement("p");
+    text.style.color = "#DB8876";
+    text.textContent = name;
+    text.classList.add("legende");
     //Call the display function
-    displayNexPrev(url, getExtensionFromUrl(url), reponse, index)
-    modalLightBoxContent.appendChild(text)
-  })
+    displayNexPrev(url, getExtensionFromUrl(url), reponse, index);
+    modalLightBoxContent.appendChild(text);
+  });
 
-  const suivant = document
-    .getElementById("modalLightBox")
-    .querySelector(".lightBoxSuivant")
+  const suivant = LightBox.querySelector(".lightBoxSuivant");
+  //suivant.setAttribute("tabindex","2")
+
   //Waiting for an event...
   suivant.addEventListener("click", function (event) {
     //Prevents event propagation to the parent
-    event.stopPropagation()
+    event.stopPropagation();
     //Increment the index of the array to move to the next element on click
     index = index + 1;
     if (index === taille) {
@@ -207,91 +206,91 @@ function openLightbox(
     }
     //************************I switch to the sourcePhoto[] array and display the photos.
     //URL of the clicked photo.
-    const url = reponse.sourcePhoto[index]
-    const partiesDuChemin = url.split("/")
-    let wholeName = partiesDuChemin[partiesDuChemin.length - 1]
-    const name = wholeName.replace(/\.jpg$/, "")
+    const url = reponse.sourcePhoto[index];
+    const partiesDuChemin = url.split("/");
+    let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
+    const name = wholeName.replace(/\.jpg$/, "");
     //remove legend class if exist
-    const legend = document.querySelector(".legende")
+    const legend = document.querySelector(".legende");
     if (legend) {
-      legend.remove() // Supprime l'élément s'il existe
+      legend.remove(); // Supprime l'élément s'il existe
     }
     //  //Title Section for Images and Videos
-    const text = document.createElement("p")
-    text.style.color = "#DB8876"
-    text.textContent = name
-    text.classList.add("legende")
+    const text = document.createElement("p");
+    text.style.color = "#DB8876";
+    text.textContent = name;
+    text.classList.add("legende");
     //Call the display function
-    displayNexPrev(url, getExtensionFromUrl(url), reponse, index)
-    modalLightBoxContent.appendChild(text)
-  })
+    displayNexPrev(url, getExtensionFromUrl(url), reponse, index);
+    modalLightBoxContent.appendChild(text);
+  });
 
   //************************************************MANAGMENT ARROW LEFT/RIGHT**************************** */
   //Waiting for an event...
   window.addEventListener("keydown", (e) => {
     // Moving to the previous photo with the left arrow key.
     if (e.key === "ArrowLeft" && modalLightBox.classList.contains("show")) {
-      e.preventDefault()
+      e.preventDefault();
       // Decrement the index of the array to move to the previous element on click."
-      index = index - 1
+      index = index - 1;
       if (index < 0) {
-        index = taille - 1
+        index = taille - 1;
       }
       //************************I switch to the sourcePhoto array to display the photos.
       //URL linked to clicked photo.
-      const url = reponse.sourcePhoto[index]
+      const url = reponse.sourcePhoto[index];
 
-      const partiesDuChemin = url.split("/")
-      let wholeName = partiesDuChemin[partiesDuChemin.length - 1]
-      const name = wholeName.replace(/\.jpg$/, "")
-      console.log(name)
+      const partiesDuChemin = url.split("/");
+      let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
+      const name = wholeName.replace(/\.jpg$/, "");
+      console.log(name);
       //remove legend class if exist
-      const legend = document.querySelector(".legende")
+      const legend = document.querySelector(".legende");
 
       if (legend) {
-        legend.remove() // Supprime l'élément s'il existe
+        legend.remove(); // Supprime l'élément s'il existe
       }
       //  //Title Section for Images and Videos
-      const text = document.createElement("p")
-      text.style.color = "#DB8876"
-      text.textContent = name
-      text.classList.add("legende")
+      const text = document.createElement("p");
+      text.style.color = "#DB8876";
+      text.textContent = name;
+      text.classList.add("legende");
       //Call the display function
-      displayNexPrev(url, getExtensionFromUrl(url), reponse, index)
-      modalLightBoxContent.appendChild(text)
+      displayNexPrev(url, getExtensionFromUrl(url), reponse, index);
+      modalLightBoxContent.appendChild(text);
     }
 
     // Moving to the next photo with the right arrow key
     if (e.key === "ArrowRight" && modalLightBox.classList.contains("show")) {
-      e.preventDefault()
+      e.preventDefault();
       //Increment the index of the array to move to the next element on click
-      index = index + 1
+      index = index + 1;
       if (index === taille) {
         index = 0;
       }
       //************************I switch to the sourcePhoto array to display the photos
       //URL of the clicked photo.
-      const url = reponse.sourcePhoto[index]
-      const partiesDuChemin = url.split("/")
-      let wholeName = partiesDuChemin[partiesDuChemin.length - 1]
+      const url = reponse.sourcePhoto[index];
+      const partiesDuChemin = url.split("/");
+      let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
       const name = wholeName.replace(/\.jpg$/, "");
-      console.log(name)
+      console.log(name);
       //remove legend class if exist
-      const legend = document.querySelector(".legende")
+      const legend = document.querySelector(".legende");
 
       if (legend) {
-        legend.remove() // Supprime l'élément s'il existe
+        legend.remove(); // Supprime l'élément s'il existe
       }
       //  //Title Section for Images and Videos
-      const text = document.createElement("p")
-      text.style.color = "#DB8876"
-      text.textContent = name
-      text.classList.add("legende")
+      const text = document.createElement("p");
+      text.style.color = "#DB8876";
+      text.textContent = name;
+      text.classList.add("legende");
       //Call the display function
-      displayNexPrev(url, getExtensionFromUrl(url), reponse, index)
-      modalLightBoxContent.appendChild(text)
+      displayNexPrev(url, getExtensionFromUrl(url), reponse, index);
+      modalLightBoxContent.appendChild(text);
     }
-  })
+  });
 
   //*************************************ZOOM MANAGMENT FOR PHOTO/VIDEO ON CLICK SECTION (closeUp view)***************************
 
@@ -302,60 +301,59 @@ function openLightbox(
     // Check if 'photoLightBox' exists in my collection with the name of the img tag.
     const elementRecherche = collection.namedItem("videoLightBox");
 
-    const partiesDuChemin = that.split("/")
-    let wholeName = partiesDuChemin[partiesDuChemin.length - 1]
-    const name = wholeName.replace(/\.jpg$/, "")
+    const partiesDuChemin = that.split("/");
+    let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
+    const name = wholeName.replace(/\.jpg$/, "");
 
     if (elementRecherche !== null) {
-      console.log('L\'élément "videoLightBox" existe dans la collection.')
-      const videoLightBox = document.querySelector(".videoLightBox")
-      videoLightBox.remove()
-      const photoElement = document.createElement("img")
-      photoElement.setAttribute("name", "photoLightBox")
-      photoElement.classList.add("photoLightBox")
-      photoElement.setAttribute("alt", name)
+      console.log('L\'élément "videoLightBox" existe dans la collection.');
+      const videoLightBox = document.querySelector(".videoLightBox");
+      videoLightBox.remove();
+      const photoElement = document.createElement("img");
+      photoElement.setAttribute("name", "photoLightBox");
+      photoElement.classList.add("photoLightBox");
+      photoElement.setAttribute("alt", name);
       //Retrieving the source of the video in the context (photo object)
-      photoElement.src = that
-
+      photoElement.src = that;
 
       //remove legend class if exist
-      const legend = document.querySelector(".legende")
+      const legend = document.querySelector(".legende");
 
       if (legend) {
-        legend.remove() // Supprime l'élément s'il existe
+        legend.remove(); // Supprime l'élément s'il existe
       }
       //Title Section for Images and Videos
-      const text = document.createElement("p")
-      text.style.color = "#DB8876"
-      text.textContent = name
-      text.classList.add("legende")
-      modalLightBoxContent.appendChild(photoElement)
-      modalLightBoxContent.appendChild(text)
+      const text = document.createElement("p");
+      text.style.color = "#DB8876";
+      text.textContent = name;
+      text.classList.add("legende");
+      modalLightBoxContent.appendChild(photoElement);
+      modalLightBoxContent.appendChild(text);
     } else {
       //not video tag
       console.log(
         "L'élément \"videoLightBox\" n'existe pas dans la collection."
-      )
+      );
 
       const imageLightBox = document.querySelector(
         ".modalLightBox-content img"
-      )
+      );
       //attribut alt pour accessibilité
-      imageLightBox.setAttribute("alt", name)
+      imageLightBox.setAttribute("alt", name);
       //remove legend class if exist
-      const legend = document.querySelector(".legende")
+      const legend = document.querySelector(".legende");
 
       if (legend) {
-        legend.remove() // Supprime l'élément s'il existe
+        legend.remove(); // Supprime l'élément s'il existe
       }
       //Title Section for Images and Videos
-      const text = document.createElement("p")
-      text.style.color = "#DB8876"
-      text.textContent = name
-      text.classList.add("legende")
+      const text = document.createElement("p");
+      text.style.color = "#DB8876";
+      text.textContent = name;
+      text.classList.add("legende");
       //give a new clicked source
-      imageLightBox.setAttribute("src", that)
-      modalLightBoxContent.appendChild(text)
+      imageLightBox.setAttribute("src", that);
+      modalLightBoxContent.appendChild(text);
     }
   } else {
     const videoLightBox = document.querySelector(".videoLightBox");
@@ -363,32 +361,65 @@ function openLightbox(
       //nothing to do , the tag video already exist
     } else {
       //The tag "img" is present at the initialization of the web page(the first time loaded page web)
-      const photoLightBox = document.querySelector(".photoLightBox")
-      photoLightBox.remove()
-      const videoElement = document.createElement("video")
-      videoElement.setAttribute("name", "videoLightBox")
-      videoElement.classList.add("videoLightBox")
+      const photoLightBox = document.querySelector(".photoLightBox");
+      photoLightBox.remove();
+      const videoElement = document.createElement("video");
+      videoElement.setAttribute("name", "videoLightBox");
+      videoElement.classList.add("videoLightBox");
       //retrieving the source of video into the context
-      videoElement.setAttribute("src", that)
-      videoElement.setAttribute("type", "mp4")
-      videoElement.setAttribute("controls", " ")
+      videoElement.setAttribute("src", that);
+      videoElement.setAttribute("type", "mp4");
+      videoElement.setAttribute("controls", " ");
 
       //remove legend class if exist
-      const legend = document.querySelector(".legende")
+      const legend = document.querySelector(".legende");
 
       if (legend) {
-        legend.remove() // Supprime l'élément s'il existe
+        legend.remove(); // Supprime l'élément s'il existe
       }
       //  //Title Section for Images and Videos
-      const text = document.createElement("p")
-      text.style.color = "#DB8876"
-      text.textContent = name
-      text.classList.add("legende")
-      modalLightBoxContent.appendChild(videoElement)
-      modalLightBoxContent.appendChild(text)
+      const text = document.createElement("p");
+      text.style.color = "#DB8876";
+      text.textContent = name;
+      text.classList.add("legende");
+      modalLightBoxContent.appendChild(videoElement);
+      modalLightBoxContent.appendChild(text);
+      //managment the start video by key enter
+      videoElement.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === "Return") {
+          event.preventDefault(); // avoid all behavior by default of key "Return"
+          // start the video
+          videoElement.play();
+        }
+      })
     }
   }
 
   //display of image into the modal
   modalLightBox.classList.add("show");
+  LightBox.focus();
+
+  // added a managment on tab key for chevrons
+  LightBox.addEventListener("keydown", function (event) {
+    if (event.key === "Tab") {
+      event.preventDefault(); // avoid the navigation toward the next element
+      if (document.activeElement === precedent) {
+        // if element precedent has the focus, put focus on element suivant
+        suivant.focus();
+      } else if (document.activeElement === suivant) {
+        //if element suivant has the focus, put focus on element precedent
+        precedent.focus();
+      } else {
+        // if neither éléments has the focus, put by default the focus on element precedent
+        precedent.focus();
+      }
+    }
+  });
+
+  // checked if LightBox have a focus
+  // if (document.activeElement === LightBox) {
+  //   console.log("L'élément LightBox a le focus.")
+  // } else {
+  //   console.log("L'élément LightBox n'a pas le focus.")
+  // }
 } //all web page loading here
