@@ -54,6 +54,8 @@ body {
 
 .photograph-header p {
   font-size: 18px;
+  margin-top: 20px;
+  text-align: start;
   margin-bottom: 0;
 }
 
@@ -255,11 +257,12 @@ textarea {
 }
 
 .modalLightBox-content {
-  width: 90%;
+  width: 60%;
+  height:700px;
   margin: auto;
   position: absolute;
   top: 50%;
-  left:60%;
+  left: 43%;
   transform: translate(-50%, -50%);
   max-width: 1050px;
 }
@@ -267,7 +270,7 @@ textarea {
 .modalLightBox-content .photoLightBox,
 .videoLightBox {
   aspect-ratio: 1/1;
-  width: 60%;
+  width: 100%;
   height: 700px;
   object-fit: cover;
   border-radius: 5px;
@@ -308,7 +311,7 @@ textarea {
 .lightBoxSuivant:hover,
 .lightBoxPrecedent:hover {
   opacity: 1;
-  transition: opacity 0.5s; 
+  transition: opacity 0.5s;
 }
 
 /* .lightBoxSuivant:focus,

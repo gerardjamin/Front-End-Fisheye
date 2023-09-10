@@ -175,7 +175,7 @@ form.addEventListener("submit", function (event) {
     console.log("OK");
     // next step : send the valid form to server
     // form.submit();
-    //give the focus at the cross
+    //give the focus to cross
     closeButton.focus()
 } else {
     console.log("Vous devez remplir le formulaire correctement !");

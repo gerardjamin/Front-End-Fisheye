@@ -67,7 +67,7 @@ async function displayData(
             videoElement.setAttribute("src", portfolioVideo)
             videoElement.setAttribute("type", "mp4")
             videoElement.setAttribute("aria-label", `video ${title}`)
-            //videoElement.setAttribute("controls", ' ')
+            videoElement.setAttribute("controls", ' ')
             //I am filling the article with the video
             article.appendChild(videoElement)
         }
@@ -166,6 +166,7 @@ async function displayData(
     const modalLightBox = document.querySelector("#modalLightBox")
     const closeLightBox = document.querySelector("#closeLightBox")
     const modalLightBoxContent = document.querySelector(".modalLightBox-content")
+    
 
     // Add an onClick() event on each of the photos or videos and open the lightbox
     // and manage accessibility.
@@ -182,7 +183,7 @@ async function displayData(
             // Add class "overlay" in order to darkened the background (all elements main content)
             const main = document.getElementById('main')
             main.classList.add('overlay')
-            openLightbox(
+             openLightbox(
                 modalLightBox,
                 filteredPhotographers,
                 modalLightBoxContent,
@@ -235,7 +236,8 @@ async function displayData(
         main.classList.remove('overlay')
     })
 
-    // Closing the modal modalLightBox with the escape key on the keyboard.
+    // // Closing the modal modalLightBox with the escape key on the keyboard.
+    
     window.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && modalLightBox.classList.contains("show")) {
             e.preventDefault();
@@ -243,8 +245,19 @@ async function displayData(
             // remove class "overlay" 
             const main = document.getElementById('main')
             main.classList.remove('overlay')
+
+
+
+            window.scrollTo(0, scrollPosition);
+
+
+
+
+
+
         }
     })
+
     //*********************************DROPDOWN SORTING MANAGMENT********************************************************** */
 
     //Close the dropdown if clicked outside
@@ -294,13 +307,13 @@ async function displayData(
         })
 } //here, the page is loaded
 
-window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-        e.preventDefault();
-        const home = document.getElementById('homePage');
-        home.focus();
-    }
-})
+// window.addEventListener("keydown", (e) => {
+//     if (e.key === "Escape") {
+//         e.preventDefault();
+//         const home = document.getElementById('homePage');
+//         home.focus();
+//     }
+// })
 
 window.addEventListener("load", function () {
     console.log("La page est entièrement chargée.")

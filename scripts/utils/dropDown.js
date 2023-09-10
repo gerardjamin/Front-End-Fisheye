@@ -7,7 +7,7 @@ function showDropdown() {
 }
 
 /**
- * Cleaning the photo gallery before displaying it by (date/popularity/title)
+ * Cleaning the photo gallery and encart before displaying the page by (date/popularity/title)
  */
 function cleanUp() {
   const portofolio = document.querySelectorAll(".portfolio_section article")

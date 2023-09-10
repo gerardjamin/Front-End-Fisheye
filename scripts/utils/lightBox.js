@@ -137,6 +137,7 @@ function getExtensionFromUrl(url) {
   return partiesDuChemin[partiesDuChemin.length - 1];
 }
 
+//***********************************************display the porfolio's photographer**********************
 function openLightbox(
   modalLightBox,
   filteredPhotographers,
@@ -151,7 +152,7 @@ function openLightbox(
   const taille = reponse.sourcePhoto.length;
   // const that = this: Storing the context during the (click)
   const LightBox = document.getElementById("modalLightBox");
-  //I must put tabindex = -1 in order to be able to focus and to do a managment of custom tabindex
+  //I must put tabindex = -1 in order to be able to do a focus and to do a managment of custom tabindex
   LightBox.setAttribute("tabindex", "-1");
 
   //************************************************MANAGMENT CHEVRON LEFT/RIGHT**************************** */
@@ -400,9 +401,11 @@ function openLightbox(
   LightBox.focus();
 
   // added a managment on tab key for chevrons
+  
   LightBox.addEventListener("keydown", function (event) {
     if (event.key === "Tab") {
       event.preventDefault(); // avoid the navigation toward the next element
+
       if (document.activeElement === precedent) {
         // if element precedent has the focus, put focus on element suivant
         suivant.focus();
