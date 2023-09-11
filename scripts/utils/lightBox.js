@@ -69,13 +69,14 @@ function displayNexPrev(url, type, reponse, index) {
   const modalLightBoxContent = document.querySelector(".modalLightBox-content");
   const videoElement = document.createElement("video");
 
-  //pick up name and add the name's photo into the alt
-  const partiesDuChemin = url.split("/");
-  let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
-  const name = wholeName.replace(/\.jpg$/, "");
+
 
   //We have either a photo or a video
   if (type === "mp4") {
+    //pick up name and add the name's photo into the alt
+    const partiesDuChemin = url.split("/");
+    let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
+    const name = wholeName.replace(/\.mp4$/, "");
     //Checking for the existing video element inside <modalLightBox-content>
     // We retrieve the reference to the HTML collection if it exists.
     const collection = document.getElementsByTagName("video");
@@ -100,6 +101,10 @@ function displayNexPrev(url, type, reponse, index) {
       videoElement.focus();
     }
   } else {
+    //pick up name and add the name's photo into the alt
+    const partiesDuChemin = url.split("/");
+    let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
+    const name = wholeName.replace(/\.jpg$/, "");
     //So, an image exists
     // We obtain the reference to the HTML collection
     const collection = document.getElementsByTagName("video");
@@ -175,7 +180,13 @@ function openLightbox(
     //retry name and add the name's photo under photo
     const partiesDuChemin = url.split("/");
     let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
-    const name = wholeName.replace(/\.jpg$/, "");
+
+    let extension = wholeName.split(".")
+    if (extension[1] === "mp4") {
+      name = wholeName.replace(/\.mp4$/, "");
+    } else {
+      name = wholeName.replace(/\.jpg$/, "");
+    }
 
     //remove legend class if exist
     const legend = document.querySelector(".legende");
@@ -208,9 +219,16 @@ function openLightbox(
     //************************I switch to the sourcePhoto[] array and display the photos.
     //URL of the clicked photo.
     const url = reponse.sourcePhoto[index];
+    //retry name and add the name's photo under photo
     const partiesDuChemin = url.split("/");
     let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
-    const name = wholeName.replace(/\.jpg$/, "");
+
+    let extension = wholeName.split(".")
+    if (extension[1] === "mp4") {
+      name = wholeName.replace(/\.mp4$/, "");
+    } else {
+      name = wholeName.replace(/\.jpg$/, "");
+    }
     //remove legend class if exist
     const legend = document.querySelector(".legende");
     if (legend) {
@@ -241,10 +259,16 @@ function openLightbox(
       //URL linked to clicked photo.
       const url = reponse.sourcePhoto[index];
 
+      //retry name and add the name's photo under photo
       const partiesDuChemin = url.split("/");
       let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
-      const name = wholeName.replace(/\.jpg$/, "");
-      console.log(name);
+
+      let extension = wholeName.split(".")
+      if (extension[1] === "mp4") {
+        name = wholeName.replace(/\.mp4$/, "");
+      } else {
+        name = wholeName.replace(/\.jpg$/, "");
+      }
       //remove legend class if exist
       const legend = document.querySelector(".legende");
 
@@ -272,10 +296,16 @@ function openLightbox(
       //************************I switch to the sourcePhoto array to display the photos
       //URL of the clicked photo.
       const url = reponse.sourcePhoto[index];
+      //retry name and add the name's photo under photo
       const partiesDuChemin = url.split("/");
       let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
-      const name = wholeName.replace(/\.jpg$/, "");
-      console.log(name);
+
+      let extension = wholeName.split(".")
+      if (extension[1] === "mp4") {
+        name = wholeName.replace(/\.mp4$/, "");
+      } else {
+        name = wholeName.replace(/\.jpg$/, "");
+      }
       //remove legend class if exist
       const legend = document.querySelector(".legende");
 
@@ -370,7 +400,7 @@ function openLightbox(
       //retrieving the source of video into the context
       videoElement.setAttribute("src", that);
       videoElement.setAttribute("type", "mp4");
-      videoElement.setAttribute("controls", " ");
+      videoElement.setAttribute("controls", true);
 
       //remove legend class if exist
       const legend = document.querySelector(".legende");
@@ -379,6 +409,9 @@ function openLightbox(
         legend.remove(); // Supprime l'élément s'il existe
       }
       //  //Title Section for Images and Videos
+      const partiesDuChemin = that.split("/");
+      let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
+      const name = wholeName.replace(/\.mp4$/, "");
       const text = document.createElement("p");
       text.style.color = "#DB8876";
       text.textContent = name;
@@ -401,7 +434,7 @@ function openLightbox(
   LightBox.focus();
 
   // added a managment on tab key for chevrons
-  
+
   LightBox.addEventListener("keydown", function (event) {
     if (event.key === "Tab") {
       event.preventDefault(); // avoid the navigation toward the next element

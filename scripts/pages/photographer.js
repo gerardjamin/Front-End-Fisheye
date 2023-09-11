@@ -245,16 +245,6 @@ async function displayData(
             // remove class "overlay" 
             const main = document.getElementById('main')
             main.classList.remove('overlay')
-
-
-
-            window.scrollTo(0, scrollPosition);
-
-
-
-
-
-
         }
     })
 
