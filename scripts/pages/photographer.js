@@ -166,7 +166,7 @@ async function displayData(
     const modalLightBox = document.querySelector("#modalLightBox")
     const closeLightBox = document.querySelector("#closeLightBox")
     const modalLightBoxContent = document.querySelector(".modalLightBox-content")
-    
+
 
     // Add an onClick() event on each of the photos or videos and open the lightbox
     // and manage accessibility.
@@ -183,13 +183,14 @@ async function displayData(
             // Add class "overlay" in order to darkened the background (all elements main content)
             const main = document.getElementById('main')
             main.classList.add('overlay')
-             openLightbox(
+            openLightbox(
                 modalLightBox,
                 filteredPhotographers,
                 modalLightBoxContent,
                 that,
                 name
             )
+            
             //display image into the modale lightBox
             modalLightBox.classList.add("show")
 
@@ -211,6 +212,9 @@ async function displayData(
             if (event.key === "Enter") {
                 //record the context
                 let that = this.src;
+                // Add class "overlay" in order to darkened the background (all elements main content)
+                const main = document.getElementById('main')
+                main.classList.add('overlay')
                 openLightbox(
                     modalLightBox,
                     filteredPhotographers,
@@ -237,7 +241,7 @@ async function displayData(
     })
 
     // // Closing the modal modalLightBox with the escape key on the keyboard.
-    
+
     window.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && modalLightBox.classList.contains("show")) {
             e.preventDefault();
@@ -297,13 +301,13 @@ async function displayData(
         })
 } //here, the page is loaded
 
-// window.addEventListener("keydown", (e) => {
-//     if (e.key === "Escape") {
-//         e.preventDefault();
-//         const home = document.getElementById('homePage');
-//         home.focus();
-//     }
-// })
+window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+        e.preventDefault();
+        const home = document.getElementById('homePage');
+        home.focus();
+    }
+})
 
 window.addEventListener("load", function () {
     console.log("La page est entièrement chargée.")

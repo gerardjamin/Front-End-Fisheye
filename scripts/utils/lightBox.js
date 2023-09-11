@@ -158,13 +158,122 @@ function openLightbox(
   // const that = this: Storing the context during the (click)
   const LightBox = document.getElementById("modalLightBox");
   //I must put tabindex = -1 in order to be able to do a focus and to do a managment of custom tabindex
-  LightBox.setAttribute("tabindex", "-1");
+  //LightBox.setAttribute("tabindex", "-1");
 
   //************************************************MANAGMENT CHEVRON LEFT/RIGHT**************************** */
   const precedent = LightBox.querySelector(".lightBoxPrecedent");
   //precedent.setAttribute("tabindex","1")
 
-  //Waiting for an event...
+
+
+  //*************************************ZOOM MANAGMENT FOR PHOTO/VIDEO ON CLICK SECTION (closeUp view)***************************
+
+  let extension = getExtensionFromUrl(that);
+  if (extension === "jpg") {
+    // We obtain the reference to the HTML collection
+    const collection = document.getElementsByTagName("video");
+    // Check if 'photoLightBox' exists in my collection with the name of the img tag.
+    const elementRecherche = collection.namedItem("videoLightBox");
+
+    const partiesDuChemin = that.split("/");
+    let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
+    const name = wholeName.replace(/\.jpg$/, "");
+
+    if (elementRecherche !== null) {
+      console.log('L\'élément "videoLightBox" existe dans la collection.');
+      const videoLightBox = document.querySelector(".videoLightBox");
+      videoLightBox.remove();
+      const photoElement = document.createElement("img");
+      photoElement.setAttribute("name", "photoLightBox");
+      photoElement.classList.add("photoLightBox");
+      photoElement.setAttribute("alt", name);
+      //Retrieving the source of the video in the context (photo object)
+      photoElement.src = that;
+
+      //remove legend class if exist
+      const legend = document.querySelector(".legende");
+
+      if (legend) {
+        legend.remove(); // Supprime l'élément s'il existe
+      }
+      //Title Section for Images and Videos
+      const text = document.createElement("p");
+      text.style.color = "#DB8876";
+      text.textContent = name;
+      text.classList.add("legende");
+      modalLightBoxContent.appendChild(photoElement);
+      modalLightBoxContent.appendChild(text);
+    } else {
+      //not video tag
+      console.log(
+        "L'élément \"videoLightBox\" n'existe pas dans la collection."
+      );
+
+      const imageLightBox = document.querySelector(
+        ".modalLightBox-content img"
+      );
+      //attribut alt pour accessibilité
+      imageLightBox.setAttribute("alt", name);
+      //remove legend class if exist
+      const legend = document.querySelector(".legende");
+
+      if (legend) {
+        legend.remove(); 
+      }
+      //Title Section for Images and Videos
+      const text = document.createElement("p");
+      text.style.color = "#DB8876";
+      text.textContent = name;
+      text.classList.add("legende");
+      //give a new clicked source
+      imageLightBox.setAttribute("src", that);
+      modalLightBoxContent.appendChild(text);
+    }
+  } else {
+    const videoLightBox = document.querySelector(".videoLightBox");
+    if (videoLightBox !== null) {
+      //nothing to do , the tag video already exist
+    } else {
+      //The tag "img" is present at the initialization of the web page(the first time loaded page web)
+      const photoLightBox = document.querySelector(".photoLightBox");
+      photoLightBox.remove();
+      const videoElement = document.createElement("video");
+      videoElement.setAttribute("name", "videoLightBox");
+      videoElement.classList.add("videoLightBox");
+      //retrieving the source of video into the context
+      videoElement.setAttribute("src", that);
+      videoElement.setAttribute("type", "mp4");
+      videoElement.setAttribute("controls", true);
+
+      //remove legend class if exist
+      const legend = document.querySelector(".legende");
+
+      if (legend) {
+        legend.remove(); 
+      }
+      //  //Title Section for Images and Videos
+      const partiesDuChemin = that.split("/");
+      let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
+      const name = wholeName.replace(/\.mp4$/, "");
+      const text = document.createElement("p");
+      text.style.color = "#DB8876";
+      text.textContent = name;
+      text.classList.add("legende");
+      modalLightBoxContent.appendChild(videoElement);
+      modalLightBoxContent.appendChild(text);
+      //managment the start video by key enter
+      videoElement.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === "Return") {
+          event.preventDefault(); // avoid all behavior by default of key "Return"
+          // start the video
+          videoElement.play();
+        }
+      })
+    }
+  }
+
+  //********************************************************WAITING FOR AN EVENT...********************************************
+  //PRECEDENT
   precedent.addEventListener("click", function (event) {
     //Prevents event propagation to the parent
     event.stopPropagation();
@@ -204,6 +313,7 @@ function openLightbox(
     modalLightBoxContent.appendChild(text);
   });
 
+  //SUIVANT
   const suivant = LightBox.querySelector(".lightBoxSuivant");
   //suivant.setAttribute("tabindex","2")
 
@@ -323,134 +433,13 @@ function openLightbox(
     }
   });
 
-  //*************************************ZOOM MANAGMENT FOR PHOTO/VIDEO ON CLICK SECTION (closeUp view)***************************
-
-  let extension = getExtensionFromUrl(that);
-  if (extension === "jpg") {
-    // We obtain the reference to the HTML collection
-    const collection = document.getElementsByTagName("video");
-    // Check if 'photoLightBox' exists in my collection with the name of the img tag.
-    const elementRecherche = collection.namedItem("videoLightBox");
-
-    const partiesDuChemin = that.split("/");
-    let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
-    const name = wholeName.replace(/\.jpg$/, "");
-
-    if (elementRecherche !== null) {
-      console.log('L\'élément "videoLightBox" existe dans la collection.');
-      const videoLightBox = document.querySelector(".videoLightBox");
-      videoLightBox.remove();
-      const photoElement = document.createElement("img");
-      photoElement.setAttribute("name", "photoLightBox");
-      photoElement.classList.add("photoLightBox");
-      photoElement.setAttribute("alt", name);
-      //Retrieving the source of the video in the context (photo object)
-      photoElement.src = that;
-
-      //remove legend class if exist
-      const legend = document.querySelector(".legende");
-
-      if (legend) {
-        legend.remove(); // Supprime l'élément s'il existe
-      }
-      //Title Section for Images and Videos
-      const text = document.createElement("p");
-      text.style.color = "#DB8876";
-      text.textContent = name;
-      text.classList.add("legende");
-      modalLightBoxContent.appendChild(photoElement);
-      modalLightBoxContent.appendChild(text);
-    } else {
-      //not video tag
-      console.log(
-        "L'élément \"videoLightBox\" n'existe pas dans la collection."
-      );
-
-      const imageLightBox = document.querySelector(
-        ".modalLightBox-content img"
-      );
-      //attribut alt pour accessibilité
-      imageLightBox.setAttribute("alt", name);
-      //remove legend class if exist
-      const legend = document.querySelector(".legende");
-
-      if (legend) {
-        legend.remove(); // Supprime l'élément s'il existe
-      }
-      //Title Section for Images and Videos
-      const text = document.createElement("p");
-      text.style.color = "#DB8876";
-      text.textContent = name;
-      text.classList.add("legende");
-      //give a new clicked source
-      imageLightBox.setAttribute("src", that);
-      modalLightBoxContent.appendChild(text);
-    }
-  } else {
-    const videoLightBox = document.querySelector(".videoLightBox");
-    if (videoLightBox !== null) {
-      //nothing to do , the tag video already exist
-    } else {
-      //The tag "img" is present at the initialization of the web page(the first time loaded page web)
-      const photoLightBox = document.querySelector(".photoLightBox");
-      photoLightBox.remove();
-      const videoElement = document.createElement("video");
-      videoElement.setAttribute("name", "videoLightBox");
-      videoElement.classList.add("videoLightBox");
-      //retrieving the source of video into the context
-      videoElement.setAttribute("src", that);
-      videoElement.setAttribute("type", "mp4");
-      videoElement.setAttribute("controls", true);
-
-      //remove legend class if exist
-      const legend = document.querySelector(".legende");
-
-      if (legend) {
-        legend.remove(); // Supprime l'élément s'il existe
-      }
-      //  //Title Section for Images and Videos
-      const partiesDuChemin = that.split("/");
-      let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
-      const name = wholeName.replace(/\.mp4$/, "");
-      const text = document.createElement("p");
-      text.style.color = "#DB8876";
-      text.textContent = name;
-      text.classList.add("legende");
-      modalLightBoxContent.appendChild(videoElement);
-      modalLightBoxContent.appendChild(text);
-      //managment the start video by key enter
-      videoElement.addEventListener("keydown", function (event) {
-        if (event.key === "Enter" || event.key === "Return") {
-          event.preventDefault(); // avoid all behavior by default of key "Return"
-          // start the video
-          videoElement.play();
-        }
-      })
-    }
-  }
-
-  //display of image into the modal
-  modalLightBox.classList.add("show");
-  LightBox.focus();
-
-  // added a managment on tab key for chevrons
-
-  LightBox.addEventListener("keydown", function (event) {
-    if (event.key === "Tab") {
-      event.preventDefault(); // avoid the navigation toward the next element
-
-      if (document.activeElement === precedent) {
-        // if element precedent has the focus, put focus on element suivant
-        suivant.focus();
-      } else if (document.activeElement === suivant) {
-        //if element suivant has the focus, put focus on element precedent
-        precedent.focus();
-      } else {
-        // if neither éléments has the focus, put by default the focus on element precedent
-        precedent.focus();
-      }
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "tab" && modalLightBox.classList.contains("show")) {
+      e.preventDefault()
     }
   });
+
+  console.log(document.activeElement)
 
   // checked if LightBox have a focus
   // if (document.activeElement === LightBox) {
