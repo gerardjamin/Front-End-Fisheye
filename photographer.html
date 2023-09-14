@@ -14,7 +14,7 @@
 
   <body>
     <header id="head">
-      <a id="homePage" href="index.html" tabindex="1">
+      <a id="homePage" href="index.html" tabindex="0">
         <img
           src="assets/images/logo.png"
           class="logo"
@@ -27,7 +27,7 @@
       <div class="photograph-header">
         <!--open div contact_modal-->
         <button
-          tabindex="2"
+          tabindex="0"
           id="openButton"
           class="openButton"
           aria-label="ouvre la fenêtre de contact "
@@ -43,14 +43,14 @@
           id="dropComment"
           onclick="showDropdown()"
           class="dropbtn"
-          tabindex="3"
-          aria-label="ouvre le menu déroulant"
+          tabindex="0"
+          aria-label="ouvre le menu déroulant pour le trie"
         >
           Click
         </button>
         <div id="myDropdown" class="dropdown-content" aria-hidden="true">
           <a
-            tabindex="4"
+            tabindex="0"
             id="popularite"
             href="#"
             onclick="changeText('Popularité')"
@@ -58,7 +58,7 @@
             >Popularité</a
           >
           <a
-            tabindex="5"
+            tabindex="0"
             id="date"
             href="#"
             onclick="changeText('Date')"
@@ -66,7 +66,7 @@
             >Date</a
           >
           <a
-            tabindex="6"
+            tabindex="0"
             id="titre"
             href="#"
             onclick="changeText('Titre')"
@@ -90,7 +90,7 @@
             id="closeButton"
             onclick="closeModal()"
             aria-label="fermeture de la modale de contact"
-            tabindex="23"
+            tabindex="0"
           >
             <img
               src="assets/icons/close.svg"
@@ -135,7 +135,7 @@
     </div>
     <div id="encart" class="bottom-right-encart" aria-hidden="false"></div>
     <!-- closeup view  -->
-    <div id="modalLightBox" class="modalLightBox" aria-label="image closeup view">
+    <div id="modalLightBox" class="modalLightBox" aria-label="image closeup view" tabindex="-1">
       <button
         id="lightBoxPrecedent"
         class="lightBoxPrecedent"
@@ -148,25 +148,15 @@
       ></button>
 
       <!-- cross lightbox -->
-      <span id="closeLightBox" class="closeLightBox">&times;</span>
-      <div class="modalLightBox-content">
+      <a alt="close modal" tabindex="0"  aria-label="close modal" href="#">
+        <div id="closeLightBox" class="closeLightBox">&times;</div>
+      </a>
+      <div class="modalLightBox-content" tabindex="-1">
         <!-- href will give in java script -->
-        <img class="photoLightBox" alt="photoLightBox" src="#" />
+        <img class="photoLightBox" alt="photoLightBox" src="#" alt = "nothing" />
         <!-- <video src=""></video> -->
       </div>
     </div>
-
-    <!-- validation W3C
-    <p>
-      <a href="http://jigsaw.w3.org/css-validator/check/referer">
-        <img
-          style="border: 0; width: 88px; height: 31px"
-          src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
-          alt="CSS Valide !"
-        />
-      </a>
-    </p> -->
-
     <script src="scripts/api/api.js"></script>
     <script src="scripts/utils/likes.js"></script>
     <script src="scripts/utils/sortFiltered.js"></script>

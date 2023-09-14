@@ -45,7 +45,7 @@ function incrementeLikes(premierEnfant,likesCount,likeCoeur) {
         likeCoeur.textContent = likesCount;
         //Call the function that counts the total number of likes on the current page
         let totalLikes = compteLikesPagePhotographer();
-        const encartLike = document.querySelector(".encartLike span");
+        const encartLike = document.querySelector(".encartLike div");
         //update the new value
         encartLike.textContent = totalLikes;
         //Save the name of its class (clicked like) in the local storage.

@@ -439,6 +439,21 @@ function openLightbox(
     }
   });
 
+  // // added a managment on tab key for chevrons
+  LightBox.addEventListener("keydown", function (event) {
+    if (event.key === "Tab") {
+      event.preventDefault(); // avoid the navigation toward the next element
+      if (document.activeElement === precedent) {
+        suivant.focus();
+      } else if (document.activeElement === suivant) {
+        //if element suivant has the focus, put focus on element precedent
+        precedent.focus();
+      } else {
+        // if neither éléments has the focus, put by default the focus on element precedent
+        precedent.focus();
+      }
+    }
+  });
   console.log(document.activeElement)
 
   // checked if LightBox have a focus

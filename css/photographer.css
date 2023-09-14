@@ -40,13 +40,13 @@ body {
   object-fit: cover;
 }
 
-.photograph-header h1 {
+.photograph-header h {
   color: #d3573c;
   font-size: 64px;
   margin-bottom: 0;
 }
 
-.photograph-header h3 {
+.photograph-header h2 {
   color: #901c1c;
   font-size: 24px;
   margin-bottom: 0;
@@ -69,8 +69,7 @@ body {
   padding: 20px 20px;
 }
 
-.portfolio_section article img,
-video {
+.portfolio_section article img {
   aspect-ratio: 1/1;
   width: 100%;
   object-position: center;
@@ -78,6 +77,16 @@ video {
   border-radius: 5px;
   background: #c4c4c4;
 }
+
+.portfolio_section article video {
+  aspect-ratio: 1/1;
+  width: 100%;
+  object-position: center;
+  object-fit: cover;
+  border-radius: 5px;
+  background: #c4c4c4;
+}
+
 
 .portfolio_section article div {
   display: flex;
@@ -110,7 +119,7 @@ video {
   bottom: -10px;
   /* right: 0; */
   left: 1200px;
-  width: 376px;
+  width: 370px;
   height: 89px;
   background-color: #db8876;
   border-radius: 5px;
@@ -119,14 +128,22 @@ video {
 #encartLike > svg {
   margin-left: -100px;
 }
-
+#encartLike > div{
+  margin-right: 30px;
+  margin-left: 30px;
+}
 .encartLike {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  gap: 120px;
+  justify-content: space-around;
+  gap: 90px;
   font-size: 24px;
+}
+
+#encartLike > h1 {
+  font-size: 24px;
+  color:black;
 }
 
 /* header cross */
@@ -165,16 +182,14 @@ video {
   top: 5%;
   left: 4%;
   /* width: 70%; */
-  zoom: 90%;
+  /* zoom: 90%; */
 }
 
 .modal {
   border-radius: 5px;
   background-color: #db8876;
-  /* width: 60%;
-  height: auto; */
   width: 669px;
-  height: 900px;
+  height: calc(80% - 20px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -296,6 +311,10 @@ textarea {
   transition: opacity 0.5s;
 }
 
+#modalLightBox > a {
+  text-decoration: none;
+}
+
 .modalLightBox .lightBoxSuivant,
 .modalLightBox .lightBoxPrecedent {
   background: url(../assets/svg/icon-chevron-right.svg) center center/43px 72px
@@ -315,13 +334,6 @@ textarea {
   opacity: 1;
   transition: opacity 0.5s;
 }
-
-/* .lightBoxSuivant:focus,
-.lightBoxPrecedent:focus {
-  opacity: 1;
-  transition: opacity 0.5s;
-  
-} */
 
 .modalLightBox .lightBoxPrecedent {
   left: 1%;

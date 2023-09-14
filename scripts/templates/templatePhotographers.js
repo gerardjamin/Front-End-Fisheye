@@ -17,13 +17,13 @@ function photographerHeader(data) {
         identity.className = "identity"
         const h1 = document.createElement('h1');
         h1.textContent = name;
-        const h3 = document.createElement('h3');
-        h3.textContent = `${city}, ${country}`;
+        const h2 = document.createElement('h2');
+        h2.textContent = `${city}, ${country}`;
         const p = document.createElement('p');
         p.textContent = tagline
 
         identity.appendChild(h1);
-        identity.appendChild(h3);
+        identity.appendChild(h2);
         identity.appendChild(p);
 
         const img = document.createElement('img');

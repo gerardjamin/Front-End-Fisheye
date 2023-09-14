@@ -3,7 +3,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 // eslint-disable-next-line no-unused-vars
-// import { getPhotographers} from '../api/api.js'
 /**
  * 
  * @param {*} identity ("identity of the photographer.)
@@ -27,7 +26,7 @@ async function displayData(
     const child = document.querySelector(".openButton")
     photographersSection.insertBefore(identity, child)
     //initialisation  tabindex
-    let tabIndex = 7
+    let tabIndex = 0
 
     //**************************************PORTFOLIO MANAGMENT SECTION(GALERY)********************************
     //loop on all photographers
@@ -45,7 +44,7 @@ async function displayData(
         //Title Section for Images and Videos
         const p = document.createElement("p")
         p.textContent = `${title}`
-        tabIndex++
+        //tabIndex++
         if (image) {
             //part image
             const imgElement = document.createElement("img")
@@ -63,12 +62,17 @@ async function displayData(
             const videoElement = document.createElement("video")
             videoElement.classList.add("video")
             //Management accessibility by tabindex
-            videoElement.setAttribute("tabindex", `${tabIndex}`)
+            //videoElement.setAttribute("tabindex", `${tabIndex}`)
+            videoElement.setAttribute("tabindex", "0")
             videoElement.setAttribute("src", portfolioVideo)
             videoElement.setAttribute("type", "mp4")
             videoElement.setAttribute("aria-label", `video ${title}`)
-            videoElement.setAttribute("controls", ' ')
-            //I am filling the article with the video
+            videoElement.setAttribute("title", "video")
+            //background picture for video
+            videoElement.setAttribute("alt", "")
+            videoElement.setAttribute("aria-hidden", true)
+            videoElement.setAttribute("controls", true)
+            //I am filling the article with the videod
             article.appendChild(videoElement)
         }
 
@@ -76,12 +80,14 @@ async function displayData(
         //heart
         const div = document.createElement("div")
         div.classList.add("likesPhotographer");
-        div.setAttribute("id", "likesPhotographer")
+        //div.setAttribute("id", "likesPhotographer")
         //managment acessibility by tabindex
+        div.setAttribute("role", "button")
         div.setAttribute("tabindex", `${tabIndex}`)
         //Customization of the Like (id)
-        div.innerHTML = `<span class="like-${id}" id="likes" role="button" aria-label="bouton likes">${likes}</span>
+        div.innerHTML = `<span class="like-${id}" id="likes" role="application" aria-label="bouton likes">${likes}</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="21" height="24" viewBox="0 0 21 24" fill="none">
+                <title>A red heart</title>
                     <g clip-path="url(#clip0_120_550)">
                         <path d="M10.5 21.35L9.23125 20.03C4.725 15.36 1.75 12.28 1.75 8.5C1.75 5.42 3.8675 3 6.5625 3C8.085 3 9.54625 3.81 10.5 5.09C11.4537 3.81 12.915 3 14.4375 3C17.1325 3 19.25 5.42 19.25 8.5C19.25 12.28 16.275 15.36 11.7688 20.04L10.5 21.35Z" fill="#911C1C" />
                     </g>
@@ -107,7 +113,7 @@ async function displayData(
                 return objet.price
             }
         }
-        return null; // If the sought value is not found
+        return null; // If the value is not found
     }
 
     const priceHour = recupererProprieteAssociee(photographers, photographerId)
@@ -116,8 +122,10 @@ async function displayData(
     const div = document.createElement("div")
     div.setAttribute("id", "encartLike")
     div.classList.add("encartLike")
-    div.innerHTML = `<span>${totalLikes}</span>
+
+    div.innerHTML = `<div role="region" aria-labelledby="encartLike">${totalLikes}</div>
                 <svg class="svg-encart" xmlns="http://www.w3.org/2000/svg" width="21" height="24" viewBox="0 0 21 24" fill="none">
+                <title>A red heart</title>
                     <g clip-path="url(#clip0_120_550)">
                         <path d="M10.5 21.35L9.23125 20.03C4.725 15.36 1.75 12.28 1.75 8.5C1.75 5.42 3.8675 3 6.5625 3C8.085 3 9.54625 3.81 10.5 5.09C11.4537 3.81 12.915 3 14.4375 3C17.1325 3 19.25 5.42 19.25 8.5C19.25 12.28 16.275 15.36 11.7688 20.04L10.5 21.35Z" fill="#000000" />
                     </g>
@@ -127,7 +135,7 @@ async function displayData(
                         </clipPath>
                     </defs>
                 </svg> 
-                <h4>${priceHour}/jour</h4>`
+                <h1 role="region" aria-labelledby="encartLike">${priceHour}/jour</h1>`
     encart.appendChild(div)
 
     //************************************************************LIKES INCREMENT MANAGMENT***************************** */
@@ -164,16 +172,15 @@ async function displayData(
     // Using the spread operator (...) to concatenate two array.
     const concatenatedArray = [...myImage, ...myVideo]
     const modalLightBox = document.querySelector("#modalLightBox")
-    const closeLightBox = document.querySelector("#closeLightBox")
+    //const closeLightBox = document.querySelector("#closeLightBox")
+    const closeLightBox = document.querySelector("#modalLightBox > a")
     const modalLightBoxContent = document.querySelector(".modalLightBox-content")
 
 
-    // Add an onClick() event on each of the photos or videos and open the lightbox
-    // and manage accessibility.
-    //looping on all elements
+    // Add an onClick() event on each of the photos or videos and open the lightbox and manage accessibility.
+    //LOOPING ON ALL ELEMENTS
     for (let photo of concatenatedArray) {
         photo.addEventListener("click", function () {
-
             //record the context du click
             let that = this.src;
             //Retrieve the name's picture
@@ -190,7 +197,7 @@ async function displayData(
                 that,
                 name
             )
-            
+
             //display image into the modale lightBox
             modalLightBox.classList.add("show")
 
@@ -206,6 +213,8 @@ async function displayData(
                 photoLightBox.focus()
             }
 
+            //modalLightBoxContent.focus()
+            console.log(document.activeElement)
         })
         //select photo by tabIndex and manage videos & pictures with return key
         photo.addEventListener("keydown", function (event) {
@@ -230,9 +239,18 @@ async function displayData(
                 }
             }
         })
-    }
+        //avoid the default behavior for tab
+        window.addEventListener("keydown", (e) => {
+            const resultat = modalLightBox.classList.contains("show")
+            if (e.key === "Tab" && resultat) {
+                e.preventDefault()
+            }
+        });
 
-    //Closing the modalLightBox by clicking the cross
+    }  //END OF LOOPING
+
+
+    //Closing the modalLightBox by clicking the RED CROSS
     closeLightBox.addEventListener("click", function () {
         modalLightBox.classList.remove("show")
         // remove class "overlay" 
@@ -240,17 +258,18 @@ async function displayData(
         main.classList.remove('overlay')
     })
 
-    // // Closing the modal modalLightBox with the escape key on the keyboard.
-
-    window.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && modalLightBox.classList.contains("show")) {
-            e.preventDefault();
-            modalLightBox.classList.remove("show")
-            // remove class "overlay" 
-            const main = document.getElementById('main')
-            main.classList.remove('overlay')
-        }
-    })
+    //put the focus on link of page HOME
+window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+        e.preventDefault();
+        const home = document.getElementById('homePage');
+        modalLightBox.classList.remove("show")
+        // remove class "overlay" 
+        const main = document.getElementById('main')
+        main.classList.remove('overlay')
+        home.focus();
+    }
+})
 
     //*********************************DROPDOWN SORTING MANAGMENT********************************************************** */
 
@@ -301,14 +320,8 @@ async function displayData(
         })
 } //here, the page is loaded
 
-window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-        e.preventDefault();
-        const home = document.getElementById('homePage');
-        home.focus();
-    }
-})
-
+//information
+console.log(document.activeElement)
 window.addEventListener("load", function () {
     console.log("La page est entièrement chargée.")
 })

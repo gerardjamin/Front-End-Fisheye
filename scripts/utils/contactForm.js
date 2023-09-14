@@ -217,12 +217,12 @@ function openModal() {
 }
 
 // Closing the modal with the keyboard's escape key
-window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.style.display === 'block') {
-        e.preventDefault()
-        closeModal()
-    }
-});
+// window.addEventListener('keydown', (e) => {
+//     if (e.key === 'Escape' && modal.style.display === 'block') {
+//         e.preventDefault()
+//         closeModal()
+//     }
+// });
 
 
 
