@@ -69,8 +69,6 @@ function displayNexPrev(url, type, reponse, index) {
   const modalLightBoxContent = document.querySelector(".modalLightBox-content");
   const videoElement = document.createElement("video");
 
-
-
   //We have either a photo or a video
   if (type === "mp4") {
     //pick up name and add the name's photo into the alt
@@ -163,9 +161,6 @@ function openLightbox(
   //************************************************MANAGMENT CHEVRON LEFT/RIGHT**************************** */
   const precedent = LightBox.querySelector(".lightBoxPrecedent");
   //precedent.setAttribute("tabindex","1")
-
-
-
   //*************************************ZOOM MANAGMENT FOR PHOTO/VIDEO ON CLICK SECTION (closeUp view)***************************
 
   let extension = getExtensionFromUrl(that);
@@ -238,12 +233,18 @@ function openLightbox(
       const photoLightBox = document.querySelector(".photoLightBox");
       photoLightBox.remove();
       const videoElement = document.createElement("video");
+      videoElement.setAttribute("tabindex", "0")
       videoElement.setAttribute("name", "videoLightBox");
       videoElement.classList.add("videoLightBox");
       //retrieving the source of video into the context
       videoElement.setAttribute("src", that);
+      videoElement.setAttribute("title", "video")
       videoElement.setAttribute("type", "mp4");
+      //background picture for video
+      videoElement.setAttribute("alt", "")
+      videoElement.setAttribute("aria-hidden", true)
       videoElement.setAttribute("controls", true);
+      videoElement.setAttribute("aria-label", "closeup view")
 
       //remove legend class if exist
       const legend = document.querySelector(".legende");

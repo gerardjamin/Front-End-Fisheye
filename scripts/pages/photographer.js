@@ -197,10 +197,10 @@ async function displayData(
                 that,
                 name
             )
-
             //display image into the modale lightBox
             modalLightBox.classList.add("show")
-
+           //i give the focus in order to use prev and next buttons
+            modalLightBoxContent.focus()
             //accessibilite
             //give the focus to video element
             const videoLightBox = document.querySelector(".videoLightBox")
@@ -259,17 +259,17 @@ async function displayData(
     })
 
     //put the focus on link of page HOME
-window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-        e.preventDefault();
-        const home = document.getElementById('homePage');
-        modalLightBox.classList.remove("show")
-        // remove class "overlay" 
-        const main = document.getElementById('main')
-        main.classList.remove('overlay')
-        home.focus();
-    }
-})
+    window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            e.preventDefault();
+            const home = document.getElementById('homePage');
+            modalLightBox.classList.remove("show")
+            // remove class "overlay" 
+            const main = document.getElementById('main')
+            main.classList.remove('overlay')
+            home.focus();
+        }
+    })
 
     //*********************************DROPDOWN SORTING MANAGMENT********************************************************** */
 
