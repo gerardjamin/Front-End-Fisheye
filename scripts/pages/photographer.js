@@ -71,7 +71,7 @@ async function displayData(
             //background picture for video
             videoElement.setAttribute("alt", "")
             videoElement.setAttribute("aria-hidden", true)
-            videoElement.setAttribute("controls", true)
+            //videoElement.setAttribute("controls", true)
             //I am filling the article with the videod
             article.appendChild(videoElement)
         }
@@ -102,6 +102,7 @@ async function displayData(
         article.appendChild(container)
         portofolioSection.appendChild(article)
     }
+
     //**************************************************************MANAGMENT ENCART OF THE PAGE HTML*********************************
     const encart = document.getElementById("encart")
     const { photographerId } = filteredPhotographers[0]
@@ -199,7 +200,7 @@ async function displayData(
             )
             //display image into the modale lightBox
             modalLightBox.classList.add("show")
-           //i give the focus in order to use prev and next buttons
+            //i give the focus in order to use prev and next buttons
             modalLightBoxContent.focus()
             //accessibilite
             //give the focus to video element
@@ -287,7 +288,7 @@ async function displayData(
         }
     }
 
-    //Sorting by Category.
+    //Sorting by popularite.
     document
         .getElementById("popularite")
         .addEventListener("click", function (event) {
@@ -298,7 +299,7 @@ async function displayData(
             // portfolio_section
             displayData(identity, picture, triePopularite, photographers)
         })
-
+    //Sorting by date
     document
         .getElementById("date").addEventListener("click", function (event) {
             // Prevent the default behavior of the link (navigation)
@@ -308,7 +309,7 @@ async function displayData(
             // portfolio_section
             displayData(identity, picture, trieDate, photographers)
         })
-
+    //Sorting by titre
     document
         .getElementById("titre").addEventListener("click", function (event) {
             // Prevent the default behavior of the link (navigation)
@@ -323,7 +324,7 @@ async function displayData(
 //information
 console.log(document.activeElement)
 window.addEventListener("load", function () {
-    console.log("La page est entièrement chargée.")
+    console.log("here, page is all loaded")
 })
 
 async function init() {

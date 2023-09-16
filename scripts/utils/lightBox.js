@@ -155,14 +155,12 @@ function openLightbox(
   const taille = reponse.sourcePhoto.length;
   // const that = this: Storing the context during the (click)
   const LightBox = document.getElementById("modalLightBox");
-  //I must put tabindex = -1 in order to be able to do a focus and to do a managment of custom tabindex
-  //LightBox.setAttribute("tabindex", "-1");
 
   //************************************************MANAGMENT CHEVRON LEFT/RIGHT**************************** */
   const precedent = LightBox.querySelector(".lightBoxPrecedent");
-  //precedent.setAttribute("tabindex","1")
-  //*************************************ZOOM MANAGMENT FOR PHOTO/VIDEO ON CLICK SECTION (closeUp view)***************************
+  const suivant = LightBox.querySelector(".lightBoxSuivant");
 
+  //*************************************ZOOM MANAGMENT FOR PHOTO/VIDEO ON CLICK SECTION (closeUp view)***************************
   let extension = getExtensionFromUrl(that);
   if (extension === "jpg") {
     // We obtain the reference to the HTML collection
@@ -315,9 +313,6 @@ function openLightbox(
   });
 
   //SUIVANT
-  const suivant = LightBox.querySelector(".lightBoxSuivant");
-  //suivant.setAttribute("tabindex","2")
-
   //Waiting for an event...
   suivant.addEventListener("click", function (event) {
     //Prevents event propagation to the parent
@@ -434,27 +429,6 @@ function openLightbox(
     }
   });
 
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "tab" && modalLightBox.classList.contains("show")) {
-      e.preventDefault()
-    }
-  });
-
-  // // added a managment on tab key for chevrons
-  LightBox.addEventListener("keydown", function (event) {
-    if (event.key === "Tab") {
-      event.preventDefault(); // avoid the navigation toward the next element
-      if (document.activeElement === precedent) {
-        suivant.focus();
-      } else if (document.activeElement === suivant) {
-        //if element suivant has the focus, put focus on element precedent
-        precedent.focus();
-      } else {
-        // if neither éléments has the focus, put by default the focus on element precedent
-        precedent.focus();
-      }
-    }
-  });
   console.log(document.activeElement)
 
   // checked if LightBox have a focus
