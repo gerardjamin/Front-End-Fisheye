@@ -135,23 +135,26 @@
     </div>
     <div id="encart" class="bottom-right-encart" aria-hidden="false"></div>
     <!-- closeup view  -->
-    <div id="modalLightBox" class="modalLightBox" aria-label="image closeup view" tabindex="-1">
+    <div id="modalLightBox" class="modalLightBox" aria-label="image closeup view" tabindex="-1" aria-hidden="true">
+       <!-- cross lightbox -->
+       <a alt="close modal" tabindex="0"  aria-label="close modal" href="#">
+        <div id="closeLightBox" class="closeLightBox">&times;</div>
+      </a>
       <button
         id="lightBoxPrecedent"
         class="lightBoxPrecedent"
+        tabindex="1"
         aria-label="Previous image"
       ></button>
       <button
         id="lightBoxSuivant"
         class="lightBoxSuivant"
+        tabindex="2"
         aria-label="Next image"
       ></button>
 
-      <!-- cross lightbox -->
-      <a alt="close modal" tabindex="0"  aria-label="close modal" href="#">
-        <div id="closeLightBox" class="closeLightBox">&times;</div>
-      </a>
-      <div class="modalLightBox-content" tabindex="-1">
+     
+      <div class="modalLightBox-content">
         <!-- href will give in java script -->
         <img class="photoLightBox" alt="photoLightBox" src="#" alt = "nothing" />
         <!-- <video src=""></video> -->

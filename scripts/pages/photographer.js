@@ -176,6 +176,7 @@ async function displayData(
     //const closeLightBox = document.querySelector("#closeLightBox")
     const closeLightBox = document.querySelector("#modalLightBox > a")
     const modalLightBoxContent = document.querySelector(".modalLightBox-content")
+    const header = document.querySelector("#head")
 
 
     // Add an onClick() event on each of the photos or videos and open the lightbox and manage accessibility.
@@ -187,9 +188,14 @@ async function displayData(
             //Retrieve the name's picture
             const partiesDuChemin = that.split("/")
             let name = partiesDuChemin[partiesDuChemin.length - 1]
+            //windows narrator desactived
+            header.setAttribute("aria-hidden",true)
+            modalLightBox.setAttribute("aria-hidden",false)
+            encart.setAttribute("aria-hidden",true)
 
             // Add class "overlay" in order to darkened the background (all elements main content)
             const main = document.getElementById('main')
+            main.setAttribute("aria-hidden",true)
             main.classList.add('overlay')
             openLightbox(
                 modalLightBox,
@@ -224,6 +230,7 @@ async function displayData(
                 let that = this.src;
                 // Add class "overlay" in order to darkened the background (all elements main content)
                 const main = document.getElementById('main')
+                main.setAttribute("aria-hidden",true)
                 main.classList.add('overlay')
                 openLightbox(
                     modalLightBox,
@@ -240,7 +247,7 @@ async function displayData(
                 }
             }
         })
-        //avoid the default behavior for tab
+        //avoid the default behavior for tab if lightBox is opened
         window.addEventListener("keydown", (e) => {
             const resultat = modalLightBox.classList.contains("show")
             if (e.key === "Tab" && resultat) {
@@ -254,9 +261,14 @@ async function displayData(
     //Closing the modalLightBox by clicking the RED CROSS
     closeLightBox.addEventListener("click", function () {
         modalLightBox.classList.remove("show")
+        modalLightBox.setAttribute("aria-hidden",true)
+        encart.setAttribute("aria-hidden",false)
+        header.setAttribute("aria-hidden",false)
         // remove class "overlay" 
         const main = document.getElementById('main')
+        main.setAttribute("aria-hidden",false)
         main.classList.remove('overlay')
+
     })
 
     //put the focus on link of page HOME
@@ -267,6 +279,7 @@ async function displayData(
             modalLightBox.classList.remove("show")
             // remove class "overlay" 
             const main = document.getElementById('main')
+            main.setAttribute("aria-hidden",true)
             main.classList.remove('overlay')
             home.focus();
         }

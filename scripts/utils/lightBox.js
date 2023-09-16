@@ -296,8 +296,8 @@ function openLightbox(
       name = wholeName.replace(/\.jpg$/, "");
     }
 
-    //remove legend class if exist
     const legend = document.querySelector(".legende");
+    //remove legend class if exist
     if (legend) {
       legend.remove(); // Supprime l'élément s'il existe
     }
@@ -335,6 +335,7 @@ function openLightbox(
     } else {
       name = wholeName.replace(/\.jpg$/, "");
     }
+
     //remove legend class if exist
     const legend = document.querySelector(".legende");
     if (legend) {
@@ -375,6 +376,7 @@ function openLightbox(
       } else {
         name = wholeName.replace(/\.jpg$/, "");
       }
+
       //remove legend class if exist
       const legend = document.querySelector(".legende");
 
@@ -402,6 +404,7 @@ function openLightbox(
       //************************I switch to the sourcePhoto array to display the photos
       //URL of the clicked photo.
       const url = reponse.sourcePhoto[index];
+
       //retry name and add the name's photo under photo
       const partiesDuChemin = url.split("/");
       let wholeName = partiesDuChemin[partiesDuChemin.length - 1];
@@ -412,6 +415,7 @@ function openLightbox(
       } else {
         name = wholeName.replace(/\.jpg$/, "");
       }
+
       //remove legend class if exist
       const legend = document.querySelector(".legende");
 
