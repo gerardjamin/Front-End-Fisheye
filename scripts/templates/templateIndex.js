@@ -18,6 +18,7 @@ function photographerTemplate(data) {
         img.setAttribute('alt', `Je m'appelle ${name}`)
         const link = document.createElement('a')
         //managment accessibility
+        link.setAttribute("role","link")
         link.setAttribute("tabindex", `${tabIndex}`)
         link.setAttribute("title","afficher la page de profil du photographe ?")
         //Link to access the photographer's presentation page

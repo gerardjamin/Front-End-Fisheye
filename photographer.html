@@ -14,7 +14,7 @@
 
   <body>
     <header id="head">
-      <a id="homePage" href="index.html" tabindex="0">
+      <a role="link" id="homePage" href="index.html" tabindex="0">
         <img
           src="assets/images/logo.png"
           class="logo"
@@ -37,7 +37,7 @@
         </button>
       </div>
       <!-- MANAGMENT OF DROPDOWN -->
-      <div class="dropdown">
+      <aside class="dropdown">
         <span>Trier par</span>
         <button
           id="dropComment"
@@ -74,7 +74,7 @@
             >Titre</a
           >
         </div>
-      </div>
+      </aside>
       <section class="portfolio_section">
         <!-- in order to keep semantic structure -->
         <h2 class="visually-hidden">Portfolio</h2>
@@ -133,7 +133,7 @@
         </form>
       </div>
     </div>
-    <div id="encart" class="bottom-right-encart" aria-hidden="false"></div>
+    <aside id="encart" class="bottom-right-encart" aria-hidden="false"></aside>
     <!-- closeup view  -->
     <div id="modalLightBox" class="modalLightBox" aria-label="image closeup view" tabindex="-1" aria-hidden="true">
        <!-- cross lightbox -->
@@ -163,7 +163,6 @@
     <script src="scripts/api/api.js"></script>
     <script src="scripts/utils/likes.js"></script>
     <script src="scripts/utils/sortFiltered.js"></script>
-
     <script src="scripts/templates/templatePhotographers.js"></script>
     <script src="scripts/pages/photographer.js"></script>
     <script src="scripts/utils/contactForm.js"></script>

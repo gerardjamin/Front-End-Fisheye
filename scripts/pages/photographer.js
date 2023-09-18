@@ -46,7 +46,7 @@ async function displayData(
         p.textContent = `${title}`
         //tabIndex++
         if (image) {
-            //part image
+            //part image (css,html)
             const imgElement = document.createElement("img")
             //Management accessibility by tabindex
             imgElement.setAttribute("tabindex", `${tabIndex}`)
@@ -58,7 +58,7 @@ async function displayData(
             //I am filling the article with the image
             article.appendChild(imgElement)
         } else if (video) {
-            //part video
+            //part video  (css,html)
             const videoElement = document.createElement("video")
             videoElement.classList.add("video")
             //Management accessibility by tabindex
@@ -85,7 +85,7 @@ async function displayData(
         div.setAttribute("role", "button")
         div.setAttribute("tabindex", `${tabIndex}`)
         //Customization of the Like (id)
-        div.innerHTML = `<span class="like-${id}" id="likes" role="application" aria-label="bouton likes">${likes}</span>
+        div.innerHTML = `<span class="like-${id}" id="likes-${id}" role="application" aria-label="bouton likes">${likes}</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="21" height="24" viewBox="0 0 21 24" fill="none">
                 <title>A red heart</title>
                     <g clip-path="url(#clip0_120_550)">

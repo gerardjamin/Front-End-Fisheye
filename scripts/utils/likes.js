@@ -20,17 +20,21 @@ function compteLikesPhotographer(filteredPhotographers) {
 function compteLikesPagePhotographer() {
     let totalLikes = 0
     //Save the likes of each photo in a node list
-    const likes = document.querySelectorAll(".likesPhotographer")
-    //We loop through the list
-    for (let like of likes) {
-        const likeCoeur = like.querySelector("#likes")
-        //convert in number
-        let likes = parseInt(likeCoeur.textContent)
-        totalLikes += likes
-    }
+    const likes = document.querySelectorAll(".likesPhotographer > span")
+    //We loop through the list of json file 
+      for (let likeCoeur of likes) {
+          // Convertir le contenu en nombre
+          let likes = parseInt(likeCoeur.textContent);
+          totalLikes += likes;
+      }
     return totalLikes
 }
-
+/**
+ * 
+ * @param {*} premierEnfant 
+ * @param {*} likesCount 
+ * @param {*} likeCoeur 
+ */
 function incrementeLikes(premierEnfant,likesCount,likeCoeur) {
      //init getLikeStorage if a value exist
      const getLikeStorage = localStorage.getItem(

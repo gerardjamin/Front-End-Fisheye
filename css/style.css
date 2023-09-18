@@ -4,7 +4,7 @@
     --name: valeur;
 }
 
-/* use for debugging element with focus*/
+/* can be used for debugging element with focus*/
 *:focus {
     /* outline: 2px solid rgb(22, 18, 219) !important; */
     box-shadow:
