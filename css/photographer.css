@@ -14,10 +14,10 @@
     105px 111px 85px -2px rgba(0, 0, 0, 0.3);
 }
 
-body {
+/* body {
   max-width: 1440px;
   max-height: 1024px;
-}
+} */
 .photograph-header {
   display: flex;
   flex-direction: row;
@@ -40,7 +40,7 @@ body {
   object-fit: cover;
 }
 
-.photograph-header h {
+.photograph-header h1 {
   color: #d3573c;
   font-size: 64px;
   margin-bottom: 0;
@@ -69,12 +69,14 @@ body {
   padding: 20px 20px;
 }
 
+.portfolio_section article {
+  width: 350px;
+  height: 350px;
+}
 .portfolio_section article img {
   aspect-ratio: 1/1;
   width: 100%;
   height: 100%;
-  object-position: center;
-  object-fit: cover;
   border-radius: 5px;
   background: #c4c4c4;
 }
@@ -264,15 +266,16 @@ textarea {
 .modalLightBox {
   display: none;
   position: fixed;
-  left: 40%;
+  left: 50%;
   top: 50%;
   bottom: 0px;
   right: 0px;
   transform: translate(-50%, -50%);
-  /* background: rgba(235, 229, 229, 0.5); */
-  background: #fff;
-  max-width: 1242px;
-  height: 850px;
+  /* background: #fff; */
+  background: black;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
 }
 
 .modalLightBox-content {
@@ -288,24 +291,23 @@ textarea {
 
 .modalLightBox-content .photoLightBox,
 .videoLightBox {
-  aspect-ratio: 1/1;
-  width: 100%;
-  height: 700px;
-  object-fit: cover;
+  width: 70%;
+  height: 100%;
   border-radius: 5px;
   cursor: pointer;
   border: 5px solid #fff;
+  margin-left: 28%;
 }
 
 .closeLightBox {
-  color: black;
+  color: rgb(219, 136, 118);
   font-size: 4em;
   width: 95%;
   height: 82px;
   display: flex;
   justify-content: end;
   cursor: pointer;
-  opacity: 0.5;
+  opacity: 0.7;
 }
 
 .closeLightBox:hover {
@@ -325,10 +327,9 @@ textarea {
   height: 100%;
   border: none;
   position: fixed;
-  opacity: 0.5;
+  opacity: 0.7;
   cursor: pointer;
   transition: 0.4s;
-  z-index: 20;
 }
 
 .lightBoxSuivant:hover,
@@ -338,18 +339,18 @@ textarea {
 }
 
 .modalLightBox .lightBoxPrecedent {
-  left: 1%;
+  left: 11%;
   transform: rotate(180deg);
 }
 
 .modalLightBox .lightBoxSuivant {
-  left: 75%;
+  left: 80%;
 }
 
 #modalLightBox > div > p {
+  position: fixed;
   font-size: 24px;
-  text-align: start;
-  /* color:#901c1c; java script*/ 
+  left:28%;
 }
 
 .dropbtn {
@@ -372,9 +373,14 @@ textarea {
   display: inline-block;
 }
 
+#sorting {
+  margin-left: 20px;
+}
+
 .dropdown-content {
   display: none;
   position: absolute;
+  left:100px;
   background-color: var(--button-color);
   min-width: 160px;
 }
@@ -384,8 +390,9 @@ textarea {
   padding: 12px 16px;
   text-decoration: none;
   display: block;
-  border: solid 5px;
-  border-bottom: white;
+  border: solid 2px;
+  /* border-bottom: white; */
+  width:140px;
   height: auto;
 }
 
@@ -404,8 +411,8 @@ textarea {
   position: fixed;
   top: 0;
   left: 0;
-  max-width: 1440px;
-  max-height: 1024px;
+  /* max-width: 1440px;
+  max-height: 1024px; */
   width: 100%;
   height: 100%;
   opacity: 0.7;

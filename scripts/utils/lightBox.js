@@ -94,7 +94,7 @@ function displayNexPrev(url, type, reponse, index) {
       //Retrieving the source of the video from the context.
       videoElement.setAttribute("src", `${url}`);
       videoElement.setAttribute("type", "mp4");
-      videoElement.setAttribute("controls", " ");
+      videoElement.setAttribute("controls", "");
       modalLightBoxContent.appendChild(videoElement);
       videoElement.focus();
     }
@@ -241,7 +241,7 @@ function openLightbox(
       //background picture for video
       videoElement.setAttribute("alt", "")
       videoElement.setAttribute("aria-hidden", true)
-      videoElement.setAttribute("controls", true);
+      videoElement.setAttribute("controls", "");
       videoElement.setAttribute("aria-label", "closeup view")
 
       //remove legend class if exist
