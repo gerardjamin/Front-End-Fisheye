@@ -1,4 +1,10 @@
 /* eslint-disable no-unused-vars */
+/**
+ * 
+ * @param {*} type 
+ * @param {*} filteredPhotographers 
+ * @returns 
+ */
 function filtrage(type, filteredPhotographers) {
 
     //Filter the table by decreasing popularity.

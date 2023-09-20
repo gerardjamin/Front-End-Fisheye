@@ -27,7 +27,7 @@ for (var i = 0; i < inputs.length; i++) {
     })
 }
 
-//Real-time Form Field zone-text.
+//controls in Real-time input Field zone-text.
 var area = document.getElementById("message");
 area.addEventListener("input", function () {
     checkMessage()

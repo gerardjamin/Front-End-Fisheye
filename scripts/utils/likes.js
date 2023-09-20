@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 /**
  * Count the likes of each photographer from the JSON file
- * @param {*} filteredPhotographers 
- * @returns 
+ * @param {*} photographer 
+ * @returns la totalité des likes de la page
  */
 function compteLikesPhotographer(filteredPhotographers) {
     let totalLikes = 0
@@ -13,9 +13,9 @@ function compteLikesPhotographer(filteredPhotographers) {
 }
 
 /**
- * Count the likes of each photographer from the photographer.html page and update the total number of likes
+ * 
  * @param {*}  
- * @returns totalLikes
+ * @returns Count the likes of each photographer from the photographer.html page and update the total number of likes
  */
 function compteLikesPagePhotographer() {
     let totalLikes = 0
@@ -30,7 +30,7 @@ function compteLikesPagePhotographer() {
     return totalLikes
 }
 /**
- * 
+ * increment the like's photographer one time only
  * @param {*} premierEnfant 
  * @param {*} likesCount 
  * @param {*} likeCoeur 
@@ -45,7 +45,7 @@ function incrementeLikes(premierEnfant,likesCount,likeCoeur) {
       } else {
         //increment
         likesCount++;
-        //Inject the value into the HTML object within the context
+        //Inject the value into the HTML object linked to the context
         likeCoeur.textContent = likesCount;
         //Call the function that counts the total number of likes on the current page
         let totalLikes = compteLikesPagePhotographer();

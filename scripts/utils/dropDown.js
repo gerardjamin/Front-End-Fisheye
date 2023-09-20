@@ -7,7 +7,7 @@ function showDropdown() {
 }
 
 /**
- * Cleaning the photo gallery and encart before displaying the page by (date/popularity/title)
+ * Cleaning the photo gallery and encart before displaying the page by (date/popularity/title) after sorting
  */
 function cleanUp() {
   const portofolio = document.querySelectorAll(".portfolio_section article")
@@ -19,7 +19,7 @@ function cleanUp() {
 }
 
 /**
- * Display the sorting type in the button
+ * Display the sorting type inside the button
  * @param {*} newText 
  */
 function changeText(newText) {

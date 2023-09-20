@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 /**
  *
- * @param {*} filteredPhotographers : All the works of the selected photographer.
- * @returns Promise for the array of videos and images : URLs of each of the photos and video
+ * @param {*} filteredPhotographers : every photographer.
+ * @returns an array with videos and images : every URLs linked to the photos and video
  */
 function getTravauxPhotographers(filteredPhotographers) {
   let portfolioPicture = [];
@@ -29,9 +29,9 @@ function getTravauxPhotographers(filteredPhotographers) {
 
 /**
  ******************************************Calculate the index of the clicked photo in the array *************
- * @param {*} filteredPhotographers :All the works of the selected photographer
+ * @param {*} every photographer
  * @param {*} src :Path of the clicked photo in the context.
- * @returns : Index of the clicked photo in the sourcePhoto array
+ * @returns : Index linked to clicked photo inside sourcePhoto array
  */
 function calculeIndex(filteredPhotographers, src) {
   // eslint-disable-next-line no-debugger
@@ -42,7 +42,7 @@ function calculeIndex(filteredPhotographers, src) {
   const urlDePhotos = sourcePhoto.map(function (element) {
     const chemin = element;
     const partiesDuChemin = chemin.split("/");
-    //Return the name of the photo with the extension
+    //Return the name of every photo with the extension
     return partiesDuChemin[partiesDuChemin.length - 1];
   });
 
@@ -53,7 +53,6 @@ function calculeIndex(filteredPhotographers, src) {
   let name = partiesDuChemin[partiesDuChemin.length - 1];
   //We are looking for the index of the clicked photo in the sourcePhoto array.
   let index = urlDePhotos.findIndex((imageIndex) => imageIndex === name);
-
   return { index, sourcePhoto };
 }
 
@@ -141,6 +140,14 @@ function getExtensionFromUrl(url) {
 }
 
 //***********************************************display the porfolio's photographer**********************
+/**
+ * 
+ * @param {*} modalLightBox 
+ * @param {*} every photographer 
+ * @param {*} modalLightBoxContent 
+ * @param {*} that (context)
+ * @param {*} name 
+ */
 function openLightbox(
   modalLightBox,
   filteredPhotographers,
@@ -433,7 +440,7 @@ function openLightbox(
     }
   });
 
-  console.log(document.activeElement)
+  // console.log(document.activeElement)
 
   // checked if LightBox have a focus
   // if (document.activeElement === LightBox) {
