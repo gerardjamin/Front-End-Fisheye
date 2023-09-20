@@ -70,9 +70,8 @@ async function displayData(
             videoElement.setAttribute("title", "video")
             //background picture for video
             videoElement.setAttribute("alt", "")
-            //videoElement.setAttribute("aria-hidden", true)
             videoElement.setAttribute("controls","")
-            //I am filling the article with the videod
+            //I am filling the article with the video
             article.appendChild(videoElement)
         }
 
