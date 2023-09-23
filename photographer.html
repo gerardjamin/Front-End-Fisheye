@@ -9,6 +9,7 @@
       href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
       rel="stylesheet"
     />
+    <script src="https://kit.fontawesome.com/bd510b2bbe.js" crossorigin="anonymous"></script>
     <title>Fisheye - photographe</title>
   </head>
 
@@ -36,18 +37,20 @@
           Contactez-moi
         </button>
       </div>
-      <!-- MANAGMENT OF DROPDOWN -->
+      <!-- CONTAINER OF MANAGMENT OF DROPDOWN -->
       <aside class="dropdown" aria-label="management du filtrage">
         <span id="sorting">Trier par</span>
-        <button
-          id="dropComment"
-          onclick="showDropdown()"
+        <!-- main button -->
+         <button
           class="dropbtn"
+          id="dropComment"
           tabindex="0"
           aria-label="ouvre le menu déroulant pour le trie"
         >
-          Click
-        </button>
+          <span id="Span-popularite">Popularité</span>
+          <span id="chevronDown" class="fa-solid fa-chevron-down"> </span>
+        </button> 
+
         <div id="myDropdown" class="dropdown-content">
           <a
             tabindex="0"
@@ -143,13 +146,13 @@
       <button
         id="lightBoxPrecedent"
         class="lightBoxPrecedent"
-        tabindex="1"
+        tabindex="0"
         aria-label="Previous image"
       ></button>
       <button
         id="lightBoxSuivant"
         class="lightBoxSuivant"
-        tabindex="2"
+        tabindex="0"
         aria-label="Next image"
       ></button>
 

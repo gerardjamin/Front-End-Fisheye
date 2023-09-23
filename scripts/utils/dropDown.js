@@ -1,9 +1,21 @@
 /* eslint-disable no-unused-vars */
 /**
- * Displaying the sorting box
- */
+ * Displaying the sorting box or removing it
+ * create a dropdown, displaying or hidding an element when the user click on button.
+*/
 function showDropdown() {
+  // toggle add or remove the class (show)
   document.getElementById("myDropdown").classList.toggle("show");
+  const chevronDown = document.querySelector(".fa-chevron-down")
+  const chevronUp = document.querySelector(".fa-chevron-up")
+  console.log("showDropdown")
+  if(chevronDown){
+    chevronDown.classList.remove("fa-chevron-down");
+    chevronDown.classList.add("fa-chevron-up") 
+  }else{
+    chevronUp.classList.remove("fa-chevron-up");
+    chevronUp.classList.add("fa-chevron-down")
+  }
 }
 
 /**
@@ -23,6 +35,7 @@ function cleanUp() {
  * @param {*} newText 
  */
 function changeText(newText) {
-  var dropComment = document.getElementById("dropComment");
+  let dropComment = document.getElementById("Span-popularite");
   dropComment.textContent = newText;
 }
+
