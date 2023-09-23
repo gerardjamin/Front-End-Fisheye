@@ -157,11 +157,10 @@ async function displayData(
     });
   }
 
-  //*************************************************MANAGMENT LIGHTBOX (closeUp)***************************************************/
+  //********************MANAGMENT LIGHTBOX (closeUp)*************/
 
   //Section that enables opening the lightbox when clicking on the image or video element
   // To retrieve the array of image and video elements.
-
   const myImage = document.getElementsByClassName("photo");
   const myVideo = document.getElementsByClassName("video");
   // Using the spread operator (...) to concatenate two array.
