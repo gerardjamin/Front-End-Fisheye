@@ -33,6 +33,6 @@ function photographerHeader(data) {
         return { identity: identity, picture: img }; // Return the article element and the image
     }
 
-    //Return the JavaScript object
-    return {getUserCardDOM} 
+    //Return the function() callback in order to use it a fiew later..
+    return ({ getUserCardDOM }) 
 }

@@ -1,8 +1,8 @@
-//import { getPhotographers} from '../api/api.js'
+//import { getPhotographers} from '../api/api.js' not necessary
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /**
- * display the index.html page
+ * display index.html page
  * @param {*} dataPhographers: A table gathering all the article tags of the photographers for the index.html page
  */
 function displayData(dataPhographers) {
@@ -29,10 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 })
 
-
-/**
- * 
- */
 async function init() {
     // Retrieve photographer data (object destructuring part photographers)
     const { photographers } = await getPhotographers()

@@ -10,9 +10,15 @@ function photographerTemplate(data) {
     const picture = `assets/photographers/${portrait}`;
 
     //objects to display
+    /**
+     * build the acticle for every photographer 
+     * @param {*} tabIndex 
+     * @returns 
+     */
     function getUserCardDOM(tabIndex) {
         const article = document.createElement('article');
         const img = document.createElement('img');
+        //here tabindex is link to accessibilité
         tabIndex = 0
         img.setAttribute("src", picture)
         img.setAttribute('alt', `Je m'appelle ${name}`)
@@ -42,8 +48,9 @@ function photographerTemplate(data) {
         article.appendChild(h2);
         article.appendChild(p);
         article.appendChild(h3);
+
         return (article);
     }
-    //Return the JavaScript object
+    //Return the function() callback in order to use after..
     return ({ getUserCardDOM })
 }
